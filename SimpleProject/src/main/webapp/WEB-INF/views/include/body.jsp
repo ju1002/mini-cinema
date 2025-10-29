@@ -885,7 +885,7 @@ marker.setMap(map);
 <div >
 <!-- 이미지 넣을거 생각해보자 -->
 	<!--  
-	<img src="${pageContext.request.contextPath }/resources/images/mainImage/" />
+	<img src="${pageContext.request.contextPath }/resources/images/mainImage/"dd />
 	-->
 	
 </div>
