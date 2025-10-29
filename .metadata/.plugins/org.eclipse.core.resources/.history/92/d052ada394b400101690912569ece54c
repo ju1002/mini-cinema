@@ -1,0 +1,13 @@
+package com.kh.moving.movie.controller;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+@Controller
+public class MovieController {
+	
+	@RequestMapping("/spring/movie")
+	public String movie() {
+		return "movie_page";
+	}
+}

@@ -1,0 +1,11 @@
+package com.kh.moving.movie.controller;
+
+import org.springframework.web.bind.annotation.RequestMapping;
+
+public class MovieController {
+	
+	@RequestMapping("")
+	public String movie() {
+		
+	}
+}

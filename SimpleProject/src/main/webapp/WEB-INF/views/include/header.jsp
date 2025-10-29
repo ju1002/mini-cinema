@@ -259,7 +259,7 @@ margin-top:20px;
                     <div class="menu-2 text-align-center line-height-0-ch-only">
                         <div class="inline-block">
                             <ul class="row">
-                                <li class="cell"><a href="#">상영중인 영화</a></li>
+                                <li class="cell"><a href="/spring/movie">상영중인 영화</a></li>
                             </ul>
                         </div>
                     </div>
