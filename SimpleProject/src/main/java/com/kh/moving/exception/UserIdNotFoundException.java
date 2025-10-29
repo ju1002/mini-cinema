@@ -1,4 +1,4 @@
-package com.moving.exception;
+package com.kh.moving.exception;
 
 public class UserIdNotFoundException extends RuntimeException{
 	
