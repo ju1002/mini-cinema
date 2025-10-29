@@ -40,6 +40,7 @@ html {
 }
 .block {
     display: block;
+    &:hover{color:black;}
 }
 .inline-block {
     display: inline-block;
@@ -135,6 +136,8 @@ body {
     left: 0;
     width: 100%;
     z-index: 10;
+    margin-bottom: 50px;
+    
 }
 
 .top-bar .menu-box-1 ul > li > a {
