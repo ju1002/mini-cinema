@@ -41,8 +41,7 @@
 
         .notice-item {
             border-bottom: 1px solid #e0e0e0;
-            padding: 20px 30px;
-            cursor: pointer;
+            padding: 0;
             transition: background-color 0.2s;
         }
 
@@ -52,6 +51,24 @@
 
         .notice-item:last-child {
             border-bottom: none;
+        }
+
+        .notice-item form {
+            padding: 20px 30px;
+            cursor: pointer;
+            border: none;
+            background: none;
+            width: 100%;
+            text-align: left;
+        }
+
+        .notice-item button {
+            background: none;
+            border: none;
+            width: 100%;
+            text-align: left;
+            cursor: pointer;
+            padding: 0;
         }
 
         .notice-badge {
@@ -120,57 +137,84 @@
 
         <div class="notice-list">
             <!-- 공지사항 항목 예시 - JSTL로 반복 처리 -->
+            <!-- <c:forEach var="notice" items="${noticeList}"> -->
             <div class="notice-item">
-                <div class="notice-title">
-                    <span class="notice-badge">중요</span>
-                    2025년 1월 정기 점검 안내
-                </div>
-                <div class="notice-meta">
-                    <span>📅 2025.01.15</span>
-                    <span>👁 1,234</span>
-                </div>
+                <form action="noticeDetail.do" method="post">
+                    <input type="hidden" name="noticeId" value="1">
+                    <button type="submit">
+                        <div class="notice-title">
+                            <span class="notice-badge">중요</span>
+                            2025년 1월 정기 점검 안내
+                        </div>
+                        <div class="notice-meta">
+                            <span>📅 2025.01.15</span>
+                            <span>👁 1,234</span>
+                        </div>
+                    </button>
+                </form>
             </div>
 
             <div class="notice-item">
-                <div class="notice-title">
-                    서비스 이용약관 변경 안내
-                </div>
-                <div class="notice-meta">
-                    <span>📅 2025.01.10</span>
-                    <span>👁 856</span>
-                </div>
+                <form action="noticeDetail" method="post">
+                    <input type="hidden" name="noticeId" value="2">
+                    <button type="submit">
+                        <div class="notice-title">
+                            서비스 이용약관 변경 안내
+                        </div>
+                        <div class="notice-meta">
+                            <span>📅 2025.01.10</span>
+                            <span>👁 856</span>
+                        </div>
+                    </button>
+                </form>
             </div>
 
             <div class="notice-item">
-                <div class="notice-title">
-                    <span class="notice-badge">중요</span>
-                    개인정보 처리방침 개정 안내
-                </div>
-                <div class="notice-meta">
-                    <span>📅 2025.01.05</span>
-                    <span>👁 2,103</span>
-                </div>
+                <form action="noticeDetail.do" method="post">
+                    <input type="hidden" name="noticeId" value="3">
+                    <button type="submit">
+                        <div class="notice-title">
+                            <span class="notice-badge">중요</span>
+                            개인정보 처리방침 개정 안내
+                        </div>
+                        <div class="notice-meta">
+                            <span>📅 2025.01.05</span>
+                            <span>👁 2,103</span>
+                        </div>
+                    </button>
+                </form>
             </div>
 
             <div class="notice-item">
-                <div class="notice-title">
-                    신규 기능 업데이트 안내
-                </div>
-                <div class="notice-meta">
-                    <span>📅 2024.12.28</span>
-                    <span>👁 1,456</span>
-                </div>
+                <form action="noticeDetail.do" method="post">
+                    <input type="hidden" name="noticeId" value="4">
+                    <button type="submit">
+                        <div class="notice-title">
+                            신규 기능 업데이트 안내
+                        </div>
+                        <div class="notice-meta">
+                            <span>📅 2024.12.28</span>
+                            <span>👁 1,456</span>
+                        </div>
+                    </button>
+                </form>
             </div>
 
             <div class="notice-item">
-                <div class="notice-title">
-                    연말연시 고객센터 운영 안내
-                </div>
-                <div class="notice-meta">
-                    <span>📅 2024.12.20</span>
-                    <span>👁 678</span>
-                </div>
+                <form action="noticeDetail.do" method="post">
+                    <input type="hidden" name="noticeId" value="5">
+                    <button type="submit">
+                        <div class="notice-title">
+                            연말연시 고객센터 운영 안내
+                        </div>
+                        <div class="notice-meta">
+                            <span>📅 2024.12.20</span>
+                            <span>👁 678</span>
+                        </div>
+                    </button>
+                </form>
             </div>
+            <!-- </c:forEach> -->
 
             <!-- 페이징 -->
             <div class="pagination">

@@ -289,7 +289,7 @@ margin-top:20px;
                         <div class="inline-block">
                             <ul class="row">
                                 <li class="cell"><a href="#">이벤트</a></li>
-                                <li class="cell"><a href="#">공지사항</a></li>
+                                <li class="cell"><a href="noticeList">공지사항</a></li>
                             </ul>
                         </div>
                     </div>

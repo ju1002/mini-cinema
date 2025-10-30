@@ -135,6 +135,7 @@
 </head>
 <body>
 <jsp:include page="../include/header.jsp" />
+
     <div class="container">
         <div class="header">
             <h1>📢 공지사항</h1>
@@ -174,10 +175,18 @@
         </div>
 
         <div class="button-group">
-            <button class="back-button">← 목록으로</button>
+            <form action="noticeList" method="get" style="display: inline;">
+                <button type="submit" class="back-button">← 목록으로</button>
+            </form>
             <!-- 관리자 권한이 있을 경우에만 표시 -->
-            <button class="edit-button">수정</button>
-            <button class="delete-button">삭제</button>
+            <form action="noticeEdit.do" method="post" style="display: inline;">
+                <input type="hidden" name="noticeId" value="1">
+                <button type="submit" class="edit-button">수정</button>
+            </form>
+            <form action="noticeDelete.do" method="post" style="display: inline;" onsubmit="return confirm('정말 삭제하시겠습니까?');">
+                <input type="hidden" name="noticeId" value="1">
+                <button type="submit" class="delete-button">삭제</button>
+            </form>
         </div>
     </div>
     <jsp:include page="../include/footer.jsp" />
