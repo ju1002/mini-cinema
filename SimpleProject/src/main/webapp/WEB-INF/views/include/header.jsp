@@ -40,6 +40,7 @@ html {
 }
 .block {
     display: block;
+    &:hover{color:black;}
 }
 .inline-block {
     display: inline-block;
