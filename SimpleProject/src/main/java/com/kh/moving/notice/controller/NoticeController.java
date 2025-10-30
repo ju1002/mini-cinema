@@ -17,4 +17,6 @@ public class NoticeController {
     public String noticeDetail(@RequestParam("noticeId") int noticeId, Model model) {
         return "notice/notice_Detail";
     }
+    
+    
 }

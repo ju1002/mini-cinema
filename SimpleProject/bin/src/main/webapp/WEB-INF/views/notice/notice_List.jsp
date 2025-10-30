@@ -126,23 +126,6 @@
             color: white;
             border-color: #2c3e50;
         }
-
-        .write-button {
-            padding: 10px 20px;
-            background-color: #3498db;
-            color: white;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            font-size: 14px;
-            transition: background-color 0.2s;
-            margin: 20px 30px;
-            float: right;
-        }
-
-        .write-button:hover {
-            background-color: #2980b9;
-        }
     </style>
 </head>
 <body>
@@ -152,18 +135,11 @@
             <h1>📢 공지사항</h1>
         </div>
 
-        <!-- 글쓰기 버튼 -->
-        <div style="padding: 20px 30px; text-align: right; border-bottom: 1px solid #e0e0e0;">
-            <form action="${pageContext.request.contextPath}/noticeWrite" method="get" style="display: inline;">
-                <button type="submit" class="write-button">✏️ 글쓰기</button>
-            </form>
-        </div>
-
         <div class="notice-list">
             <!-- 공지사항 항목 예시 - JSTL로 반복 처리 -->
             <!-- <c:forEach var="notice" items="${noticeList}"> -->
             <div class="notice-item">
-                <form action="noticeDetail" method="post">
+                <form action="noticeDetail.do" method="post">
                     <input type="hidden" name="noticeId" value="1">
                     <button type="submit">
                         <div class="notice-title">
@@ -194,7 +170,7 @@
             </div>
 
             <div class="notice-item">
-                <form action="noticeDetail" method="post">
+                <form action="noticeDetail.do" method="post">
                     <input type="hidden" name="noticeId" value="3">
                     <button type="submit">
                         <div class="notice-title">
@@ -210,7 +186,7 @@
             </div>
 
             <div class="notice-item">
-                <form action="noticeDetail" method="post">
+                <form action="noticeDetail.do" method="post">
                     <input type="hidden" name="noticeId" value="4">
                     <button type="submit">
                         <div class="notice-title">
@@ -225,7 +201,7 @@
             </div>
 
             <div class="notice-item">
-                <form action="noticeDetail" method="post">
+                <form action="noticeDetail.do" method="post">
                     <input type="hidden" name="noticeId" value="5">
                     <button type="submit">
                         <div class="notice-title">
