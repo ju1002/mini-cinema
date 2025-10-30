@@ -112,6 +112,7 @@
     </style>
 </head>
 <body>
+<jsp:include page="../include/header.jsp" />
     <div class="container">
         <div class="header">
             <h1>📢 공지사항</h1>
@@ -181,5 +182,6 @@
             </div>
         </div>
     </div>
+    <jsp:include page="../include/footer.jsp" />
 </body>
 </html>
