@@ -1,22 +1,21 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>영화 카드</title>
+<title>영화 상세정보</title>
 <style>
-
 .movie-grid {
 	display: grid;
 	grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-	gap: 20px;
-	max-width: 800px;
+	gap: 30px;
 	width: 100%;
 }
 
 .movie-card {
-	background: white;
+	background: pink;
 	border-radius: 10px;
 	overflow: hidden;
 	box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
@@ -47,33 +46,40 @@
 	font-size: 13px;
 	color: #777;
 }
+
 .prod-box-1 {
-	width : 1100px;
-	height : 800px;
+	padding: 100px 0px 100px 100px;
+	width: 100%;
+	height: 800px;
 }
 </style>
 </head>
 <body>
-
 	<%@ include file="../include/header.jsp"%>
-	
+
 	<div class="prod-box-1">
 		<div class="movie-grid">
 			<div class="movie-card">
-				<img src="https://via.placeholder.com/200x280" alt="범죄도시4"
-					class="poster">
+				<img src="https://via.placeholder.com/200x280" alt="" class="poster" />
 				<div class="movie-info">
-					<div class="movie-title">범죄도시4</div>
-					<div class="movie-meta">2024 · 액션 · 15세</div>
+					<div class="movie-title">영화 제목</div>
+					<div class="movie-meta">2024 · 장르 · 등급</div>
 				</div>
 			</div>
 
 			<div class="movie-card">
-				<img src="https://via.placeholder.com/200x280" alt="파묘"
-					class="poster">
+				<img src="https://via.placeholder.com/200x280" alt="" class="poster" />
 				<div class="movie-info">
-					<div class="movie-title">파묘</div>
-					<div class="movie-meta">2024 · 미스터리 · 15세</div>
+					<div class="movie-title">영화 제목</div>
+					<div class="movie-meta">2024 · 장르 · 등급</div>
+				</div>
+			</div>
+
+			<div class="movie-card">
+				<img src="https://via.placeholder.com/200x280" alt="" class="poster" />
+				<div class="movie-info">
+					<div class="movie-title">영화 제목</div>
+					<div class="movie-meta">2024 · 장르 · 등급</div>
 				</div>
 			</div>
 		</div>
