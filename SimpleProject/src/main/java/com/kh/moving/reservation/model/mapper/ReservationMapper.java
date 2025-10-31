@@ -11,7 +11,7 @@ import com.kh.moving.reservation.model.dto.MovieListDTO;
 public interface ReservationMapper {
 
 	
-	@Select("SELECT MOVIE_ID movieId , MOVIE_TITLE movieTitle FROM TB_MOVIE_DETAIL")
+	@Select("SELECT MOVIE_ID movieId , MOVIE_TITLE movieTitle FROM TB_MOVIE_DETAIL ORDER BY TO_DATE(Release_DATE,'YYYY.MM.DD')")
 	List<MovieListDTO> findMovieList();
 	
 }
