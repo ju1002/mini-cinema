@@ -6,5 +6,7 @@
 <mapper namespace="com.kh.moving.notice.model.mapper.NoticeMapper">
 
 
-<select id=""></select>
+<select id="countNotice" resultType="_int">	
+	
+</select>
 </mapper>
