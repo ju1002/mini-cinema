@@ -1,4 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -146,110 +148,70 @@
     </style>
 </head>
 <body>
-<jsp:include page="../include/header.jsp" />
-    <div class="container">
-        <div class="header">
-            <h1>📢 공지사항</h1>
-        </div>
+	<jsp:include page="../include/header.jsp" />
+	    <div class="container">
+	        <div class="header">
+	            <h1>📢 공지사항</h1>
+	        </div>
 
-        <!-- 글쓰기 버튼 -->
-        <div style="padding: 20px 30px; text-align: right; border-bottom: 1px solid #e0e0e0;">
-            <form action="${pageContext.request.contextPath}/noticeWrite" method="get" style="display: inline;">
-                <button type="submit" class="write-button">✏️ 글쓰기</button>
-            </form>
-        </div>
+	        <div style="padding: 20px 30px; text-align: right; border-bottom: 1px solid #e0e0e0;">
+	            <form action="${pageContext.request.contextPath}/notice/noticeWrite" method="get" style="display: inline;">
+	                <button type="submit" class="write-button">✏️ 글쓰기</button>
+	            </form>
+	        </div>
 
-        <div class="notice-list">
-            <!-- 공지사항 항목 예시 - JSTL로 반복 처리 -->
-            <!-- <c:forEach var="notice" items="${noticeList}"> -->
-            <div class="notice-item">
-                <form action="noticeDetail" method="post">
-                    <input type="hidden" name="noticeId" value="1">
-                    <button type="submit">
-                        <div class="notice-title">
-                            <span class="notice-badge">중요</span>
-                            2025년 1월 정기 점검 안내
-                        </div>
-                        <div class="notice-meta">
-                            <span>📅 2025.01.15</span>
-                            <span>👁 1,234</span>
-                        </div>
-                    </button>
-                </form>
-            </div>
+	        <div class="notice-list">
+	            
+	            <c:forEach var="notice" items="${noticeList}">
+	                <div class="notice-item">
+	                    <form action="${pageContext.request.contextPath}/notice/noticeDetail" method="post">
+	                        <input type="hidden" name="noticeId" value="${notice.noticeNo}">
+	                        <button type="submit">
+	                            <div class="notice-title">
+	                                ${notice.noticeTitle}
+	                            </div>
+	                            <div class="notice-meta">
+	                                <span>📅 <fmt:formatDate value="${notice.createDate}" pattern="yyyy.MM.dd" /></span>
+	                                <span>👁 ${notice.count}</span>
+	                            </div>
+	                        </button>
+	                    </form>
+	                </div>
+	            </c:forEach>
+	            
+	            <c:if test="${empty noticeList}">
+	                <div style="padding: 50px; text-align: center; color: #7f8c8d;">
+	                    등록된 공지사항이 없습니다.
+	                </div>
+	            </c:if>
+	            
 
-            <div class="notice-item">
-                <form action="noticeDetail" method="post">
-                    <input type="hidden" name="noticeId" value="2">
-                    <button type="submit">
-                        <div class="notice-title">
-                            서비스 이용약관 변경 안내
-                        </div>
-                        <div class="notice-meta">
-                            <span>📅 2025.01.10</span>
-                            <span>👁 856</span>
-                        </div>
-                    </button>
-                </form>
-            </div>
+	            <div class="pagination">
+	                <c:if test="${pageInfo.currentPage > 1}">
+	                    <form action="${pageContext.request.contextPath}/notice/noticeList" method="get" style="display: inline;">
+	                        <input type="hidden" name="page" value="${pageInfo.currentPage - 1}">
+	                        <button type="submit">&lt; 이전</button>
+	                    </form>
+	                </c:if>
 
-            <div class="notice-item">
-                <form action="noticeDetail" method="post">
-                    <input type="hidden" name="noticeId" value="3">
-                    <button type="submit">
-                        <div class="notice-title">
-                            <span class="notice-badge">중요</span>
-                            개인정보 처리방침 개정 안내
-                        </div>
-                        <div class="notice-meta">
-                            <span>📅 2025.01.05</span>
-                            <span>👁 2,103</span>
-                        </div>
-                    </button>
-                </form>
-            </div>
+	                <c:forEach var="p" begin="${pageInfo.startPage}" end="${pageInfo.endPage}">
+	                    <form action="${pageContext.request.contextPath}/notice/noticeList" method="get" style="display: inline;">
+	                        <input type="hidden" name="page" value="${p}">
+	                        <button type="submit" class="${p == pageInfo.currentPage ? 'active' : ''}">
+	                            ${p}
+	                        </button>
+	                    </form>
+	                </c:forEach>
 
-            <div class="notice-item">
-                <form action="noticeDetail" method="post">
-                    <input type="hidden" name="noticeId" value="4">
-                    <button type="submit">
-                        <div class="notice-title">
-                            신규 기능 업데이트 안내
-                        </div>
-                        <div class="notice-meta">
-                            <span>📅 2024.12.28</span>
-                            <span>👁 1,456</span>
-                        </div>
-                    </button>
-                </form>
-            </div>
-
-            <div class="notice-item">
-                <form action="noticeDetail" method="post">
-                    <input type="hidden" name="noticeId" value="5">
-                    <button type="submit">
-                        <div class="notice-title">
-                            연말연시 고객센터 운영 안내
-                        </div>
-                        <div class="notice-meta">
-                            <span>📅 2024.12.20</span>
-                            <span>👁 678</span>
-                        </div>
-                    </button>
-                </form>
-            </div>
-            <!-- </c:forEach> -->
-
-            <!-- 페이징 -->
-            <div class="pagination">
-                <button class="active">1</button>
-                <button>2</button>
-                <button>3</button>
-                <button>4</button>
-                <button>5</button>
-            </div>
-        </div>
-    </div>
-    <jsp:include page="../include/footer.jsp" />
-</body>
-</html>
+	                <c:if test="${pageInfo.currentPage < pageInfo.maxPage}">
+	                    <form action="${pageContext.request.contextPath}/notice/noticeList" method="get" style="display: inline;">
+	                        <input type="hidden" name="page" value="${pageInfo.currentPage + 1}">
+	                        <button type="submit">다음 &gt;</button>
+	                    </form>
+	                </c:if>
+	            </div>
+	        </div>
+	    </div>
+	    <jsp:include page="../include/footer.jsp" />
+	</body>
+	</html>

@@ -18,7 +18,7 @@ public class NoticeDTO {
 	private Long noticeNo;
 	private int userNo;
 	private String noticeTitle;
-	private String noticeCotent;
+	private String noticeContent;
 	private int count;
 	private Date createDate;
 	private String status;

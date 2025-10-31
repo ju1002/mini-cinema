@@ -29,7 +29,7 @@ public class ExceptionHandlerController {
 		ModelAndView mv = new ModelAndView();
 		mv.addObject("msg",e.getMessage()).setViewName("include/error");
 		log.info("발생에외 :{}", e);
-		return mv;	
+		return mv;	 
 	}
 	@ExceptionHandler(AuthenticationException.class)
 	protected ModelAndView authenticationError(AuthenticationException e) {

@@ -43,6 +43,9 @@ public class NoticeController {
     	
     	List<NoticeDTO> noticeList = noticeService.findAllNotice(pageInfo);
     	
+    	model.addAttribute("noticeList", noticeList); // 공지사항 목록 전달
+        model.addAttribute("pageInfo", pageInfo);
+    	
     	return "notice/notice_List";
     }
     

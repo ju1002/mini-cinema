@@ -5,8 +5,30 @@
   
 <mapper namespace="com.kh.moving.notice.model.mapper.NoticeMapper">
 
-
-<select id="countNotice" resultType="_int">	
-	
-</select>
+  <select id="countNotice" resultType="_int">	
+    SELECT COUNT(*) 
+    FROM TB_NOTICE
+    WHERE STATUS = 'Y'
+  </select>
+  
+  <select id="findAllNotice" resultType="com.kh.moving.notice.model.dto.NoticeDTO">
+    SELECT *
+    FROM (
+        SELECT ROWNUM AS RNUM, T.*
+        FROM (
+            SELECT
+                NOTICE_NO AS "noticeNo",
+                USER_NO AS "userNo",
+                NOTICE_TITLE AS "noticeTitle",
+                NOTICE_CONTENT AS "noticeContent", COUNT,
+                CREATE_DATE AS "createDate",
+                STATUS
+            FROM TB_NOTICE
+            WHERE STATUS = 'Y'
+            ORDER BY NOTICE_NO DESC
+        ) T
+    )
+    WHERE RNUM BETWEEN #{startRow} AND #{endRow}
+  </select>
+  
 </mapper>
