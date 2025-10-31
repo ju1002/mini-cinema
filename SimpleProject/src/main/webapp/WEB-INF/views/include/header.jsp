@@ -283,13 +283,13 @@ margin-top:20px;
             </li>
           
             <li class="cell">
-                <a href="#" class="block">공지사항& 이벤트 </a>
+                <a href="#" class="block">공지사항 & 이벤트 </a>
                 <div>
                     <div class="menu-2 text-align-center line-height-0-ch-only">
                         <div class="inline-block">
                             <ul class="row">
                                 <li class="cell"><a href="#">이벤트</a></li>
-                                <li class="cell"><a href="noticeList">공지사항</a></li>
+                                <li class="cell"><a href="${pageContext.request.contextPath}/notice/noticeList">공지사항</a></li>
                             </ul>
                         </div>
                     </div>
