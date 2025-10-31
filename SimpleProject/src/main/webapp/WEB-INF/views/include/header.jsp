@@ -228,7 +228,8 @@ width:}
 margin-top:20px;
 }
 .menu-box-1 text-align-center line-height-0-ch-only con{
-}</style>
+}
+</style>
 
 
 <!-- Header HTML -->
@@ -239,7 +240,7 @@ margin-top:20px;
             <li class="cell cell-left" ><img src="https://i.namu.wiki/i/EYm29AFq9eP2QqG9c7ns7UMD85CFFJeagte2DGY7rZlEsedVGGAt3b_WmEcs7GXEpf8E7yNGDvfq8Ou9-8cN8w.webp" alt="" width="50%" height="50%" ></li>
         </ul>
     </nav>
-    <a class="logo inline-block" href="#" ><img src="${pageContext.request.contextPath}/resources/images/mainImage/main-logo4.png" alt="로고 사진" class="block" id="logo-img" ></a>
+    <a class="logo inline-block" href="/spring" ><img src="${pageContext.request.contextPath}/resources/images/mainImage/main-logo4.png" alt="로고 사진" class="block" id="logo-img" ></a>
     <form class="search-box absolute-right absolute-middle">
         <ul class="row">
         
@@ -287,8 +288,8 @@ margin-top:20px;
                 <div>
                     <div class="menu-2 text-align-center line-height-0-ch-only">
                         <div class="inline-block">
-                            <ul class="row">
-                                <li class="cell"><a href="#">이벤트</a></li>
+                            <ul class="row"> 
+                                <li class="cell"><a href="/spring/event">이벤트</a></li>
                                 <li class="cell"><a href="#">공지사항</a></li>
                             </ul>
                         </div>
