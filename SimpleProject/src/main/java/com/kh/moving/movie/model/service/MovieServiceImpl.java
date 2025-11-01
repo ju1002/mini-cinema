@@ -19,4 +19,8 @@ public class MovieServiceImpl implements MovieService {
 	public List<MovieDTO> getListMovie() {
 		return movieMapper.getListMovie();
 	}
+	
+	public MovieDTO findByMovieId(String movieId) {
+		return movieMapper.findByMovieId(movieId);
+	}
 }

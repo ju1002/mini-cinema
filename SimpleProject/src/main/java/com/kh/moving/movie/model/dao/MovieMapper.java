@@ -42,7 +42,7 @@ public interface MovieMapper {
      			     , MD.MOVIE_STATUS
     			 ORDER
     			    BY
-    			       TO_DATE (RELEASE_DATE, 'YYYY.MM.DD') DESC
+    			       TO_DATE (RELEASE_DATE, 'YYYY.MM.DD') ASC
     		""")
     List<MovieDTO> getListMovie();
     
@@ -79,10 +79,10 @@ public interface MovieMapper {
  				 , MD.ORIGIN_NAME
  				 , MD.ACTOR
  			     , MD.MOVIE_STATUS
-			 ORDER
-			    BY
+			 ORDER 
+			    BY 
 			       TO_DATE (RELEASE_DATE, 'YYYY.MM.DD') DESC
 		""")
-    MovieDTO findByMovieId();
+    MovieDTO findByMovieId(String movieId);
     
 }
