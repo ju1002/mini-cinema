@@ -12,7 +12,7 @@
 }
 #res-main{
 	border: 1px solid black;
-	width: 1200px;
+	width: 1400px;
 	height: 700px;
 	margin-top:40px;
 	margin: auto;
@@ -33,6 +33,7 @@ width: 100%;
 	height: 50px;
 	border: 1px solid red;
 	line-height: 50px;
+
 	
 	
 }
@@ -64,6 +65,9 @@ width: 100%;
 
 }
 
+.selected{
+	background: gray;
+}
 
 
 
@@ -81,6 +85,7 @@ width: 100%;
     	<div id="res1">
     	<!-- 영화 리스트 비동기 -->
     
+
     	
     	<div id="movie-list">
     	</div>
@@ -108,39 +113,74 @@ width: 100%;
     	</div>
     	<div id="movie-list">
     	</div>
-    	
+
+
     	
     	
     	</div>
     	<div id="res2">2</div>
     	<div id="res3">3</div>
     	<div id="res4">4</div>
+    	<div id="res5">4</div>
     </div>
     <script type="text/javascript">
     	
-    const selectedMovie = '${selectedMovieId}'; 
-    console.log(selectedMovie);
-
-    $.ajax({
-        url: '${pageContext.request.contextPath}/ajax/reservation',
-        method: 'GET',
-        success: function(response) {
-            console.log(response);
-            
-            const movies = response.map(e => {
-                return `<div id="movie-list">
-                			<div id=\${e.movieId}>\${e.movieTitle}</div>
-                		</div>`;
-            }).join('');
-            
-            document.querySelector('#res1').innerHTML += movies;
-        }
-    });
-
 
   
+
+
+
+    	const selectedMovie = '${selectedMovieId}'; 
+    	console.log(selectedMovie);
+    	
+    	$.ajax({
+    		url: '${pageContext.request.contextPath}/ajax/reservation',
+    		method: 'GET',
+    		success:function(response){
+    			console.log(response);
+    			
+    			
+    			const movies = response.map(e => {
+    			    return `<div id="movie-list">
+    			   	<div id=\${e.movieId} onclick="change();">\${e.movieTitle} </div>
+    			   			         	 
+    			            
+    			    </div>`;
+    			}).join('');
+
+    			
+    			 document.querySelector('#res1').innerHTML = movies;
+    			 
+    			 
+    				const movielist = document.querySelectorAll('#movie-list');
+    		    	console.log(movielist);
+    				
+    				
+    		}
+		
+    		
+    	});
+    	
+    	
+		function change() {
+			
+			const movielist = document.querySelectorAll('#movie-list');
+
+			movielist.forEach(item => {
+				  item.addEventListener('click', function() {
+				    // 1️ 모든 요소에서 selected 제거
+				    movielist.forEach(el => el.classList.remove('selected'));
+
+				    // 2️ 클릭한 요소(this)에 selected 추가
+				    this.classList.add('selected');
+				  });
+				});
+		}
+    	
+
     	
     	</script>
+    	
     <!-- Footer 영역 -->
     <%@ include file="../include/footer.jsp" %>
 </body>
