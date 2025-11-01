@@ -4,7 +4,7 @@
 <style>
 /* 하단 정렬 */
 .boo {
-    margin-top: 5%;
+    margin-top: 20%;
     height: 62px;
     border-top: 1px solid #444444;
     border-bottom: 1px solid #444444;
@@ -121,8 +121,7 @@
     margin-top: 30px;
 }
 
-.address > 
-c {
+.address > .cc {
     margin-top: 30px;
 }
 
@@ -130,7 +129,7 @@ c {
     margin-top: 10px;
     margin-left: 80px;
 }
-.
+
 .address > .cc > a {
     overflow: hidden;
     float: right;
