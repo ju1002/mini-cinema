@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -142,53 +143,35 @@
         </div>
 
         <div class="detail-header">
-            <div class="detail-title">
-                <!-- 제목은 서버에서 전달 예: ${notice.title} -->
-                2025년 1월 정기 점검 안내
-            </div>
+			<div class="detail-title">
+			    ${notice.noticeTitle} 
+			</div>
             <div class="detail-meta">
-                <span>작성일: <strong>2025.01.15</strong></span>
-                <span>조회수: <strong>1,234</strong></span>
-                <span>작성자: <strong>관리자</strong></span>
+				<span>작성일: <strong>
+				    ${notice.formattedDate} 
+				</strong></span>
+                <span>조회수: <strong>${notice.count}</strong></span>
+                <span>작성자: <strong>${notice.userName}</strong></span>
             </div>
         </div>
 
         <div class="detail-content">
-            <!-- 본문 내용은 서버에서 전달 예: ${notice.content} -->
-            <h3>안녕하세요. 서비스 운영팀입니다.</h3>
-            <br>
-            <p>보다 안정적인 서비스 제공을 위해 아래와 같이 정기 점검을 실시하고자 합니다.</p>
-            <br>
-            <p><strong>■ 점검 일시</strong></p>
-            <p>2025년 1월 20일(월) 02:00 ~ 06:00 (4시간)</p>
-            <br>
-            <p><strong>■ 점검 내용</strong></p>
-            <p>- 시스템 안정화 작업<br>
-            - 보안 업데이트<br>
-            - 서버 최적화 작업</p>
-            <br>
-            <p><strong>■ 점검 중 서비스 이용 제한</strong></p>
-            <p>점검 시간 동안 일시적으로 서비스 이용이 불가합니다.</p>
-            <br>
-            <p>이용에 불편을 드려 죄송하며, 더 나은 서비스로 보답하겠습니다.</p>
-            <p>감사합니다.</p>
+           <pre style="font-family: inherit; font-size: 1em; white-space: pre-wrap;">${notice.noticeContent}</pre>
         </div>
 
-        <div class="button-group">
-            <form action="noticeList" method="get" style="display: inline;">
-                <button type="submit" class="back-button">← 목록으로</button>
-            </form>
-            <!-- 관리자 권한이 있을 경우에만 표시 -->
-            <form action="noticeEdit.do" method="post" style="display: inline;">
-                <input type="hidden" name="noticeId" value="1">
-                <button type="submit" class="edit-button">수정</button>
-            </form>
-            <form action="noticeDelete.do" method="post" style="display: inline;" onsubmit="return confirm('정말 삭제하시겠습니까?');">
-                <input type="hidden" name="noticeId" value="1">
-                <button type="submit" class="delete-button">삭제</button>
-            </form>
-        </div>
-    </div>
+		<div class="button-group">
+		            <a href="${pageContext.request.contextPath}/notice/noticeList" class="back-button" style="text-decoration: none;">← 목록으로</a>
+		            <c:if test="${not empty sessionScope.loginMember and sessionScope.loginMember.manager eq 'Y'}">
+		                <form action="${pageContext.request.contextPath}/notice/noticeUpdateForm" method="get" style="display: inline;">
+		                    <input type="hidden" name="noticeId" value="${notice.noticeNo}">
+		                    <button type="submit" class="edit-button">수정</button>
+		                </form>
+		                <form action="${pageContext.request.contextPath}/notice/noticeDelete" method="post" style="display: inline;" onsubmit="return confirm('정말 삭제하시겠습니까?');">
+		                    <input type="hidden" name="noticeId" value="${notice.noticeNo}">
+		                    <button type="submit" class="delete-button">삭제</button>
+		                </form>
+		            </c:if> </div>
+		    </div>
     <jsp:include page="../include/footer.jsp" />
 </body>
 </html>

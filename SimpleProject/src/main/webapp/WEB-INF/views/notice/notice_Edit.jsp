@@ -5,7 +5,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>공지사항 작성</title>
+    <title>공지사항 수정</title>
     <style>
         * {
             margin: 0;
@@ -40,7 +40,7 @@
             font-weight: 600;
         }
 
-        .write-form {
+        .edit-form {
             padding: 30px;
         }
 
@@ -152,26 +152,29 @@
 <jsp:include page="../include/header.jsp" />
     <div class="container">
         <div class="header">
-            <h1>📝 공지사항 작성</h1>
+            <h1>✏️ 공지사항 수정</h1>
         </div>
 
-        <form class="write-form" action="${pageContext.request.contextPath}/notice/noticeInsert" method="post">
+        <form class="edit-form" action="${pageContext.request.contextPath}/noticeUpdate" method="post">
+            <!-- 공지사항 ID (hidden) -->
+            <input type="hidden" name="noticeNo" value="${notice.noticeNo}">
+
             <div class="form-group">
                 <label>제목<span class="required">*</span></label>
-                <input type="text" name="noticeTitle" placeholder="제목을 입력하세요" required>
+                <input type="text" name="noticeTitle" value="${notice.noticeTitle}" placeholder="제목을 입력하세요" required>
             </div>
 
             <div class="form-group">
                 <label>작성자<span class="required">*</span></label>
-                <input type="text" name="writer" value="관리자" readonly>
+                <input type="text" name="userName" value="${notice.userName}" readonly>
             </div>
             <div class="form-group">
                 <label>내용<span class="required">*</span></label>
-                <textarea name="noticeContent" placeholder="내용을 입력하세요" required></textarea>
+                <textarea name="noticeContent" placeholder="내용을 입력하세요" required>${notice.noticeContent}</textarea>
             </div>
 
             <div class="button-group">
-                <button type="submit" class="submit-button">등록</button>
+                <button type="submit" class="submit-button">수정완료</button>
                 <button type="button" class="cancel-button" onclick="history.back()">취소</button>
             </div>
         </form>

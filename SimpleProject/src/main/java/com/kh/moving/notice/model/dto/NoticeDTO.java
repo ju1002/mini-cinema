@@ -22,4 +22,7 @@ public class NoticeDTO {
 	private int count;
 	private Date createDate;
 	private String status;
+	private String formattedDate;
+	
+	private String userName;
 }

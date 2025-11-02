@@ -31,4 +31,46 @@
     WHERE RNUM BETWEEN #{startRow} AND #{endRow}
   </select>
   
+  <insert id="insertNotice" parameterType="NoticeDTO">
+  	INSERT 
+  	  INTO 
+  	       TB_NOTICE
+  	       (
+			NOTICE_NO
+	      , USER_NO
+	      , NOTICE_TITLE
+	      , NOTICE_CONTENT
+	      , COUNT
+	      , CREATE_DATE
+	      , STATUS
+		   )
+	VALUES
+	       (
+		   NOTICE_SEQ.NEXTVAL
+		 , #{userNo}
+		 , #{noticeTitle}
+		 , #{noticeContent}
+		 , 0
+		 , DEFAULT
+		 , DEFAULT
+		   )
+  </insert>
+  
+  <select id="findNoticeById" resultType="com.kh.moving.notice.model.dto.NoticeDTO">
+    SELECT 
+            n.NOTICE_NO AS noticeNo
+          , n.USER_NO AS userNo
+          , n.NOTICE_TITLE AS noticeTitle
+          , n.NOTICE_CONTENT AS noticeContent
+          , n.COUNT AS count
+          , n.CREATE_DATE AS createDate
+          , n.STATUS AS status
+          , m.USER_NAME AS userName
+       FROM 
+            TB_NOTICE n
+       JOIN 
+            TB_MEMBER m ON n.USER_NO = m.USER_NO
+      WHERE 
+            n.NOTICE_NO = #{noticeId} AND n.STATUS = 'Y'
+</select>
 </mapper>

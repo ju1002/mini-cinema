@@ -6,9 +6,9 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.kh.moving.exception.AuthenticationException;
+import com.kh.moving.exception.UserIdNotFoundException;
 import com.kh.moving.member.model.dao.MemberMapper;
 import com.kh.moving.member.model.dto.MemberDTO;
-import com.moving.exception.UserIdNotFoundException;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

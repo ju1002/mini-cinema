@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -54,24 +53,20 @@
         .notice-item:last-child {
             border-bottom: none;
         }
-
-        .notice-item form {
+        
+        /* * [수정됨] 상세 조회 링크(a 태그) 스타일
+         */
+        .notice-link {
+            display: block;
             padding: 20px 30px;
-            cursor: pointer;
-            border: none;
-            background: none;
-            width: 100%;
-            text-align: left;
+            text-decoration: none;
+            color: inherit; /* 부모 색상 상속 */
         }
-
-        .notice-item button {
-            background: none;
-            border: none;
-            width: 100%;
-            text-align: left;
-            cursor: pointer;
-            padding: 0;
-        }
+        
+        /* * [삭제됨] 
+         * .notice-item form, .notice-item button 스타일은
+         * .notice-link 스타일로 대체되었으므로 삭제 
+         */
 
         .notice-badge {
             display: inline-block;
@@ -106,7 +101,12 @@
             border-top: 1px solid #e0e0e0;
         }
 
-        .pagination button {
+        /*
+         * [수정됨] 
+         * pagination button -> pagination-button (a 태그용 클래스)
+         */
+        .pagination-button {
+            display: inline-block; /* <a> 태그에 패딩을 주기 위해 */
             padding: 8px 15px;
             margin: 0 5px;
             border: 1px solid #ddd;
@@ -115,21 +115,26 @@
             border-radius: 4px;
             transition: all 0.2s;
             color: #333;
+            text-decoration: none; /* <a> 태그 밑줄 제거 */
         }
 
-        .pagination button:hover {
+        .pagination-button:hover {
             background-color: #2c3e50;
             color: white;
             border-color: #2c3e50;
         }
 
-        .pagination button.active {
+        .pagination-button.active {
             background-color: #2c3e50;
             color: white;
             border-color: #2c3e50;
         }
 
+        /* * [수정됨] 
+         * 글쓰기 버튼 (a 태그용 클래스)
+         */
         .write-button {
+            display: inline-block; /* <a> 태그에 패딩을 주기 위해 */
             padding: 10px 20px;
             background-color: #3498db;
             color: white;
@@ -138,8 +143,7 @@
             cursor: pointer;
             font-size: 14px;
             transition: background-color 0.2s;
-            margin: 20px 30px;
-            float: right;
+            text-decoration: none; /* <a> 태그 밑줄 제거 */
         }
 
         .write-button:hover {
@@ -148,70 +152,68 @@
     </style>
 </head>
 <body>
-	<jsp:include page="../include/header.jsp" />
-	    <div class="container">
-	        <div class="header">
-	            <h1>📢 공지사항</h1>
-	        </div>
+    <jsp:include page="../include/header.jsp" />
+    <div class="container">
+        <div class="header">
+            <h1>📢 공지사항</h1>
+        </div>
+		<div style="background:yellow; padding:20px; font-weight:bold; font-size:16px;">
+		    [세션 디버깅]<br>
+		    세션 loginMember 객체: ${sessionScope.loginMember} <br><br>
+		    
+		    loginMember.manager 값: [${sessionScope.loginMember.manager}] <br>
+		    manager 값 'Y'와 비교: ${sessionScope.loginMember.manager eq 'Y'}
+			
+			세션 loginMember 객체: ${sessionScope.loginMember}
+		</div>
 
-	        <div style="padding: 20px 30px; text-align: right; border-bottom: 1px solid #e0e0e0;">
-	            <form action="${pageContext.request.contextPath}/notice/noticeWrite" method="get" style="display: inline;">
-	                <button type="submit" class="write-button">✏️ 글쓰기</button>
-	            </form>
-	        </div>
+        <div style="padding: 20px 30px; text-align: right; border-bottom: 1px solid #e0e0e0;">
+            <c:if test="${not empty sessionScope.loginMember and sessionScope.loginMember.manager eq 'Y'}">
+                <a href="${pageContext.request.contextPath}/notice/noticeForm" class="write-button">✏️ 글쓰기</a>
+            </c:if>
+        </div>
 
-	        <div class="notice-list">
-	            
-	            <c:forEach var="notice" items="${noticeList}">
-	                <div class="notice-item">
-	                    <form action="${pageContext.request.contextPath}/notice/noticeDetail" method="post">
-	                        <input type="hidden" name="noticeId" value="${notice.noticeNo}">
-	                        <button type="submit">
-	                            <div class="notice-title">
-	                                ${notice.noticeTitle}
-	                            </div>
-	                            <div class="notice-meta">
-	                                <span>📅 <fmt:formatDate value="${notice.createDate}" pattern="yyyy.MM.dd" /></span>
-	                                <span>👁 ${notice.count}</span>
-	                            </div>
-	                        </button>
-	                    </form>
-	                </div>
-	            </c:forEach>
-	            
-	            <c:if test="${empty noticeList}">
-	                <div style="padding: 50px; text-align: center; color: #7f8c8d;">
-	                    등록된 공지사항이 없습니다.
-	                </div>
-	            </c:if>
-	            
+        <div class="notice-list">
+            
+            <c:forEach var="notice" items="${noticeList}">
+                <div class="notice-item">
+                    <a href="${pageContext.request.contextPath}/notice/noticeDetail?noticeId=${notice.noticeNo}" class="notice-link">
+                        <div class="notice-title">
+                            ${notice.noticeTitle}
+                        </div>
+                        <div class="notice-meta">
+                            <span>📅 <fmt:formatDate value="${notice.createDate}" pattern="yyyy.MM.dd" /></span>
+                            <span>👁 ${notice.count}</span>
+                        </div>
+                    </a>
+                </div>
+            </c:forEach>
+            
+            <c:if test="${empty noticeList}">
+                <div style="padding: 50px; text-align: center; color: #7f8c8d;">
+                    등록된 공지사항이 없습니다.
+                </div>
+            </c:if>
+            
 
-	            <div class="pagination">
-	                <c:if test="${pageInfo.currentPage > 1}">
-	                    <form action="${pageContext.request.contextPath}/notice/noticeList" method="get" style="display: inline;">
-	                        <input type="hidden" name="page" value="${pageInfo.currentPage - 1}">
-	                        <button type="submit">&lt; 이전</button>
-	                    </form>
-	                </c:if>
+            <div class="pagination">
+                <c:if test="${pageInfo.currentPage > 1}">
+                    <a href="${pageContext.request.contextPath}/notice/noticeList?page=${pageInfo.currentPage - 1}" class="pagination-button">&lt; 이전</a>
+                </c:if>
 
-	                <c:forEach var="p" begin="${pageInfo.startPage}" end="${pageInfo.endPage}">
-	                    <form action="${pageContext.request.contextPath}/notice/noticeList" method="get" style="display: inline;">
-	                        <input type="hidden" name="page" value="${p}">
-	                        <button type="submit" class="${p == pageInfo.currentPage ? 'active' : ''}">
-	                            ${p}
-	                        </button>
-	                    </form>
-	                </c:forEach>
+                <c:forEach var="p" begin="${pageInfo.startPage}" end="${pageInfo.endPage}">
+                    <a href="${pageContext.request.contextPath}/notice/noticeList?page=${p}" 
+                       class="pagination-button ${p == pageInfo.currentPage ? 'active' : ''}">
+                        ${p}
+                    </a>
+                </c:forEach>
 
-	                <c:if test="${pageInfo.currentPage < pageInfo.maxPage}">
-	                    <form action="${pageContext.request.contextPath}/notice/noticeList" method="get" style="display: inline;">
-	                        <input type="hidden" name="page" value="${pageInfo.currentPage + 1}">
-	                        <button type="submit">다음 &gt;</button>
-	                    </form>
-	                </c:if>
-	            </div>
-	        </div>
-	    </div>
-	    <jsp:include page="../include/footer.jsp" />
-	</body>
-	</html>
+                <c:if test="${pageInfo.currentPage < pageInfo.maxPage}">
+                    <a href="${pageContext.request.contextPath}/notice/noticeList?page=${pageInfo.currentPage + 1}" class="pagination-button">다음 &gt;</a>
+                </c:if>
+            </div>
+        </div>
+    </div>
+    <jsp:include page="../include/footer.jsp" />
+</body>
+</html>
