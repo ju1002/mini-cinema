@@ -30,7 +30,7 @@ public class ExceptionHandlerController {
 	private ModelAndView createErrorResponse(RuntimeException e)
 	{
 		ModelAndView mv = new ModelAndView();
-		mv.addObject("msg",e.getMessage()).setViewName("include/error");
+		mv.addObject("msg",e.getMessage()).setViewName("include/error_page");
 		log.info("발생에외 :{}", e);
 		return mv;	
 	}

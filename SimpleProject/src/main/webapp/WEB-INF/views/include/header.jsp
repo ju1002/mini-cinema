@@ -4,6 +4,10 @@
 <!-- Header CSSddddd -->
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"></script>
+<!-- Bootstrap CSS -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css">
 <!-- Header CSS -->
 
 <style>
@@ -323,7 +327,7 @@ margin-top:20px;
 </div>
 
 <!-- 로그인 클릭 시 뜨는 모달 -->
-<c:if test="${ empty sessionScope.loginMember }">
+
 <div class="modal fade" id="loginModal">
     <div class="modal-dialog modal-sm">
         <div class="modal-content">
@@ -351,4 +355,3 @@ margin-top:20px;
         </div>
     </div>
 </div>
-</c:if>

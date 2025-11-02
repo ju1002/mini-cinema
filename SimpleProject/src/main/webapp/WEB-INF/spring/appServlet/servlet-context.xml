@@ -30,6 +30,18 @@
 		base-package="com.kh.moving" />
 
 
-
+	<!-- LoginInterceptor 설정 -->
+	<interceptors>
+		<interceptor>
+			<!-- 로그인이 필요한 페이지 경로 -->
+			<mapping path="/reserve/**"/>
+			
+			<!-- 로그인 페이지는 제외 -->
+			<!--<exclude-mapping path="/member/login"/> -->
+			
+			<!-- 인터셉터 클래스 지정 -->
+			<beans:bean class="com.kh.moving.interceptor.LoginInterceptor"/>
+		</interceptor>
+	</interceptors>
 
 </beans:beans>

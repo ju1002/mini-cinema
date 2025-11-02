@@ -4,12 +4,14 @@ import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.kh.moving.reservation.model.dto.MovieListDTO;
+import com.kh.moving.reservation.model.dto.ScreeningDTO;
 import com.kh.moving.reservation.model.service.ReserveService;
 
 import lombok.RequiredArgsConstructor;
@@ -37,13 +39,29 @@ public class ReserveRestController {
 	}
 	
 	@GetMapping("/showtimes")
-	public String getShowTime(@RequestParam String movieId , @RequestParam String date) {
+	public ResponseEntity<?> findShowTime(@RequestParam String movieId , @RequestParam String date) {
 		log.info("들어온값은 : {} , {} " , movieId , date);
 		
+		// 서비스에 가서 count랑 상영시간을 가져와야함 
+		List<ScreeningDTO> screening =  reserveService.findScreeningList(movieId,date);
 		
-		//reserveService.findShowTime(movieId,date);
+		
+		
+		return ResponseEntity.ok(screening);
+	}
+	
+	@GetMapping("/seats")
+	public ResponseEntity<?> findReserveSeats(@RequestParam String movieId , @RequestParam String date){
+		
+		
+		log.info("seats들어온값은 : {} , {}" , movieId , date);
+		
+		List<String> seats = reserveService.findReserveSeats(movieId,date);
+		
+		
 		
 		return null;
+		
 	}
 	
 	
