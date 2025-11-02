@@ -41,7 +41,7 @@ public class ReserveRestController {
 		log.info("들어온값은 : {} , {} " , movieId , date);
 		
 		
-		reserveService.findShowTime(movieId,date);
+		//reserveService.findShowTime(movieId,date);
 		
 		return null;
 	}
