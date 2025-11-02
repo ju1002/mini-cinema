@@ -17,7 +17,7 @@ body {
 	background: #fff;
 	margin: 40px auto;
 	border-radius: 16px;
-	padding: 24px;
+	padding: 150px;
 	box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
@@ -46,7 +46,7 @@ body {
 }
 
 .summary {
-	margin-top: 20px;
+	margin-top: 40px;
 	line-height: 1.6;
 }
 </style>

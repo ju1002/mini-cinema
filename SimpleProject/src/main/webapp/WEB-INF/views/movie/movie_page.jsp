@@ -15,7 +15,7 @@ body{
 .movie-grid {
 	display: grid;
 	grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-	gap: 80px;
+	gap: 60px;
 	width: 100%;
 }
 
@@ -25,6 +25,7 @@ body{
 	overflow: hidden;
 	box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
 	transition: transform 0.2s;
+	cursor: pointer;
 }
 
 .movie-card:hover {
@@ -54,9 +55,11 @@ body{
 }
 
 .prod-box-1 {
-	padding: 150px 0px 150px 150px;
+	padding: 150px;
 	width: 100%;
-	height: 800px;
+	max-width: 1400px;
+    margin: 0 auto; 
+    box-sizing: border-box;
 }
 </style>
 </head>
