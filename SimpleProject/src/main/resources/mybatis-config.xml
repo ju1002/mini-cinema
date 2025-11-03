@@ -6,16 +6,14 @@
 	  	<settings>
 	 		<setting name="jdbcTypeForNull" value="NULL"/>
 	  	</settings>
-		<typeAliases>
-		
-		</typeAliases>
+	
 		
 		<!-- environments,dataSource =>DB연결정보를 원래 적어야 함 -->
 		<!-- Bean등록  1 -->
 		  
 	  <mappers>
-	  	<!-- 
 	  	 <mapper resource ="/mapper/member-mapper.xml"/>
+	  	<!-- 
 	    <mapper resource ="/mapper/board-mapper.xml"/>
 	  	 -->
 	  </mappers>

@@ -1,6 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
+
 <!-- Header CSSddddd -->
+
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"></script>
+<!-- Bootstrap CSS -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css">
+<!-- Header CSS -->
+
 <style>
 /* 폰트 적용 */
 @import url(//fonts.googleapis.com/earlyaccess/notosanskr.css);
@@ -137,7 +146,6 @@ body {
     width: 100%;
     z-index: 10;
     margin-bottom: 50px;
-    
 }
 
 .top-bar .menu-box-1 ul > li > a {
@@ -221,8 +229,9 @@ body {
 width: 100px;
 height: 100px;
 }
-.logo inline-block{
-width:}
+.logo.inline-block {
+    width: auto;
+}
 
 #content_1{
 margin-top:20px;
@@ -239,19 +248,37 @@ margin-top:20px;
             <li class="cell cell-left" ><img src="https://i.namu.wiki/i/EYm29AFq9eP2QqG9c7ns7UMD85CFFJeagte2DGY7rZlEsedVGGAt3b_WmEcs7GXEpf8E7yNGDvfq8Ou9-8cN8w.webp" alt="" width="50%" height="50%" ></li>
         </ul>
     </nav>
-    <a class="logo inline-block" href="#" ><img src="${pageContext.request.contextPath}/resources/images/mainImage/main-logo4.png" alt="로고 사진" class="block" id="logo-img" ></a>
-    <form class="search-box absolute-right absolute-middle">
-        <ul class="row">
-        
-            <li class="cell"><a href="#">내정보</a></li>
-            <li class="cell"><a href="#">로그아웃</a></li>
-            
-            
-            <li class="cell"><a href="#">회원가입</a></li>
-            <li class="cell"><a href="#">로그인</a></li>
-            
-        </ul>
-    </form>
+    <a class="logo inline-block" href="/spring" ><img src="${pageContext.request.contextPath}/resources/images/mainImage/main-logo4.png" alt="로고 사진" class="block" id="logo-img" ></a>
+    <div class="search-box absolute-right absolute-middle">
+    <ul class="row">
+
+        <c:choose>
+            <c:when test="${ empty sessionScope.loginMember }">
+                <!-- 로그인 전 -->
+                <li class="cell">
+                    <a href="join">회원가입</a>
+                    <a data-toggle="modal" data-target="#loginModal">로그인</a>
+                </li>
+                
+            </c:when>
+
+            <c:otherwise>
+                <!-- 로그인 후 -->
+                <li class="cell">
+                    ${ sessionScope.loginMember.userName }님 환영합니다
+                </li>
+                <li class="cell">
+                    <a href="${pageContext.request.contextPath}/myInfo">내정보</a>
+                </li>
+                <li class="cell">
+                    <a href="${pageContext.request.contextPath}/logout">로그아웃</a>
+                </li>
+            </c:otherwise>
+        </c:choose>
+
+    </ul>
+</div>
+
 </div>
 
 <div class="top-bar relative con-min-width">
@@ -297,5 +324,34 @@ margin-top:20px;
             </li>
         </ul>
     </nav>
-    
+</div>
+
+<!-- 로그인 클릭 시 뜨는 모달 -->
+
+<div class="modal fade" id="loginModal">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h4 class="modal-title">Login</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+
+            <form action="/spring/login" method="post">
+                <!-- Modal body -->
+                <div class="modal-body">
+                    <label for="userId" class="mr-sm-2">ID : </label>
+                    <input type="text" class="form-control mb-2 mr-sm-2" placeholder="Enter ID" id="userId" name="userId"><br>
+                    <label for="userPwd" class="mr-sm-2">Password : </label>
+                    <input type="password" class="form-control mb-2 mr-sm-2" placeholder="Enter Password" id="userPwd" name="userPwd">
+                </div>
+                       
+                <!-- Modal footer -->
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary">로그인</button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">취소</button>
+                </div>
+            </form>
+        </div>
+    </div>
 </div>
