@@ -129,7 +129,11 @@
     margin-top: 10px;
     margin-left: 80px;
 }
+<<<<<<< HEAD
 .
+=======
+
+>>>>>>> develop
 .address > .cc > a {
     overflow: hidden;
     float: right;
