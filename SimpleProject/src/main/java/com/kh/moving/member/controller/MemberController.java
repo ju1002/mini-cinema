@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.kh.moving.member.model.dto.MemberDTO;
 import com.kh.moving.member.model.service.MemberService;
@@ -31,7 +32,7 @@ public class MemberController {
 							  HttpSession session,
 							  ModelAndView mv) {
 		
-		MemberDTO loginMember = memberService.login(member);
+		MemberDTO loginMember = memberService.login("L", member);
 		if(loginMember != null) {
 			session.setAttribute("loginMember", loginMember);
 			mv.setViewName("redirect:/");
@@ -55,10 +56,23 @@ public class MemberController {
 	}
 	
 	@PostMapping("signup")
-	public String signup(MemberDTO member) {
+
+	public String signup(MemberDTO member,
+            @RequestParam(value = "genreList", required = false) String[] genreList) {
 		
-		log.info("{}", member);
+		if (genreList != null && genreList.length > 0) {
+	        String joinedGenres = String.join(",", genreList);
+	        member.setPreferredGenres(joinedGenres);
+	        log.info("선호 장르: {}", joinedGenres);
+	    } else {
+	        member.setPreferredGenres("");
+	    }
+
+	    log.info("회원가입 정보: {}", member);
+
 		memberService.signUp(member);
+		
+
 		return "main";
 	}
 	
@@ -68,13 +82,33 @@ public class MemberController {
 	}
 	
 	@PostMapping("edit")
-	public String edit(MemberDTO member, HttpSession session) {
-		
-		log.info("값 찍어보기 : {}", member);
-		
-		memberService.update(member, session);
-		return "redirect:myInfo";
+	public String edit(MemberDTO member,
+	                   @RequestParam(value = "genreList", required = false) String[] genreList,
+	                   HttpSession session,
+	                   RedirectAttributes redirectAttributes) {
+
+	    if (genreList != null && genreList.length > 0) {
+	        member.setPreferredGenres(String.join(",", genreList));
+	    } else {
+	        member.setPreferredGenres("");
+	    }
+
+	    log.info("수정된 정보: {}", member);
+
+	    int result = memberService.update(member, session);
+	    
+	    if (result > 0) {
+	        // DB 최신 정보로 세션 갱신
+	        MemberDTO updatedMember = memberService.login("U", member);
+	        session.setAttribute("loginMember", updatedMember);
+	        redirectAttributes.addFlashAttribute("msg", "회원 정보가 수정되었습니다.");
+	    } else {
+	        redirectAttributes.addFlashAttribute("msg", "회원 정보 수정에 실패했습니다.");
+	    }
+
+	    return "redirect:myInfo";
 	}
+
 	
 	@PostMapping("delete")
 	public String delete(@RequestParam(value="userPwd") String userPwd,
@@ -85,8 +119,7 @@ public class MemberController {
 		return "redirect:/";
 	}
 	
-	
-	
+
     @RequestMapping("/")
     public String main() {
         return "main";

@@ -1,6 +1,7 @@
 package com.kh.moving.member.model.dto;
 
 import java.sql.Date;
+import java.util.List;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -26,5 +27,8 @@ public class MemberDTO {
     private Date enrollDate;
     private String manager;
     private String status;
+    
+    private List<String> genreList;   // 선택된 장르들 (체크박스용)
+    private String preferredGenres;   // DB 저장용 (콤마로 구분)
 	
 }

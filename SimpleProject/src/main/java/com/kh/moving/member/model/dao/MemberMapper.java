@@ -18,7 +18,7 @@ public interface MemberMapper {
 	MemberDTO login(MemberDTO member);
 	
 	@Insert("INSERT INTO TB_MEMBER (USER_NO, USER_ID, USER_PWD, USER_NAME, BIRTHDAY, EMAIL, PHONE, SNS_AGREE, ENROLL_DATE, MANAGER, STATUS) " +
-	        "VALUES (SEQ_UNO.NEXTVAL, #{userId}, #{userPwd}, #{userName}, #{birthday}, #{email}, #{phone}, #{snsAgree}, SYSDATE, DEFAULT, DEFAULT)")
+	        "VALUES (SEQ_USERNO.NEXTVAL, #{userId}, #{userPwd}, #{userName}, #{birthday}, #{email}, #{phone}, #{snsAgree}, SYSDATE, DEFAULT, DEFAULT)")
 	int signup(MemberDTO member);
 	
 	@Update("UPDATE TB_MEMBER SET USER_NAME = #{userName}, BIRTHDAY = #{birthday}, PHONE = #{phone}, EMAIL = #{email}, SNS_AGREE = #{snsAgree} WHERE USER_ID = #{userId}")
