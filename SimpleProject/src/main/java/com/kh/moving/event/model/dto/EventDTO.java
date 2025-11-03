@@ -21,7 +21,9 @@ public class EventDTO {
 	private String Description;
 	private Date startDate;
 	private Date endDate;
-	private String postOriginName;
+	private String originName;
+	private String changeName;
+	
 	
 
 }
