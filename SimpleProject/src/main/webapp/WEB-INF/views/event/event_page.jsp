@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
+ㄹ<%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -469,26 +469,8 @@ body {
     margin-top: 32px;
 }
 
-.form-group input[type="file"] {
-    padding: 12px;
-}
 
-.form-group input[type="file"]::file-selector-button {
-    background: var(--primary);
-    color: white;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 6px;
-    cursor: pointer;
-    font-weight: 700;
-    margin-right: 12px;
-    transition: all 0.3s;
-    letter-spacing: 0.3px;
-}
 
-.form-group input[type="file"]::file-selector-button:hover {
-    background: var(--primary-dark);
-}
 
 /* Modal */
 .modal {
@@ -665,10 +647,7 @@ body {
                     <textarea id="description" placeholder="이벤트에 대한 자세한 설명을 입력하세요" required></textarea>
                 </div>
 
-                <div class="form-group">
-                    <label for="image">이미지 *</label>
-                    <input type="file" id="image" accept="image/*" required>
-                </div>
+               
 
                 <div class="form-row">
                     <div class="form-group">

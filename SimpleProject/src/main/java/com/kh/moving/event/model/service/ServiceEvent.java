@@ -1,8 +1,8 @@
 package com.kh.moving.event.model.service;
 
-import javax.servlet.http.HttpSession;
+import java.util.List;
 
-import org.springframework.web.multipart.MultipartFile;
+import javax.servlet.http.HttpSession;
 
 import com.kh.moving.event.model.dto.EventDTO;
 
@@ -10,6 +10,7 @@ import com.kh.moving.event.model.dto.EventDTO;
 
 public interface ServiceEvent {
 	
-int save(EventDTO event , MultipartFile file, HttpSession session);
+int insert(EventDTO event , HttpSession session);
+List<EventDTO> selectAll(EventDTO event , HttpSession session);
 	
 }

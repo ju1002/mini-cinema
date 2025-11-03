@@ -160,68 +160,7 @@ body {
     gap: 20px;
 }
 
-.file-upload-area {
-    border: 2px dashed var(--gray-300);
-    border-radius: 8px;
-    padding: 30px;
-    text-align: center;
-    transition: all 0.3s;
-    cursor: pointer;
-    background: var(--gray-50);
-}
 
-.file-upload-area:hover {
-    border-color: var(--primary);
-    background: rgba(229, 9, 20, 0.05);
-}
-
-.file-upload-area.dragover {
-    border-color: var(--primary);
-    background: rgba(229, 9, 20, 0.1);
-}
-
-.file-upload-icon {
-    font-size: 2.5em;
-    margin-bottom: 12px;
-}
-
-.file-upload-text {
-    color: var(--gray-600);
-}
-
-.file-upload-text strong {
-    color: var(--primary);
-}
-
-#fileInput {
-    display: none;
-}
-
-.file-preview {
-    margin-top: 20px;
-}
-
-.preview-image {
-    max-width: 100%;
-    max-height: 300px;
-    border-radius: 8px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-}
-
-.file-info {
-    margin-top: 12px;
-    padding: 12px;
-    background: var(--gray-50);
-    border-radius: 6px;
-    font-size: 0.9em;
-    color: var(--gray-600);
-}
-
-.form-actions {
-    display: flex;
-    gap: 12px;
-    margin-top: 40px;
-}
 
 .btn {
     padding: 14px 32px;
@@ -345,151 +284,68 @@ body {
     <div class="form-card">
         <div id="alertBox"></div>
 
-        <form id="eventForm" enctype="multipart/form-data">
-            <div class="form-group">
-                <label for="title">
-                    이벤트 제목 <span class="required">*</span>
-                </label>
-                <input type="text" id="title" name="title" 
-                       placeholder="예: 여름 시즌 특가 이벤트" required>
-                <div class="form-help">이벤트의 핵심을 담은 제목을 입력하세요 (최대 50자)</div>
-            </div>
+       <form id="eventForm" action="${pageContext.request.contextPath}/event/insert" method="post" enctype="multipart/form-data">
+    <div class="form-group">
+        <label for="title">이벤트 제목 <span class="required">*</span></label>
+        <input type="text" id="title" name="eventTitle" placeholder="예: 여름 시즌 특가 이벤트" required>
+    </div>
 
-            <div class="form-group">
-                <label for="description">
-                    이벤트 설명 <span class="required">*</span>
-                </label>
-                <textarea id="description" name="description" 
-                          placeholder="이벤트에 대한 자세한 설명을 입력하세요" required></textarea>
-                <div class="form-help">이벤트의 목적, 혜택, 참여방법 등을 상세히 작성하세요</div>
-            </div>
+    <div class="form-group">
+        <label for="description">이벤트 설명 <span class="required">*</span></label>
+        <textarea id="description" name="description" placeholder="이벤트에 대한 자세한 설명을 입력하세요" required></textarea>
+    </div>
 
-            <div class="form-group">
-                <label for="fileInput">
-                    이벤트 포스터 <span class="required">*</span>
-                </label>
-                <div class="file-upload-area" id="uploadArea">
-                    <div class="file-upload-icon">📸</div>
-                    <div class="file-upload-text">
-                        <strong>클릭</strong>하거나 파일을 드래그하세요
-                        <br>
-                        <small>JPG, PNG (최대 10MB)</small>
-                    </div>
-                </div>
-                <input type="file" id="fileInput" name="file" accept="image/*" required>
-                <div id="filePreview" class="file-preview"></div>
-            </div>
+    <div class="form-row">
+        <div class="form-group">
+            <label for="startDate" >시작일 <span class="required">*</span></label>
+            <input type="date" id="startDate" name="startDate" required>
+        </div>
+        <div class="form-group">
+            <label for="endDate" >종료일 <span class="required">*</span></label>
+            
+            <input type="date" id="endDate" name="endDate" required>
+        </div>
+    </div>
 
-            <div class="form-row">
-                <div class="form-group">
-                    <label for="startDate">
-                        시작일 <span class="required">*</span>
-                    </label>
-                    <input type="date" id="startDate" name="startDate" required>
-                </div>
-                <div class="form-group">
-                    <label for="endDate">
-                        종료일 <span class="required">*</span>
-                    </label>
-                    <input type="date" id="endDate" name="endDate" required>
-                </div>
-            </div>
+    <div class="form-group">
+        <label for="category">카테고리</label>
+        <select id="category" name="category">
+            <option value="">카테고리 선택</option>
+            <option value="movie">영화</option>
+            <option value="snack">스낵/음료</option>
+            <option value="membership">멤버십</option>
+            <option value="promotion">프로모션</option>
+            <option value="other">기타</option>
+        </select>
+    </div>
 
-            <div class="form-group">
-                <label for="category">카테고리</label>
-                <select id="category" name="category">
-                    <option value="">카테고리 선택</option>
-                    <option value="movie">영화</option>
-                    <option value="snack">스낵/음료</option>
-                    <option value="membership">멤버십</option>
-                    <option value="promotion">프로모션</option>
-                    <option value="other">기타</option>
-                </select>
-            </div>
-
-            <div class="form-actions">
-                <button type="button" class="btn btn-secondary" onclick="cancelForm()">
-                    취소
-                </button>
-                <a href="/spring/event" class="btn btn-primary">
-                    이벤트 등록
-                </a>
-            </div>
-        </form>
+    <div class="form-actions">
+        <button type="submit" class="btn btn-primary">이벤트 등록</button>
+    </div>
+</form>
     </div>
 </div>
 
 <script>
-const uploadArea = document.getElementById('uploadArea');
-const fileInput = document.getElementById('fileInput');
-const filePreview = document.getElementById('filePreview');
+
 const eventForm = document.getElementById('eventForm');
 
-uploadArea.addEventListener('click', () => {
-    fileInput.click();
-});
 
-uploadArea.addEventListener('dragover', (e) => {
-    e.preventDefault();
-    uploadArea.classList.add('dragover');
-});
 
-uploadArea.addEventListener('dragleave', () => {
-    uploadArea.classList.remove('dragover');
-});
 
-uploadArea.addEventListener('drop', (e) => {
-    e.preventDefault();
-    uploadArea.classList.remove('dragover');
-    
-    const files = e.dataTransfer.files;
-    if (files.length > 0) {
-        fileInput.files = files;
-        handleFileSelect();
-    }
-});
 
-fileInput.addEventListener('change', handleFileSelect);
-
-function handleFileSelect() {
-    const file = fileInput.files[0];
-    
-    if (file) {
-        if (file.size > 10 * 1024 * 1024) {
-            showAlert('파일 크기가 10MB를 초과합니다.', 'error');
-            fileInput.value = '';
-            return;
-        }
-
-        if (!file.type.startsWith('image/')) {
-            showAlert('이미지 파일만 업로드 가능합니다.', 'error');
-            fileInput.value = '';
-            return;
-        }
-
-        const reader = new FileReader();
-        reader.onload = (e) => {
-            const sizeMB = (file.size / 1024 / 1024).toFixed(2);
-            let html = '<img src="' + e.target.result + '" class="preview-image" alt="preview">';
-            html += '<div class="file-info">File: ' + file.name + ' (' + sizeMB + 'MB)</div>';
-            filePreview.innerHTML = html;
-        };
-        reader.readAsDataURL(file);
-    }
-}
-
+/*
 eventForm.addEventListener('submit', (e) => {
     e.preventDefault();
     submitForm();
 });
-
+*/
 async function submitForm() {
     const title = document.getElementById('title').value.trim();
     const description = document.getElementById('description').value.trim();
     const startDate = document.getElementById('startDate').value;
     const endDate = document.getElementById('endDate').value;
-    const file = fileInput.files[0];
-
+   
     if (!title) {
         showAlert('이벤트 제목을 입력하세요.', 'error');
         return;
@@ -510,21 +366,17 @@ async function submitForm() {
         return;
     }
 
-    if (!file) {
-        showAlert('이벤트 포스터를 업로드하세요.', 'error');
-        return;
-    }
-
+  
     const formData = new FormData();
-    formData.append('title', title);
+    formData.append('eventTitle', title);
     formData.append('description', description);
     formData.append('startDate', startDate);
     formData.append('endDate', endDate);
     formData.append('category', document.getElementById('category').value);
-    formData.append('upfile', file);
+   
 
     try {
-        const response = await fetch('${pageContext.request.contextPath}/event/save', {
+        const response = await fetch('${pageContext.request.contextPath}/event/insert', {
             method: 'POST',
             body: formData
         });
@@ -532,7 +384,7 @@ async function submitForm() {
         if (response.ok) {
             showAlert('이벤트가 성공적으로 등록되었습니다!', 'success');
             setTimeout(() => {
-                window.location.href = '${pageContext.request.contextPath}/event/list';
+                window.location.href = '${pageContext.request.contextPath}/event/insert';
             }, 1500);
         } else {
             showAlert('이벤트 등록에 실패했습니다.', 'error');

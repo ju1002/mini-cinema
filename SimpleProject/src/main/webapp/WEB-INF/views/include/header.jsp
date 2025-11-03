@@ -246,10 +246,7 @@ margin-top:20px;
             <li class="cell cell-left" ><img src="https://i.namu.wiki/i/EYm29AFq9eP2QqG9c7ns7UMD85CFFJeagte2DGY7rZlEsedVGGAt3b_WmEcs7GXEpf8E7yNGDvfq8Ou9-8cN8w.webp" alt="" width="50%" height="50%" ></li>
         </ul>
     </nav>
-<<<<<<< HEAD
 
-=======
->>>>>>> f4c0a98dcb9a05e793d74ca89dad2d4148118a3f
     <a class="logo inline-block" href="/spring" ><img src="${pageContext.request.contextPath}/resources/images/mainImage/main-logo4.png" alt="로고 사진" class="block" id="logo-img" ></a>
     <div class="search-box absolute-right absolute-middle">
     <ul class="row">
