@@ -1,256 +1,569 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8" trimDirectiveWhitespaces="true" isELIgnored="false"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
-<html lang="ko">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>공지사항 작성</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-            background-color: #F5F5F5;
-            padding: 20px;
-        }
-        .container {
-            max-width: 1000px;
-            margin: 0 auto;
-            background-color: white;
-            border-radius: 8px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-            overflow: hidden;
-        }
-        .header {
-            background-color: #2C3E50;
-            color: white;
-            padding: 30px;
-            text-align: center;
-        }
-        .header h1 {
-            font-size: 28px;
-            font-weight: 600;
-        }
-        .write-form {
-            padding: 30px;
-        }
-        .form-group {
-            margin-bottom: 20px;
-        }
-        .form-group label {
-            display: block;
-            font-size: 14px;
-            font-weight: 600;
-            color: #2C3E50;
-            margin-bottom: 8px;
-        }
-        .form-group input[type="text"],
-        .form-group select,
-        .form-group textarea {
-            width: 100%;
-            padding: 12px;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-            font-size: 14px;
-            font-family: inherit;
-            transition: border-color 0.2s;
-        }
-        .form-group input[type="text"]:focus,
-        .form-group select:focus,
-        .form-group textarea:focus {
-            outline: none;
-            border-color: #3498DB;
-        }
-        .form-group textarea {
-            min-height: 300px;
-            resize: vertical;
-        }
-        .form-group select {
-            cursor: pointer;
-        }
-        .checkbox-group {
-            display: flex;
-            align-items: center;
-        }
-        .checkbox-group input[type="checkbox"] {
-            width: 18px;
-            height: 18px;
-            margin-right: 8px;
-            cursor: pointer;
-        }
-        .checkbox-group label {
-            margin-bottom: 0;
-            cursor: pointer;
-            font-weight: normal;
-        }
-        .button-group {
-            padding: 20px 30px;
-            border-top: 1px solid #E0E0E0;
-            display: flex;
-            justify-content: center;
-            gap: 10px;
-        }
-        .submit-button {
-            padding: 12px 30px;
-            background-color: #3498DB;
-            color: white;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            font-size: 15px;
-            font-weight: 600;
-            transition: background-color 0.2s;
-        }
-        .submit-button:hover {
-            background-color: #2980B9;
-        }
-        .cancel-button {
-            padding: 12px 30px;
-            background-color: #95A5A6;
-            color: white;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            font-size: 15px;
-            font-weight: 600;
-            transition: background-color 0.2s;
-        }
-        .cancel-button:hover {
-            background-color: #7F8C8D;
-        }
-        .required {
-            color: #E74C3C;
-            margin-left: 4px;
-        }
-        .file-input-wrapper {
-            position: relative;
-            display: inline-block;
-            width: 100%;
-        }
-        .file-input-wrapper input[type="file"] {
-            position: absolute;
-            left: -9999px;
-        }
-        .file-input-label {
-            display: inline-block;
-            padding: 10px 20px;
-            background-color: #ECF0F1;
-            color: #2C3E50;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-            cursor: pointer;
-            transition: background-color 0.2s;
-            font-size: 14px;
-        }
-        .file-input-label:hover {
-            background-color: #DFE6E9;
-        }
-        .file-name {
-            display: inline-block;
-            margin-left: 10px;
-            color: #7F8C8D;
-            font-size: 14px;
-        }
-        .image-preview {
-            margin-top: 15px;
-            max-width: 100%;
-            display: none;
-        }
-        .image-preview img {
-            max-width: 100%;
-            max-height: 400px;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-        }
-        .remove-image {
-            display: inline-block;
-            margin-left: 10px;
-            padding: 5px 10px;
-            background-color: #E74C3C;
-            color: white;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            font-size: 12px;
-        }
-        .remove-image:hover {
-            background-color: #C0392B;
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>이벤트 등록 - CGV</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700;900&display=swap" rel="stylesheet">
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --primary: #e50914;
+    --primary-dark: #b20710;
+    --gray-50: #fafafa;
+    --gray-100: #f5f5f5;
+    --gray-200: #eeeeee;
+    --gray-300: #e0e0e0;
+    --gray-600: #666666;
+    --gray-700: #444444;
+    --gray-900: #222222;
+}
+
+body {
+    font-family: 'Noto Sans KR', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background: linear-gradient(135deg, #f5f5f5 0%, #ffffff 100%);
+    color: var(--gray-700);
+    min-height: 100vh;
+}
+
+.nav-bar {
+    background: white;
+    border-bottom: 1px solid var(--gray-200);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+
+.nav-content {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 70px;
+}
+
+.logo {
+    font-size: 1.6em;
+    font-weight: 900;
+    color: var(--primary);
+}
+
+.nav-links {
+    display: flex;
+    gap: 40px;
+    list-style: none;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: var(--gray-700);
+    font-weight: 600;
+    cursor: pointer;
+    transition: color 0.3s;
+}
+
+.nav-links a:hover {
+    color: var(--primary);
+}
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 60px 40px;
+}
+
+.page-header {
+    margin-bottom: 50px;
+}
+
+.page-header h1 {
+    font-size: 2.5em;
+    color: var(--gray-900);
+    margin-bottom: 12px;
+    font-weight: 900;
+}
+
+.page-header p {
+    color: var(--gray-600);
+    font-size: 1em;
+}
+
+.form-card {
+    background: white;
+    border-radius: 12px;
+    padding: 40px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+}
+
+.form-group {
+    margin-bottom: 32px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 12px;
+    font-weight: 700;
+    color: var(--gray-900);
+    font-size: 0.95em;
+}
+
+.required {
+    color: var(--primary);
+}
+
+.form-group input,
+.form-group textarea,
+.form-group select {
+    width: 100%;
+    padding: 14px 16px;
+    border: 1.5px solid var(--gray-300);
+    border-radius: 8px;
+    font-size: 0.95em;
+    font-family: inherit;
+    transition: all 0.3s;
+    background: white;
+}
+
+.form-group input:focus,
+.form-group textarea:focus,
+.form-group select:focus {
+    outline: none;
+    border-color: var(--primary);
+    box-shadow: 0 4px 12px rgba(229, 9, 20, 0.15);
+}
+
+.form-group textarea {
+    resize: vertical;
+    min-height: 150px;
+}
+
+.form-help {
+    font-size: 0.85em;
+    color: var(--gray-600);
+    margin-top: 6px;
+}
+
+.form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+.file-upload-area {
+    border: 2px dashed var(--gray-300);
+    border-radius: 8px;
+    padding: 30px;
+    text-align: center;
+    transition: all 0.3s;
+    cursor: pointer;
+    background: var(--gray-50);
+}
+
+.file-upload-area:hover {
+    border-color: var(--primary);
+    background: rgba(229, 9, 20, 0.05);
+}
+
+.file-upload-area.dragover {
+    border-color: var(--primary);
+    background: rgba(229, 9, 20, 0.1);
+}
+
+.file-upload-icon {
+    font-size: 2.5em;
+    margin-bottom: 12px;
+}
+
+.file-upload-text {
+    color: var(--gray-600);
+}
+
+.file-upload-text strong {
+    color: var(--primary);
+}
+
+#fileInput {
+    display: none;
+}
+
+.file-preview {
+    margin-top: 20px;
+}
+
+.preview-image {
+    max-width: 100%;
+    max-height: 300px;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.file-info {
+    margin-top: 12px;
+    padding: 12px;
+    background: var(--gray-50);
+    border-radius: 6px;
+    font-size: 0.9em;
+    color: var(--gray-600);
+}
+
+.form-actions {
+    display: flex;
+    gap: 12px;
+    margin-top: 40px;
+}
+
+.btn {
+    padding: 14px 32px;
+    border: none;
+    border-radius: 8px;
+    font-size: 0.95em;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    flex: 1;
+    letter-spacing: 0.3px;
+}
+
+.btn-primary {
+    background: var(--primary);
+    color: white;
+}
+
+.btn-primary:hover {
+    background: var(--primary-dark);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 16px rgba(229, 9, 20, 0.3);
+}
+
+.btn-primary:active {
+    transform: translateY(0);
+}
+
+.btn-secondary {
+    background: var(--gray-200);
+    color: var(--gray-700);
+    border: 1.5px solid var(--gray-300);
+}
+
+.btn-secondary:hover {
+    background: var(--gray-100);
+    border-color: var(--gray-400);
+}
+
+.btn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.alert {
+    padding: 16px 20px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    display: none;
+    animation: slideDown 0.3s ease;
+}
+
+@keyframes slideDown {
+    from {
+        transform: translateY(-20px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.alert.show {
+    display: block;
+}
+
+.alert-success {
+    background: rgba(76, 175, 80, 0.1);
+    color: #4caf50;
+    border-left: 4px solid #4caf50;
+}
+
+.alert-error {
+    background: rgba(229, 9, 20, 0.1);
+    color: var(--primary);
+    border-left: 4px solid var(--primary);
+}
+
+@media (max-width: 768px) {
+    .container {
+        padding: 40px 20px;
+    }
+
+    .page-header h1 {
+        font-size: 1.8em;
+    }
+
+    .form-card {
+        padding: 24px;
+    }
+
+    .form-row {
+        grid-template-columns: 1fr;
+    }
+
+    .form-actions {
+        flex-direction: column;
+    }
+
+    .nav-content {
+        padding: 0 20px;
+    }
+
+    .nav-links {
+        gap: 20px;
+    }
+}
+</style>
 </head>
 <body>
-<jsp:include page="../include/header.jsp" />
-    <div class="container">
-        <div class="header">
-            <h1>이벤트 작성</h1>
-        </div>
-        <form class="write-form" action="${pageContext.request.contextPath}/eventInsert" method="post">
+
+<jsp:include page="../include/header.jsp"/>
+
+<div class="container">
+    <div class="page-header">
+        <h1>새 이벤트 등록</h1>
+        <p>새로운 이벤트를 만들고 고객과 소통하세요</p>
+    </div>
+
+    <div class="form-card">
+        <div id="alertBox"></div>
+
+        <form id="eventForm" enctype="multipart/form-data">
             <div class="form-group">
-                <label>제목<span class="required">*</span></label>
-                <input type="text" name="title" placeholder="제목을 입력하세요" required>
+                <label for="title">
+                    이벤트 제목 <span class="required">*</span>
+                </label>
+                <input type="text" id="title" name="title" 
+                       placeholder="예: 여름 시즌 특가 이벤트" required>
+                <div class="form-help">이벤트의 핵심을 담은 제목을 입력하세요 (최대 50자)</div>
             </div>
+
             <div class="form-group">
-                <label>작성자<span class="required">*</span></label>
-                <input type="text" name="writer" value="관리자" readonly>
+                <label for="description">
+                    이벤트 설명 <span class="required">*</span>
+                </label>
+                <textarea id="description" name="description" 
+                          placeholder="이벤트에 대한 자세한 설명을 입력하세요" required></textarea>
+                <div class="form-help">이벤트의 목적, 혜택, 참여방법 등을 상세히 작성하세요</div>
             </div>
-            <div class="form-group checkbox-group">
-                <input type="checkbox" id="isImportant" name="isImportant" value="Y">
-                <label for="isImportant">중요 공지사항으로 등록</label>
-            </div>
+
             <div class="form-group">
-                <label>내용<span class="required">*</span></label>
-                <textarea name="content" placeholder="내용을 입력하세요" required></textarea>
-            </div>
-            <div class="form-group">
-                <label>이미지 첨부</label>
-                <div class="file-input-wrapper">
-                    <input type="file" id="imageFile" name="imageFile" accept="image/*" onchange="previewImage(event)">
-                    <label for="imageFile" class="file-input-label">:클립: 파일 선택</label>
-                    <span class="file-name" id="fileName">선택된 파일 없음</span>
-                    <button type="button" class="remove-image" id="removeBtn" style="display: none;" onclick="removeImage()">삭제</button>
+                <label for="fileInput">
+                    이벤트 포스터 <span class="required">*</span>
+                </label>
+                <div class="file-upload-area" id="uploadArea">
+                    <div class="file-upload-icon">📸</div>
+                    <div class="file-upload-text">
+                        <strong>클릭</strong>하거나 파일을 드래그하세요
+                        <br>
+                        <small>JPG, PNG (최대 10MB)</small>
+                    </div>
                 </div>
-                <div class="image-preview" id="imagePreview">
-                    <img id="previewImg" src="" alt="미리보기">
+                <input type="file" id="fileInput" name="file" accept="image/*" required>
+                <div id="filePreview" class="file-preview"></div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="startDate">
+                        시작일 <span class="required">*</span>
+                    </label>
+                    <input type="date" id="startDate" name="startDate" required>
+                </div>
+                <div class="form-group">
+                    <label for="endDate">
+                        종료일 <span class="required">*</span>
+                    </label>
+                    <input type="date" id="endDate" name="endDate" required>
                 </div>
             </div>
-            <div class="button-group">
-                <button type="submit" class="submit-button">등록</button>
-                <button type="button" class="cancel-button" onclick="history.back()">취소</button>
+
+            <div class="form-group">
+                <label for="category">카테고리</label>
+                <select id="category" name="category">
+                    <option value="">카테고리 선택</option>
+                    <option value="movie">영화</option>
+                    <option value="snack">스낵/음료</option>
+                    <option value="membership">멤버십</option>
+                    <option value="promotion">프로모션</option>
+                    <option value="other">기타</option>
+                </select>
+            </div>
+
+            <div class="form-actions">
+                <button type="button" class="btn btn-secondary" onclick="cancelForm()">
+                    취소
+                </button>
+                <a href="/spring/event" class="btn btn-primary">
+                    이벤트 등록
+                </a>
             </div>
         </form>
     </div>
-    <jsp:include page="../include/footer.jsp" />
-    <script>
-        function previewImage(event) {
-            const file = event.target.files[0];
-            const fileName = document.getElementById('fileName');
-            const preview = document.getElementById('imagePreview');
-            const previewImg = document.getElementById('previewImg');
-            const removeBtn = document.getElementById('removeBtn');
-            if (file) {
-                fileName.textContent = file.name;
-                removeBtn.style.display = 'inline-block';
-                const reader = new FileReader();
-                reader.onload = function(e) {
-                    previewImg.src = e.target.result;
-                    preview.style.display = 'block';
-                }
-                reader.readAsDataURL(file);
-            }
-        }
-        function removeImage() {
-            const fileInput = document.getElementById('imageFile');
-            const fileName = document.getElementById('fileName');
-            const preview = document.getElementById('imagePreview');
-            const removeBtn = document.getElementById('removeBtn');
+</div>
+
+<script>
+const uploadArea = document.getElementById('uploadArea');
+const fileInput = document.getElementById('fileInput');
+const filePreview = document.getElementById('filePreview');
+const eventForm = document.getElementById('eventForm');
+
+uploadArea.addEventListener('click', () => {
+    fileInput.click();
+});
+
+uploadArea.addEventListener('dragover', (e) => {
+    e.preventDefault();
+    uploadArea.classList.add('dragover');
+});
+
+uploadArea.addEventListener('dragleave', () => {
+    uploadArea.classList.remove('dragover');
+});
+
+uploadArea.addEventListener('drop', (e) => {
+    e.preventDefault();
+    uploadArea.classList.remove('dragover');
+    
+    const files = e.dataTransfer.files;
+    if (files.length > 0) {
+        fileInput.files = files;
+        handleFileSelect();
+    }
+});
+
+fileInput.addEventListener('change', handleFileSelect);
+
+function handleFileSelect() {
+    const file = fileInput.files[0];
+    
+    if (file) {
+        if (file.size > 10 * 1024 * 1024) {
+            showAlert('파일 크기가 10MB를 초과합니다.', 'error');
             fileInput.value = '';
-            fileName.textContent = '선택된 파일 없음';
-            preview.style.display = 'none';
-            removeBtn.style.display = 'none';
+            return;
         }
-    </script>
+
+        if (!file.type.startsWith('image/')) {
+            showAlert('이미지 파일만 업로드 가능합니다.', 'error');
+            fileInput.value = '';
+            return;
+        }
+
+        const reader = new FileReader();
+        reader.onload = (e) => {
+            const sizeMB = (file.size / 1024 / 1024).toFixed(2);
+            let html = '<img src="' + e.target.result + '" class="preview-image" alt="preview">';
+            html += '<div class="file-info">File: ' + file.name + ' (' + sizeMB + 'MB)</div>';
+            filePreview.innerHTML = html;
+        };
+        reader.readAsDataURL(file);
+    }
+}
+
+eventForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+    submitForm();
+});
+
+async function submitForm() {
+    const title = document.getElementById('title').value.trim();
+    const description = document.getElementById('description').value.trim();
+    const startDate = document.getElementById('startDate').value;
+    const endDate = document.getElementById('endDate').value;
+    const file = fileInput.files[0];
+
+    if (!title) {
+        showAlert('이벤트 제목을 입력하세요.', 'error');
+        return;
+    }
+
+    if (!description) {
+        showAlert('이벤트 설명을 입력하세요.', 'error');
+        return;
+    }
+
+    if (!startDate || !endDate) {
+        showAlert('시작일과 종료일을 선택하세요.', 'error');
+        return;
+    }
+
+    if (new Date(startDate) > new Date(endDate)) {
+        showAlert('시작일이 종료일보다 클 수 없습니다.', 'error');
+        return;
+    }
+
+    if (!file) {
+        showAlert('이벤트 포스터를 업로드하세요.', 'error');
+        return;
+    }
+
+    const formData = new FormData();
+    formData.append('title', title);
+    formData.append('description', description);
+    formData.append('startDate', startDate);
+    formData.append('endDate', endDate);
+    formData.append('category', document.getElementById('category').value);
+    formData.append('upfile', file);
+
+    try {
+        const response = await fetch('${pageContext.request.contextPath}/event/save', {
+            method: 'POST',
+            body: formData
+        });
+
+        if (response.ok) {
+            showAlert('이벤트가 성공적으로 등록되었습니다!', 'success');
+            setTimeout(() => {
+                window.location.href = '${pageContext.request.contextPath}/event/list';
+            }, 1500);
+        } else {
+            showAlert('이벤트 등록에 실패했습니다.', 'error');
+        }
+    } catch (error) {
+        console.error('Error:', error);
+        showAlert('서버 오류가 발생했습니다.', 'error');
+    }
+}
+
+function cancelForm() {
+    if (confirm('작성 중인 내용이 사라집니다. 계속하시겠습니까?')) {
+        window.history.back();
+    }
+}
+
+function showAlert(message, type) {
+    const alertBox = document.getElementById('alertBox');
+    alertBox.innerHTML = '<div class="alert alert-' + type + ' show">' + message + '</div>';
+
+    if (type === 'success') {
+        setTimeout(() => {
+            alertBox.innerHTML = '';
+        }, 3000);
+    }
+}
+
+const today = new Date().toISOString().split('T')[0];
+document.getElementById('startDate').min = today;
+document.getElementById('endDate').min = today;
+</script>
+
 </body>
 </html>

@@ -6,7 +6,6 @@
 <meta charset="UTF-8">
  <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CGV 이벤트</title>
-    <link rel="stylesheet" href="css/event-styles.css">
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700;900&display=swap" rel="stylesheet">
 <style>
 * {
@@ -702,6 +701,5 @@ body {
         </div>
     </div>
 
-    <script src="js/event-script.js"></script>
 </body>
 </html>

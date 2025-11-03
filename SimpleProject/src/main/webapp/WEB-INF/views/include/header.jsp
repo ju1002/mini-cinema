@@ -1,11 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<<<<<<< HEAD
 
-<!-- Header CSSddddd -->
-=======
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!-- Header CSS -->
->>>>>>> develop
+
 <style>
 /* 폰트 적용 */
 @import url(//fonts.googleapis.com/earlyaccess/notosanskr.css);
@@ -247,7 +244,7 @@ margin-top:20px;
         </ul>
     </nav>
 
-    <a class="logo inline-block" href="#" ><img src="${pageContext.request.contextPath}/resources/images/mainImage/main-logo4.png" alt="로고 사진" class="block" id="logo-img" ></a>
+    <a class="logo inline-block" href="/spring" ><img src="${pageContext.request.contextPath}/resources/images/mainImage/main-logo4.png" alt="로고 사진" class="block" id="logo-img" ></a>
     <div class="search-box absolute-right absolute-middle">
     <ul class="row">
 
