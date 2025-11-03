@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 
 import com.kh.moving.reservation.model.dto.MovieListDTO;
+import com.kh.moving.reservation.model.dto.ReserveSeatsDTO;
 import com.kh.moving.reservation.model.dto.ScreeningDTO;
 
 @Mapper
@@ -48,20 +49,23 @@ public interface ReservationMapper {
 	int findReservationCount(@Param("screeningId") int screeningId, @Param("selectDate") String selectDate);
 
 	@Select("""
-			  SELECT 
-			  	     rs.SEAT_NUMBER
-				FROM 
-					 TB_RESERVATION_SEAT rs
-                JOIN 
-                     TB_RESERVATION r
-			   USING (RESERVATION_ID)
-			   WHERE 
-			         r.MOVIE_ID = #{movieId}
-				 AND 
-				     TRUNC(r.RESERVATION_DATE) = TO_DATE(#{date}, 'YYYY-MM-DD')
-                 AND 
-                     r.RESERVATION_STATUS = 'Y'
+			     SELECT 
+				        rs.SEAT_NUMBER
+				   FROM 
+				        TB_RESERVATION_SEAT rs
+				   JOIN 
+				        TB_RESERVATION r USING (RESERVATION_ID)
+				   JOIN 
+				        TB_SCREENING s USING (SCREENING_ID)
+				  WHERE 
+				        s.MOVIE_ID = #{reserveSeats.movieId}
+				    AND 
+				        TRUNC(r.RESERVATION_DATE) = TO_DATE(#{reserveSeats.selectDate}, 'YYYY-MM-DD')
+				    AND 
+				        TO_CHAR(s.START_TIME, 'HH24:MI') = #{reserveSeats.startTime}
+				    AND 
+				        r.RESERVATION_STATUS = 'Y'
 						""")
-	List<String> findReserveSeats(@Param("movieId") String movieId, @Param("date") String date);
+	List<String> findReserveSeats(@Param("reserveSeats")ReserveSeatsDTO reserveSeats);
 
 }
