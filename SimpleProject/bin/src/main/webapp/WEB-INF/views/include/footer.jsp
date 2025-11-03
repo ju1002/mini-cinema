@@ -4,11 +4,7 @@
 <style>
 /* 하단 정렬 */
 .boo {
-<<<<<<< HEAD
     margin-top: 5%;
-=======
-    margin-top: 20%;
->>>>>>> develop
     height: 62px;
     border-top: 1px solid #444444;
     border-bottom: 1px solid #444444;
@@ -125,12 +121,10 @@
     margin-top: 30px;
 }
 
-<<<<<<< HEAD
 .address > 
 c {
-=======
+}
 .address > .cc {
->>>>>>> develop
     margin-top: 30px;
 }
 
@@ -138,11 +132,6 @@ c {
     margin-top: 10px;
     margin-left: 80px;
 }
-<<<<<<< HEAD
-.
-=======
-
->>>>>>> develop
 .address > .cc > a {
     overflow: hidden;
     float: right;
