@@ -60,7 +60,7 @@ public class ReserveServiceImpl implements ReserveService {
 		
 		log.info("seats 메퍼 돌아온값 : {}" +  seats);
 		
-		return null;
+		return seats;
 	}
 	
 	
