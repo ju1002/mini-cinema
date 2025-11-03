@@ -69,6 +69,7 @@
 				    <input type="checkbox" name="genreList" value="G007" ${fn:contains(sessionScope.loginMember.preferredGenres, 'G007') ? 'checked' : ''}>공포
 				    <input type="checkbox" name="genreList" value="G008" ${fn:contains(sessionScope.loginMember.preferredGenres, 'G008') ? 'checked' : ''}>애니메이션    
 				        
+
                 </div> 
                 <br>
                 <div class="btns" align="center">

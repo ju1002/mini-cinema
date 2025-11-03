@@ -24,6 +24,7 @@ public class MemberServiceImpl implements MemberService {
 	private final MemberMapper mapper;
 	
 	@Override
+
 	public MemberDTO login(String loginGb, MemberDTO member) {
 		
 		MemberDTO loginMember = mapper.login(member);
@@ -52,6 +53,7 @@ public class MemberServiceImpl implements MemberService {
 		validator.validatedMember(member);
 		String encPwd = passwordEncoder.encode(member.getUserPwd());
 		member.setUserPwd(encPwd);
+
 		int result = mapper.signup(member);
 		
 		if(result != 1) {
@@ -80,6 +82,7 @@ public class MemberServiceImpl implements MemberService {
 	
 	@Override
 	public int update(MemberDTO member, HttpSession session) {
+
 		MemberDTO sessionMember = ((MemberDTO)session.getAttribute("loginMember"));
 		
 		validator.validatedUpdateMember(member, sessionMember);
@@ -102,6 +105,7 @@ public class MemberServiceImpl implements MemberService {
 	
 	@Override
 	public int delete(String userPwd, HttpSession session) {
+
 		
 		MemberDTO sessionMember = ((MemberDTO)session.getAttribute("loginMember"));
 		
@@ -118,6 +122,8 @@ public class MemberServiceImpl implements MemberService {
 		if(result != 1) {
 			throw new AuthenticationException("관리자에게 문의하세요.");
 		}
+
 		return result;
+
 	}
 }

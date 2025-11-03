@@ -6,6 +6,7 @@ import com.kh.moving.member.model.dto.MemberDTO;
 
 public interface MemberService {
 	
+
 	MemberDTO login(String loginGb, MemberDTO member);
 
 	int signUp(MemberDTO member);
@@ -13,6 +14,7 @@ public interface MemberService {
 	int update(MemberDTO member, HttpSession session);
 
 	int delete(String userPwd, HttpSession session);
+
 	
 }
 

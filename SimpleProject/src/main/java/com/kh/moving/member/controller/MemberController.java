@@ -55,6 +55,7 @@ public class MemberController {
 	}
 	
 	@PostMapping("signup")
+
 	public String signup(MemberDTO member,
             @RequestParam(value = "genreList", required = false) String[] genreList) {
 		
@@ -70,6 +71,7 @@ public class MemberController {
 
 		memberService.signUp(member);
 		
+
 		return "main";
 	}
 	
@@ -79,6 +81,7 @@ public class MemberController {
 	}
 	
 	@PostMapping("edit")
+
 	public String edit(MemberDTO member,
 	                   @RequestParam(value = "genreList", required = false) String[] genreList,
 	                   HttpSession session) {
@@ -99,6 +102,7 @@ public class MemberController {
 	        session.setAttribute("loginMember", updatedMember); // 세션 갱신
 	    }
 
+
 		return "redirect:myInfo";
 	}
 	
@@ -111,6 +115,7 @@ public class MemberController {
 		return "redirect:/";
 	}
 	
+
     @RequestMapping("/")
     public String main() {
         return "main";

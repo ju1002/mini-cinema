@@ -22,6 +22,7 @@ public interface MemberMapper {
 	int signup2(MemberGenreDTO genre);
 	
 	@Update("UPDATE TB_MEMBER SET USER_NAME = #{userName}, BIRTHDAY = #{birthday}, PHONE = #{phone}, EMAIL = #{email}, SNS_AGREE = #{snsAgree}, PREFERRED_GENRES = #{preferredGenres} WHERE USER_ID = #{userId}")
+
 	int update(MemberDTO member);
 	
 	@Delete("DELETE FROM TB_MEMBER WHERE USER_ID = #{ userId }")

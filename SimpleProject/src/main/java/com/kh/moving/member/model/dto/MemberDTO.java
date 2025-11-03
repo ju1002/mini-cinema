@@ -28,7 +28,7 @@ public class MemberDTO {
     private String manager;
     private String status;
     
-    private List<String> genreList;   // ✅ 선택된 장르들 (체크박스용)
-    private String preferredGenres;   // ✅ DB 저장용 (콤마로 구분)
+    private List<String> genreList;   // 선택된 장르들 (체크박스용)
+    private String preferredGenres;   // DB 저장용 (콤마로 구분)
 	
 }
