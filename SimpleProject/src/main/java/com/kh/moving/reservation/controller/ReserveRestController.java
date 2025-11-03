@@ -6,6 +6,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -64,8 +65,23 @@ public class ReserveRestController {
 		List<String> seats = reserveService.findReserveSeats(reserveSeats);
 		
 		
+		log.info("seats : {}"+seats);
+		
+		return ResponseEntity.ok(seats);
+		
+	}
+	
+	@PostMapping
+	public ResponseEntity<?> reservation(){
+		
+		log.info("이거 맞아요?");
+		
+		
+		
+
 		
 		return null;
+		
 		
 	}
 	

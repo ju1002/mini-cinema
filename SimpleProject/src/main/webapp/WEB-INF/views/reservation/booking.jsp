@@ -258,7 +258,7 @@
 				<div class="seat" data-seat="B09">B09</div>
 				<div class="seat" data-seat="B10">B10</div>
 			</div>
-			<button id="reserve-btn">예매하기</button>
+			<button id="reserve-btn" disabled>예매하기</button>
 		</div>
 
 
@@ -333,6 +333,13 @@
 
 				    // 2️ 클릭한 요소(this)에 selected 추가
 				    this.classList.add('selected');
+				    
+				    
+		            // 3️ res3, res4 초기화 및 숨기기
+		            document.querySelector('#res3').innerHTML = '';
+		            document.getElementById('seat-container').style.display = 'none';
+		            document.getElementById('reserve-btn').style.display = 'none';
+				    
 				  });
 				});
 			
@@ -493,11 +500,37 @@ function SelectedTime(movieId, selectedDate) {
                         selectedSeats.push(seatId);
                         seat.classList.add('selected');
                     }
+                    // 버튼 활성화/비활성화 처리
+                    const reserveBtn = document.querySelector('#reserve-btn');
+                    reserveBtn.disabled = selectedSeats.length === 0;
                 };
             });
         });
     });
 }
+
+const reservation =() => {
+	
+	document.querySelector('#reserve-btn').addEventListener('click',() => {
+		
+		
+		$.ajax({
+			url: '${pageContext.request.contextPath}/ajax/reservation',
+			method: 'POST',
+			
+			
+			
+			
+		})
+		
+		
+	})
+	
+	
+}
+
+reservation();
+
 
 		</script>
 

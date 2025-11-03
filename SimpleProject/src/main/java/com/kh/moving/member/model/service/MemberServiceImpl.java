@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import com.kh.moving.exception.AuthenticationException;
 import com.kh.moving.member.model.dao.MemberMapper;
 import com.kh.moving.member.model.dto.MemberDTO;
+import com.kh.moving.member.model.dto.MemberGenreDTO;
 import com.moving.exception.UserIdNotFoundException;
 
 import lombok.RequiredArgsConstructor;
@@ -23,34 +24,65 @@ public class MemberServiceImpl implements MemberService {
 	private final MemberMapper mapper;
 	
 	@Override
-	public MemberDTO login(MemberDTO member) {
+
+	public MemberDTO login(String loginGb, MemberDTO member) {
 		
 		MemberDTO loginMember = mapper.login(member);
-		return validateLoginMember(loginMember, member.getUserPwd());
+		return validateLoginMember(loginGb, loginMember, member.getUserPwd());
 	}
 	
-	private MemberDTO validateLoginMember(MemberDTO loginMember, String userPwd) {
+	private MemberDTO validateLoginMember(String loginGb, MemberDTO loginMember, String userPwd) {
 		if(loginMember == null) {
-			throw new UserIdNotFoundException("아이디 또는 비밀번호가 올바르지 않습니다.");
+			throw new UserIdNotFoundException("회원정보가 존재하지 않습니다.");
 		}
-		if(passwordEncoder.matches(userPwd, loginMember.getUserPwd())) {
+		
+		if("L".equals(loginGb)) {
+			if(passwordEncoder.matches(userPwd, loginMember.getUserPwd())) {
+				return loginMember;
+			} else {
+				throw new UserIdNotFoundException("아이디 또는 비밀번호가 올바르지 않습니다.");
+			}
+		} else {
 			return loginMember;
 		}
-		return null;
 	}
 	
 	@Override
-	public void signUp(MemberDTO member) {
+	public int signUp(MemberDTO member) {
 		
 		validator.validatedMember(member);
 		String encPwd = passwordEncoder.encode(member.getUserPwd());
 		member.setUserPwd(encPwd);
-		mapper.signup(member);
+
+		int result = mapper.signup(member);
+		
+		if(result != 1) {
+			throw new AuthenticationException("문제가 발생했습니다. 관리자에게 문의하세요.");
+		}
+		
+		String[] test = null;
+		MemberGenreDTO genre = new MemberGenreDTO();
+		
+		String pre = member.getPreferredGenres();
+		test = pre.split(",");
+		
+		genre.setUserNo(member.getUserNo());
+		
+		int result2 = 0;
+		for(int i=0; i<test.length; i++) {
+			genre.setGenreId(test[i]);
+			
+			result2 = mapper.signup2(genre);
+			if(result2 != 1) {
+				throw new AuthenticationException("문제가 발생했습니다. 관리자에게 문의하세요.");
+			}
+		}
+		return result;
 	}
 	
 	@Override
-	public void update(MemberDTO member, HttpSession session) {
-		
+	public int update(MemberDTO member, HttpSession session) {
+
 		MemberDTO sessionMember = ((MemberDTO)session.getAttribute("loginMember"));
 		
 		validator.validatedUpdateMember(member, sessionMember);
@@ -66,10 +98,14 @@ public class MemberServiceImpl implements MemberService {
 		sessionMember.setPhone(member.getPhone());
 		sessionMember.setEmail(member.getEmail());
 		sessionMember.setSnsAgree(member.getSnsAgree());
+		sessionMember.setSnsAgree(member.getPreferredGenres());
+		
+		return result;
 	}
 	
 	@Override
-	public void delete(String userPwd, HttpSession session) {
+	public int delete(String userPwd, HttpSession session) {
+
 		
 		MemberDTO sessionMember = ((MemberDTO)session.getAttribute("loginMember"));
 		
@@ -86,5 +122,8 @@ public class MemberServiceImpl implements MemberService {
 		if(result != 1) {
 			throw new AuthenticationException("관리자에게 문의하세요.");
 		}
+
+		return result;
+
 	}
 }
