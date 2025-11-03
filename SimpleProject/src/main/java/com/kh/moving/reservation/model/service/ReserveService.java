@@ -17,6 +17,6 @@ public interface ReserveService {
 	
 	List<String> findReserveSeats(ReserveSeatsDTO reserveSeats);
 	
-	void saveReservationByUserId(String userId, ReservationDTO reservation);
+	void saveReservation(ReservationDTO reserveDTO);
 	
 }

@@ -425,11 +425,12 @@
 		            console.log(response);
 		            // res3에 상영시간 표시
 		const showTime = response.map(e => {
-    return `<div id="movie-time" data-screening-id="\${e.screeningId}">
+    return `<div id="movie-time" data-screening-id="\${e.screeningId}" class="movie-time">
         <div>\${e.startTime}</div>
         <div>잔여 : \${e.seatsCount} 석</div>
     </div>`;
 }).join('');
+		            
 document.querySelector('#res3').innerHTML = showTime;
 		            
 		            
@@ -444,7 +445,7 @@ const selectedSeats = [];
 const maxSelection = 3;
 
 function SelectedTime(movieId, selectedDate) {
-    const movieTime = document.querySelectorAll('#movie-time');
+    const movieTime = document.querySelectorAll('.movie-time');
 
     movieTime.forEach(e => {
         e.addEventListener('click', function() {
@@ -454,6 +455,10 @@ function SelectedTime(movieId, selectedDate) {
             // 클릭한 요소만 selected 추가
             this.classList.add('selected');
 
+            // 선택한 상영시간의 id 가져오기
+            const screeningId = parseInt(this.dataset.screeningId);
+            console.log(screeningId);
+            
             // res4 자식 요소 보이기
             document.getElementById('seat-container').style.display = 'flex';
             document.getElementById('reserve-btn').style.display = 'inline-block';
@@ -531,6 +536,7 @@ const reservation = () => {
 
         if (!movieId || !selectedDate || !startTime || !screeningId || selectedSeats.length === 0) {
             alert('영화, 날짜, 시간, 좌석을 모두 선택해주세요.');
+            console.log(movieId,selectedDate,startTime,screeningId,selectedSeats.length)
             return;
         }
 
@@ -542,7 +548,7 @@ const reservation = () => {
                 movieId: movieId,
                 date: selectedDate,
                 startTime: startTime,
-                screeningId: screeningId, // ✅ 선택된 상영시간에서 가져옴
+                screeningId: screeningId, 
                 seats: selectedSeats
             }),
             success: function(response) {

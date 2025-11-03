@@ -33,11 +33,11 @@ public class ReserveRestController {
 	@GetMapping
 	public List<MovieListDTO> findMovieList(HttpSession session){
 		
-		log.info("들어온값 : {}" ,reserveService.findMovieList());
+		//log.info("들어온값 : {}" ,reserveService.findMovieList());
 		
 		String userInfo = (String) session.getAttribute("userInfo");
 		
-		log.info("들어온 값 : {}"+userInfo);
+		//log.info("들어온 값 : {}"+userInfo);
 		
 		return reserveService.findMovieList();
 		
@@ -60,8 +60,8 @@ public class ReserveRestController {
 	public ResponseEntity<?> findReserveSeats(@RequestParam String movieId , @RequestParam String date ,@RequestParam String startTime){
 		
 		
-		log.info("seats들어온값은 : {} , {} " , movieId , date);
-		log.info("startTime  = {} " , startTime);
+		//log.info("seats들어온값은 : {} , {} " , movieId , date);
+		//log.info("startTime  = {} " , startTime);
 		
 		ReserveSeatsDTO reserveSeats = new ReserveSeatsDTO(movieId,date,startTime);
 		
@@ -69,25 +69,27 @@ public class ReserveRestController {
 		List<String> seats = reserveService.findReserveSeats(reserveSeats);
 		
 		
-		log.info("seats : {}"+seats);
+		//log.info("seats : {}"+seats);
 		
 		return ResponseEntity.ok(seats);
 		
 	}
 	
 	@PostMapping
-	public ResponseEntity<?> reservation(HttpSession session,@RequestBody ReservationDTO reservation){
-		
-		  MemberDTO loginMember = (MemberDTO) session.getAttribute("loginMember");
-		
-		  
-		    String userId = loginMember.getUserId(); // userNo 대신 userId 사용	
-		    reserveService.saveReservationByUserId(userId, reservation);
-		
-		return null;
+	public ResponseEntity<?> createReservation(@RequestBody ReservationDTO dto, HttpSession session){
 		
 		
+	            // 세션에서 USER_NO 가져오기 (로그인한 사용자)
+	            MemberDTO userInfo  = (MemberDTO) session.getAttribute("loginMember");
+	          
+	            dto.setUserNo(userInfo.getUserNo());
+	            log.info("dto 들어오는값 : {}  " + dto);
+	            
+	            // 예약 처리
+	            reserveService.saveReservation(dto);
+	            
+	          return null;
+	            
+	        
+	    }
 	}
-	
-	
-}

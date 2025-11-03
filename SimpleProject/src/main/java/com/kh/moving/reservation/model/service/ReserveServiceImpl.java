@@ -34,7 +34,7 @@ public class ReserveServiceImpl implements ReserveService {
 	@Override
 	public List<ScreeningDTO> findScreeningList(String movieId , String selectDate) {
 		
-		List<ScreeningDTO> screening = mapper.findScreeningList(movieId);
+		List<ScreeningDTO> screening = mapper.findScreeningList(movieId,selectDate);
 		
 		
 		for(ScreeningDTO s : screening) {
@@ -49,7 +49,7 @@ public class ReserveServiceImpl implements ReserveService {
 		
 		
 		
-		log.info("돌아온 dto : {}  "+screening );
+		//log.info("돌아온 dto : {}  "+screening );
 		
 		return screening;
 	}
@@ -57,6 +57,8 @@ public class ReserveServiceImpl implements ReserveService {
 
 	@Override
 	public List<String> findReserveSeats(ReserveSeatsDTO reserveSeats) {
+		
+		log.info("ReserveSeatsDTO : {} " , reserveSeats);
 		
 		List<String> seats = mapper.findReserveSeats(reserveSeats);
 		
@@ -66,27 +68,35 @@ public class ReserveServiceImpl implements ReserveService {
 	}
 	
 	
+	@Transactional
+	public void saveReservation(ReservationDTO reserveDTO) {
+		
+		int saveReserve = mapper.saveReservation(reserveDTO);
+		
+		int userNo = reserveDTO.getUserNo();
+		
+		List<String> seats = reserveDTO.getSeats();
+		
+		if(saveReserve > 0) {
+			
+			for(String seat : seats) {
+				
+				
+				mapper.saveReserveSeat(seat);
+				
+				
+			}
+			
+			
+		}
+		
+		
+		
 	
-	 @Transactional
-	    public void saveReservationByUserId(String userId, ReservationDTO reservation) {
-	        // 1. userId로 userNo 조회
-	        Long userNo = mapper.getUserNoByUserId(userId);
-	        reservation.setUserNo(userNo);
-	        
-	        // 2. TB_RESERVATION INSERT (RESERVATION_STATUS는 DEFAULT 'Y')
-	        mapper.insertReservation(reservation);
-	        
-	        // 3. TB_RESERVATION_SEAT INSERT (선택한 좌석들)
-	        for (String seatNumber : reservation.getSeats()) {
-	            ReservationSeatDTO seatDTO = new ReservationSeatDTO(
-	                seatNumber, 
-	                reservation.getReservationId()
-	            );
-	            mapper.insertReservationSeat(seatDTO);
-	        }
-	    }
-	}
-
+}
+	
+	
+}
 	
 	
 
