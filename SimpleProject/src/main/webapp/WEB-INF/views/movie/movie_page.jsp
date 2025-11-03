@@ -8,6 +8,7 @@
 <title>영화 목록</title>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <style>
+/* 기존 스타일 그대로 */
 body{
 	background-color: #f5f5f5;
 }
@@ -61,13 +62,23 @@ body{
     margin: 0 auto; 
     box-sizing: border-box;
 }
+
+.section-title {
+	font-size: 20px;
+	font-weight: bold;
+	margin-bottom: 20px;
+}
 </style>
 </head>
 <body>
 	<%@ include file="../include/header.jsp"%>
 
 	<div class="prod-box-1">
-		<div class="movie-grid"></div>
+		<div class="section-title"></div>
+		<div class="movie-grid" id="db-movie-grid"></div>
+		
+		<div class="section-title"></div>
+		<div class="movie-grid" id="api-movie-grid"></div>
 	</div>
 
 	<script>
@@ -75,35 +86,53 @@ body{
 	    location.href = `${pageContext.request.contextPath}/movie/detail/\${id}`;
 	}
 	
+	// DB 영화 목록 AJAX
 	function getListMovie() {
 		$.ajax({
 			url : `${pageContext.request.contextPath}/movie/list`,
 			success : function(response) {
-				console.log('응답 데이터:', response);
-				
-				console.log('첫번째 응답 제목 : ', response[0].movieTitle);
-				
 				const result = response.map(movie => `
-			    <div class="movie-card" onClick = "detail('\${movie.movieId}')")>
-				<img src="${pageContext.request.contextPath}/resources/images/\${movie.originName}" 
-			     alt="${movie.movieTitle}" class="poster" />
-			        <div class="movie-info">
-			            <div class="movie-title">\${movie.movieTitle}</div>
-			            <div class="movie-meta">\${movie.releaseDate} · \${movie.genreName} · \${movie.rating}</div>
-			        </div>
-			    </div>
-			`).join('');
+				    <div class="movie-card" onClick="detail('\${movie.movieId}')">
+				        <img src="${pageContext.request.contextPath}/resources/images/\${movie.originName}" 
+				             alt="\${movie.movieTitle}" class="poster" />
+				        <div class="movie-info">
+				            <div class="movie-title">\${movie.movieTitle}</div>
+				            <div class="movie-meta">\${movie.releaseDate} · \${movie.genreName} · \${movie.rating}</div>
+				        </div>
+				    </div>
+				`).join('');
 				
-				$('.movie-grid').html(result);
+				$('#db-movie-grid').html(result);
 			}
-		})
+		});
+	}
+	
+	// API 영화 목록 AJAX
+	function getApiListMovie() {
+		$.ajax({
+			url : `${pageContext.request.contextPath}/movie/apiList`,
+			success : function(response) {
+				const result = response.map(movie => `
+				    <div class="movie-card" onClick="detail('\${movie.id}')">
+				        <img src="https://image.tmdb.org/t/p/w500\${movie.poster_path}" 
+				             alt="\${movie.title}" class="poster" />
+				        <div class="movie-info">
+				            <div class="movie-title">\${movie.title}</div>
+				            <div class="movie-meta">\${movie.release_date} · 장르ID: \${movie.genre_ids.join(', ')} · 평점: \${movie.vote_average}</div>
+				        </div>
+				    </div>
+				`).join('');
+				
+				$('#api-movie-grid').html(result);
+			}
+		});
 	}
 	
 	$(function() {
-		  getListMovie();
-		});
+		getListMovie();
+		getApiListMovie();
+	});
 	</script>
-
 
 	<%@ include file="../include/footer.jsp"%>
 </body>

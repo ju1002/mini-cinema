@@ -2,7 +2,6 @@ package com.kh.moving.movie.controller;
 
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -10,6 +9,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.kh.moving.movie.model.dto.ApiMovieDTO;
 import com.kh.moving.movie.model.dto.MovieDTO;
 import com.kh.moving.movie.model.service.ApiService;
 import com.kh.moving.movie.model.service.MovieService;
@@ -42,16 +42,14 @@ public class MovieController {
 	@ResponseBody
 	@GetMapping("/list")
 	public List<MovieDTO> getListMovie() {
-		
-	    List<MovieDTO> movie = movieService.getListMovie();
-	    
-	    //log.info("조회된 영화 개수 : {} , 영화들 : {}", movie.size(), movie);
-		
-	    String apimovie = apiService.requestApi();
-		
-		log.info("잘오냐? : {}", apimovie);
-		
-	    return movie;
+		 return movieService.getListMovie();
+	}
+	
+	// 상영중인 api영화페이지 목록 뿌려주기
+	@ResponseBody
+	@GetMapping("/apiList")
+	public List<ApiMovieDTO> getApiListMovie() {
+		return apiService.getNowPlayingMovies();
 	}
 	
 	// 상영중인 영화 디테일화면으로 값뿌려기
