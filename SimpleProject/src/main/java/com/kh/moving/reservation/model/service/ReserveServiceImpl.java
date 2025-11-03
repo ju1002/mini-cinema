@@ -3,8 +3,11 @@ package com.kh.moving.reservation.model.service;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.kh.moving.reservation.model.dto.MovieListDTO;
+import com.kh.moving.reservation.model.dto.ReservationDTO;
+import com.kh.moving.reservation.model.dto.ReservationSeatDTO;
 import com.kh.moving.reservation.model.dto.ReserveSeatsDTO;
 import com.kh.moving.reservation.model.dto.ScreeningDTO;
 import com.kh.moving.reservation.model.mapper.ReservationMapper;
@@ -52,7 +55,6 @@ public class ReserveServiceImpl implements ReserveService {
 	}
 	
 
-
 	@Override
 	public List<String> findReserveSeats(ReserveSeatsDTO reserveSeats) {
 		
@@ -65,6 +67,26 @@ public class ReserveServiceImpl implements ReserveService {
 	
 	
 	
+	 @Transactional
+	    public void saveReservationByUserId(String userId, ReservationDTO reservation) {
+	        // 1. userId로 userNo 조회
+	        Long userNo = mapper.getUserNoByUserId(userId);
+	        reservation.setUserNo(userNo);
+	        
+	        // 2. TB_RESERVATION INSERT (RESERVATION_STATUS는 DEFAULT 'Y')
+	        mapper.insertReservation(reservation);
+	        
+	        // 3. TB_RESERVATION_SEAT INSERT (선택한 좌석들)
+	        for (String seatNumber : reservation.getSeats()) {
+	            ReservationSeatDTO seatDTO = new ReservationSeatDTO(
+	                seatNumber, 
+	                reservation.getReservationId()
+	            );
+	            mapper.insertReservationSeat(seatDTO);
+	        }
+	    }
+	}
+
 	
 	
-}
+

@@ -3,6 +3,7 @@ package com.kh.moving.reservation.model.service;
 import java.util.List;
 
 import com.kh.moving.reservation.model.dto.MovieListDTO;
+import com.kh.moving.reservation.model.dto.ReservationDTO;
 import com.kh.moving.reservation.model.dto.ReserveSeatsDTO;
 import com.kh.moving.reservation.model.dto.ScreeningDTO;
 
@@ -15,5 +16,7 @@ public interface ReserveService {
 	List<ScreeningDTO> findScreeningList(String movieId , String selectDate);
 	
 	List<String> findReserveSeats(ReserveSeatsDTO reserveSeats);
+	
+	void saveReservationByUserId(String userId, ReservationDTO reservation);
 	
 }

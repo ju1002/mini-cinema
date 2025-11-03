@@ -86,7 +86,8 @@ public class MemberController {
 	                   @RequestParam(value = "genreList", required = false) String[] genreList,
 	                   HttpSession session,
 	                   RedirectAttributes redirectAttributes) {
-
+		
+		
 	    if (genreList != null && genreList.length > 0) {
 	        member.setPreferredGenres(String.join(",", genreList));
 	    } else {

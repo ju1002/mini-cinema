@@ -4,14 +4,18 @@ import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.kh.moving.member.model.dto.MemberDTO;
 import com.kh.moving.reservation.model.dto.MovieListDTO;
+import com.kh.moving.reservation.model.dto.ReservationDTO;
 import com.kh.moving.reservation.model.dto.ReserveSeatsDTO;
 import com.kh.moving.reservation.model.dto.ScreeningDTO;
 import com.kh.moving.reservation.model.service.ReserveService;
@@ -72,13 +76,13 @@ public class ReserveRestController {
 	}
 	
 	@PostMapping
-	public ResponseEntity<?> reservation(){
+	public ResponseEntity<?> reservation(HttpSession session,@RequestBody ReservationDTO reservation){
 		
-		log.info("이거 맞아요?");
+		  MemberDTO loginMember = (MemberDTO) session.getAttribute("loginMember");
 		
-		
-		
-
+		  
+		    String userId = loginMember.getUserId(); // userNo 대신 userId 사용	
+		    reserveService.saveReservationByUserId(userId, reservation);
 		
 		return null;
 		

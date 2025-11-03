@@ -13,6 +13,7 @@
 		  
 	  <mappers>
 	  	 <mapper resource ="/mapper/member-mapper.xml"/>
+	  	 <mapper resource="/mapper/reservation-mapper.xml"/>
 	  	<!-- 
 	    <mapper resource ="/mapper/board-mapper.xml"/>
 	  	 -->

@@ -7,6 +7,8 @@ import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 
 import com.kh.moving.reservation.model.dto.MovieListDTO;
+import com.kh.moving.reservation.model.dto.ReservationDTO;
+import com.kh.moving.reservation.model.dto.ReservationSeatDTO;
 import com.kh.moving.reservation.model.dto.ReserveSeatsDTO;
 import com.kh.moving.reservation.model.dto.ScreeningDTO;
 
@@ -68,4 +70,14 @@ public interface ReservationMapper {
 						""")
 	List<String> findReserveSeats(@Param("reserveSeats")ReserveSeatsDTO reserveSeats);
 
+	
+	@Select("SELECT USER_NO FROM TB_MEMBER WHERE USER_ID = #{userId}")
+	Long getUserNoByUserId(String userId);
+	
+	
+	int insertReservation(ReservationDTO reservationDTO);
+	
+	
+	int insertReservationSeat(ReservationSeatDTO reservationDTO);
+	
 }
