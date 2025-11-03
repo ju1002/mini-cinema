@@ -38,7 +38,7 @@
         STATUS
     )
     VALUES (
-        SEQ_MEMBER_NO.NEXTVAL,
+        SEQ_UNO.NEXTVAL,
         #{userId},
         #{userPwd},
         #{userName},
