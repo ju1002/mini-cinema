@@ -429,7 +429,6 @@
 		}
 
 		// 상영시간 선택
-		// 전역으로 선언
 const selectedSeats = [];
 const maxSelection = 3;
 

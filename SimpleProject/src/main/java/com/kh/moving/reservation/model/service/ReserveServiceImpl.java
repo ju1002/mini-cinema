@@ -1,11 +1,11 @@
 package com.kh.moving.reservation.model.service;
 
-import java.util.Arrays;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
 
 import com.kh.moving.reservation.model.dto.MovieListDTO;
+import com.kh.moving.reservation.model.dto.ReserveSeatsDTO;
 import com.kh.moving.reservation.model.dto.ScreeningDTO;
 import com.kh.moving.reservation.model.mapper.ReservationMapper;
 
@@ -54,9 +54,9 @@ public class ReserveServiceImpl implements ReserveService {
 
 
 	@Override
-	public List<String> findReserveSeats(String movieId, String date) {
+	public List<String> findReserveSeats(ReserveSeatsDTO reserveSeats) {
 		
-		List<String> seats = mapper.findReserveSeats(movieId , date);
+		List<String> seats = mapper.findReserveSeats(reserveSeats);
 		
 		log.info("seats 메퍼 돌아온값 : {}" +  seats);
 		

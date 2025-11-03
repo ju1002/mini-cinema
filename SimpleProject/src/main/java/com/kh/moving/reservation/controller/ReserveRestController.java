@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.kh.moving.reservation.model.dto.MovieListDTO;
+import com.kh.moving.reservation.model.dto.ReserveSeatsDTO;
 import com.kh.moving.reservation.model.dto.ScreeningDTO;
 import com.kh.moving.reservation.model.service.ReserveService;
 
@@ -51,12 +52,16 @@ public class ReserveRestController {
 	}
 	
 	@GetMapping("/seats")
-	public ResponseEntity<?> findReserveSeats(@RequestParam String movieId , @RequestParam String date){
+	public ResponseEntity<?> findReserveSeats(@RequestParam String movieId , @RequestParam String date ,@RequestParam String startTime){
 		
 		
-		log.info("seats들어온값은 : {} , {}" , movieId , date);
+		log.info("seats들어온값은 : {} , {} " , movieId , date);
+		log.info("startTime  = {} " , startTime);
 		
-		List<String> seats = reserveService.findReserveSeats(movieId,date);
+		ReserveSeatsDTO reserveSeats = new ReserveSeatsDTO(movieId,date,startTime);
+		
+		
+		List<String> seats = reserveService.findReserveSeats(reserveSeats);
 		
 		
 		
