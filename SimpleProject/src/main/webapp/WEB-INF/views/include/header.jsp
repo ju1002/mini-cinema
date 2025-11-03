@@ -323,18 +323,6 @@ margin-top:20px;
 </div>
 
 <!-- 로그인 클릭 시 뜨는 모달 -->
-<<<<<<< HEAD
-<c:if test="${ empty sessionScope.loginMember }">
-<div class="modal fade" id="loginModal">
-    <div class="modal-dialog modal-sm">
-        <div class="modal-content">
-            <!-- Modal Header -->
-            <div class="modal-header">
-                <h4 class="modal-title">Login</h4>
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-            </div>
-
-=======
 
 <div class="modal fade" id="loginModal">
     <div class="modal-dialog modal-sm">
@@ -345,7 +333,6 @@ margin-top:20px;
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
             </div>
 
->>>>>>> develop
             <form action="/spring/login" method="post">
                 <!-- Modal body -->
                 <div class="modal-body">
@@ -364,7 +351,3 @@ margin-top:20px;
         </div>
     </div>
 </div>
-<<<<<<< HEAD
-</c:if>
-=======
->>>>>>> develop
