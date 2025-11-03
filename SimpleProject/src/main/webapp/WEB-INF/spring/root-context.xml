@@ -20,7 +20,7 @@
 		  <property name="driverClassName" value="oracle.jdbc.driver.OracleDriver" />
 		 <property name="url" value="jdbc:oracle:thin:@115.90.212.20:10000:xe"/> 
 		 <property name="username" value="BJY11"/>
-		 <property name="password" value="BJY11234"/>
+		 <property name="password" value="BJY111234"/>
 		  <!--드라이버 등록  
 		  property name="필드명" value="넣을 풀클래스명"-->
 	</bean>
