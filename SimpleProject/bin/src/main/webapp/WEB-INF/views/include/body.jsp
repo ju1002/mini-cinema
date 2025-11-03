@@ -269,7 +269,11 @@ h3 {
 }
 
 /* 메인그리드 */
+<<<<<<< HEAD
 .-grid {
+=======
+.main-grid {
+>>>>>>> f4c0a98dcb9a05e793d74ca89dad2d4148118a3f
     background-color: #fdfcf0;
 }
 
@@ -534,7 +538,10 @@ h3 {
         color : white;
         /* display : none; */ /* 아니면 안보이게 숨기기도 가능 */
     }
+<<<<<<< HEAD
   
+=======
+>>>>>>> f4c0a98dcb9a05e793d74ca89dad2d4148118a3f
 </style>
 
 
@@ -855,7 +862,11 @@ h3 {
 <!-- CGV 안내 -->
 <div class="box-1-title con" style="text-align:left;">
     <h1>CGV 안내</h1>
+<<<<<<< HEAD
 <div id="map" style="width:500px;height:500px;"></div>
+=======
+<div id="map" style="width:700px;height:700px;"></div>
+>>>>>>> f4c0a98dcb9a05e793d74ca89dad2d4148118a3f
 </div>
 
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=32768b61b72672bff487bc496c4a8901"></script>
@@ -882,12 +893,18 @@ marker.setMap(map);
 
 
 </script>
+<<<<<<< HEAD
 <div >
 <!-- 이미지 넣을거 생각해보자 -->
 	<!--  
 	<img src="${pageContext.request.contextPath }/resources/images/mainImage/"dd />
 	-->
 	
+=======
+<div>
+<!-- 이미지 넣을거 생각해보자 -->
+
+>>>>>>> f4c0a98dcb9a05e793d74ca89dad2d4148118a3f
 </div>
 
 

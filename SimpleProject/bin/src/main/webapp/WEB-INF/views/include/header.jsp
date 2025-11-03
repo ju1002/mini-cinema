@@ -1,6 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
+<<<<<<< HEAD
 <!-- Header CSSddddd -->
+=======
+<!-- Header CSS -->
+>>>>>>> f4c0a98dcb9a05e793d74ca89dad2d4148118a3f
 <style>
 /* 폰트 적용 */
 @import url(//fonts.googleapis.com/earlyaccess/notosanskr.css);
@@ -21,7 +25,11 @@ html {
 .cell {
     float: left;
     box-sizing: border-box;
+<<<<<<< HEAD
  
+=======
+    
+>>>>>>> f4c0a98dcb9a05e793d74ca89dad2d4148118a3f
     
 }
 .cell-right {
@@ -40,7 +48,10 @@ html {
 }
 .block {
     display: block;
+<<<<<<< HEAD
     &:hover{color:black;}
+=======
+>>>>>>> f4c0a98dcb9a05e793d74ca89dad2d4148118a3f
 }
 .inline-block {
     display: inline-block;
@@ -136,8 +147,11 @@ body {
     left: 0;
     width: 100%;
     z-index: 10;
+<<<<<<< HEAD
     margin-bottom: 50px;
     
+=======
+>>>>>>> f4c0a98dcb9a05e793d74ca89dad2d4148118a3f
 }
 
 .top-bar .menu-box-1 ul > li > a {
@@ -227,8 +241,11 @@ width:}
 #content_1{
 margin-top:20px;
 }
+<<<<<<< HEAD
 .menu-box-1 text-align-center line-height-0-ch-only con{
 }
+=======
+>>>>>>> f4c0a98dcb9a05e793d74ca89dad2d4148118a3f
 </style>
 
 
@@ -240,7 +257,11 @@ margin-top:20px;
             <li class="cell cell-left" ><img src="https://i.namu.wiki/i/EYm29AFq9eP2QqG9c7ns7UMD85CFFJeagte2DGY7rZlEsedVGGAt3b_WmEcs7GXEpf8E7yNGDvfq8Ou9-8cN8w.webp" alt="" width="50%" height="50%" ></li>
         </ul>
     </nav>
+<<<<<<< HEAD
     <a class="logo inline-block" href="/spring" ><img src="${pageContext.request.contextPath}/resources/images/mainImage/main-logo4.png" alt="로고 사진" class="block" id="logo-img" ></a>
+=======
+    <a class="logo inline-block" href="#" ><img src="${pageContext.request.contextPath}/resources/image/main-logo4.png" alt="로고 사진" class="block" id="logo-img" ></a>
+>>>>>>> f4c0a98dcb9a05e793d74ca89dad2d4148118a3f
     <form class="search-box absolute-right absolute-middle">
         <ul class="row">
         
@@ -259,7 +280,11 @@ margin-top:20px;
     <nav class="menu-box-1 text-align-center line-height-0-ch-only con">
         <ul class="row inline-block">
             <li class="cell">
+<<<<<<< HEAD
                 <a href="/spring/movie" class="block">영화</a>
+=======
+                <a href="#" class="block">영화</a>
+>>>>>>> f4c0a98dcb9a05e793d74ca89dad2d4148118a3f
                 <div>
                     <div class="menu-2 text-align-center line-height-0-ch-only">
                         <div class="inline-block">
@@ -271,12 +296,20 @@ margin-top:20px;
                 </div>
             </li>
             <li class="cell">
+<<<<<<< HEAD
                 <a href="/spring/reserve" class="block">예매</a>
+=======
+                <a href="#" class="block">예매</a>
+>>>>>>> f4c0a98dcb9a05e793d74ca89dad2d4148118a3f
                 <div>
                     <div class="menu-2 text-align-center line-height-0-ch-only">
                         <div class="inline-block">
                             <ul class="row">
+<<<<<<< HEAD
                                 <li class="cell"><a href="/spring/reserve">빠른예매</a></li>
+=======
+                                <li class="cell"><a href="#">상영시간표</a></li>
+>>>>>>> f4c0a98dcb9a05e793d74ca89dad2d4148118a3f
                             </ul>
                         </div>
                     </div>
@@ -288,8 +321,13 @@ margin-top:20px;
                 <div>
                     <div class="menu-2 text-align-center line-height-0-ch-only">
                         <div class="inline-block">
+<<<<<<< HEAD
                             <ul class="row"> 
                                 <li class="cell"><a href="/spring/event">이벤트</a></li>
+=======
+                            <ul class="row">
+                                <li class="cell"><a href="#">이벤트</a></li>
+>>>>>>> f4c0a98dcb9a05e793d74ca89dad2d4148118a3f
                                 <li class="cell"><a href="#">공지사항</a></li>
                             </ul>
                         </div>

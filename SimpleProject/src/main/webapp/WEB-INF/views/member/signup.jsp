@@ -63,20 +63,22 @@
 			        <input type="radio" name="snsAgree" value="Y" checked> 수신 동의
 			        <input type="radio" name="snsAgree" value="N"> 수신 비동의
                      <br /> <br />
+                     
              	    <tr>
-                        <th>선호 장르</th>
-                        <br />
-                        <td>
-                            <input type="checkbox" name="genre" value="액션"><label>액션</label>
-                            <input type="checkbox" name="genre" value="범죄">범죄
-                            <input type="checkbox" name="genre" value="코미디">코미디
-                            <input type="checkbox" name="genre" value="로맨스">로맨스
-                            <input type="checkbox" name="genre" value="SF">SF
-                            <input type="checkbox" name="genre" value="스릴러">스릴러
-                            <input type="checkbox" name="genre" value="공포">공포
-                            <input type="checkbox" name="genre" value="판타지">판타지
-                        </td>
-                    </tr>
+					    <th>선호 장르</th>
+					    <br />
+					    <td>
+					        <input type="checkbox" name="genreList" value="G001">드라마
+					        <input type="checkbox" name="genreList" value="G002">액션
+					        <input type="checkbox" name="genreList" value="G003">코미디
+					        <input type="checkbox" name="genreList" value="G004">스릴러
+					        <input type="checkbox" name="genreList" value="G005">로맨스
+					        <input type="checkbox" name="genreList" value="G006">SF
+					        <input type="checkbox" name="genreList" value="G007">공포
+					        <input type="checkbox" name="genreList" value="G008">애니메이션
+					    </td>
+					</tr>
+					
                 </div> 
                 <br>
                 <div class="btns" align="center">
