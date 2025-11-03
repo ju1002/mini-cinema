@@ -9,11 +9,10 @@ import com.kh.moving.exception.AuthenticationException;
 import com.kh.moving.exception.UserIdNotFoundException;
 import com.kh.moving.member.model.dao.MemberMapper;
 import com.kh.moving.member.model.dto.MemberDTO;
-<<<<<<< HEAD
-=======
+
 import com.kh.moving.member.model.dto.MemberGenreDTO;
-import com.moving.exception.UserIdNotFoundException;
->>>>>>> develop
+import com.kh.moving.exception.UserIdNotFoundException;
+
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -76,7 +75,7 @@ public class MemberServiceImpl implements MemberService {
 		for(int i=0; i<test.length; i++) {
 			genre.setGenreId(test[i]);
 			
-			result2 = mapper.signup2(genre);
+			//result2 = mapper.signup2(genre);
 			if(result2 != 1) {
 				throw new AuthenticationException("문제가 발생했습니다. 관리자에게 문의하세요.");
 			}

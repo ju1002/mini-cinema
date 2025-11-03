@@ -157,16 +157,6 @@
         <div class="header">
             <h1>📢 공지사항</h1>
         </div>
-		<div style="background:yellow; padding:20px; font-weight:bold; font-size:16px;">
-		    [세션 디버깅]<br>
-		    세션 loginMember 객체: ${sessionScope.loginMember} <br><br>
-		    
-		    loginMember.manager 값: [${sessionScope.loginMember.manager}] <br>
-		    manager 값 'Y'와 비교: ${sessionScope.loginMember.manager eq 'Y'}
-			
-			세션 loginMember 객체: ${sessionScope.loginMember}
-		</div>
-
         <div style="padding: 20px 30px; text-align: right; border-bottom: 1px solid #e0e0e0;">
             <c:if test="${not empty sessionScope.loginMember and sessionScope.loginMember.manager eq 'Y'}">
                 <a href="${pageContext.request.contextPath}/notice/noticeForm" class="write-button">✏️ 글쓰기</a>

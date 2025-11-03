@@ -15,7 +15,7 @@ import lombok.ToString;
 @ToString	
 public class NoticeDTO {
 
-	private Long noticeNo;
+	private int noticeNo;
 	private int userNo;
 	private String noticeTitle;
 	private String noticeContent;

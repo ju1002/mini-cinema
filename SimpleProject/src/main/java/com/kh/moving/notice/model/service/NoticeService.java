@@ -25,5 +25,7 @@ public interface NoticeService {
 	NoticeDTO findNoticeById(int noticeId);
 
 	int updateNotice(NoticeDTO noticeDTO, int userNo);
+
+	int deleteNotice(int noticeNo, MemberDTO loginMember);
 	
 }

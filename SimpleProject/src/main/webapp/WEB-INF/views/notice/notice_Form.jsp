@@ -163,7 +163,7 @@
 
             <div class="form-group">
                 <label>작성자<span class="required">*</span></label>
-                <input type="text" name="writer" value="관리자" readonly>
+                <input type="text" name="writer" value="${sessionScope.loginMember.userName}" readonly>
             </div>
             <div class="form-group">
                 <label>내용<span class="required">*</span></label>

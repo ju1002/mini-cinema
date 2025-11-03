@@ -11,9 +11,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.kh.moving.member.model.dto.MemberDTO;
-import com.kh.moving.member.model.service.PasswordEncoder;
 import com.kh.moving.notice.model.dto.NoticeDTO;
 import com.kh.moving.notice.model.service.NoticeService;
 import com.kh.moving.utll.PageInfo;
@@ -219,5 +219,22 @@ public class NoticeController {
 		}
 	}
 	
+	@PostMapping("/noticeDelete")
+	@ResponseBody
+	public String deleteNotice(@RequestParam("noticeId") int noticeId, HttpSession session) {
 
+	    MemberDTO loginMember = (MemberDTO) session.getAttribute("loginMember");
+
+	    if (loginMember == null || !"Y".equals(loginMember.getManager())) {
+	        return "권한이 없습니다.";
+	    }
+
+	    int result = noticeService.deleteNotice(noticeId, loginMember);
+
+	    if (result > 0) {
+	        return "삭제 성공";
+	    } else {
+	        return "삭제 실패";
+	    }
+	}
 }

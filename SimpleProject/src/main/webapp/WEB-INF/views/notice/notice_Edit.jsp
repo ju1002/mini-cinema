@@ -155,7 +155,7 @@
             <h1>✏️ 공지사항 수정</h1>
         </div>
 
-        <form class="edit-form" action="${pageContext.request.contextPath}/noticeUpdate" method="post">
+        <form class="edit-form" action="${pageContext.request.contextPath}/notice/noticeUpdate" method="post">
             <!-- 공지사항 ID (hidden) -->
             <input type="hidden" name="noticeNo" value="${notice.noticeNo}">
 

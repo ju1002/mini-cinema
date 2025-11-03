@@ -24,8 +24,6 @@
   <!-- 회원가입 -->
   <insert id="signup"
   		  parameterType="com.kh.moving.member.model.dto.MemberDTO">
-<<<<<<< HEAD
-
   	INSERT 
   	  INTO 
   	  	   TB_MEMBER 
@@ -57,35 +55,7 @@
 	      , SYSDATE
 	      , DEFAULT
 	      , DEFAULT
-
-=======
-  	INSERT INTO TB_MEMBER (
-        USER_NO,
-        USER_ID,
-        USER_PWD,
-        USER_NAME,
-        BIRTHDAY,
-        EMAIL,
-        PHONE,
-        SNS_AGREE,
-        ENROLL_DATE,
-        MANAGER,
-        STATUS
-    )
-    VALUES (
-        SEQ_UNO.NEXTVAL,
-        #{userId},
-        #{userPwd},
-        #{userName},
-        #{birthday},
-        #{email},
-        #{phone},
-        DEFAULT,
-        SYSDATE,
-        DEFAULT,
-        DEFAULT
->>>>>>> develop
-    )
+)
   </insert>
   
 </mapper>

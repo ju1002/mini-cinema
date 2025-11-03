@@ -78,13 +78,30 @@ public class NoticeServiceImpl implements NoticeService {
 		
 		return noticeMapper.updateNotice(noticeDTO);
 	}
-	
-	
-	
-	
-	
-	
-	
-	
+
+	@Override
+	public int deleteNotice(int noticeNo, MemberDTO loginMember) {
+		
+		if(loginMember == null) {
+			return 0;
+		}
+		
+		NoticeDTO noticeDTO = noticeMapper.findNoticeById(noticeNo);
+		
+		if(noticeDTO == null) {
+			return 0;
+		}
+		
+		boolean isAdmin ="Y".equals(loginMember.getManager());
+		boolean isAuthor = (loginMember.getUserNo() == noticeDTO.getUserNo());
+		
+		int result = 0;
+		
+		if(isAdmin) {
+			result = noticeMapper.deleteNoticeById(noticeNo);
+		}
+		
+		return result;
+	}
 
 }
