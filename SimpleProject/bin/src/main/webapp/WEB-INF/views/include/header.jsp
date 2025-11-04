@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
-<!-- Header CSS -->
 <style>
 /* 폰트 적용 */
 @import url(//fonts.googleapis.com/earlyaccess/notosanskr.css);
@@ -21,8 +20,6 @@ html {
 .cell {
     float: left;
     box-sizing: border-box;
-    
-    
 }
 .cell-right {
     float: right;
@@ -40,6 +37,7 @@ html {
 }
 .block {
     display: block;
+    &:hover{color:black;}
 }
 .inline-block {
     display: inline-block;
@@ -135,6 +133,7 @@ body {
     left: 0;
     width: 100%;
     z-index: 10;
+    margin-bottom: 50px;
 }
 
 .top-bar .menu-box-1 ul > li > a {
@@ -224,7 +223,8 @@ width:}
 #content_1{
 margin-top:20px;
 }
-</style>
+.menu-box-1 text-align-center line-height-0-ch-only con{
+}</style>
 
 
 <!-- Header HTML -->
@@ -236,10 +236,14 @@ margin-top:20px;
         </ul>
     </nav>
 <<<<<<< HEAD
+<<<<<<< HEAD
     <a class="logo inline-block" href="#" ><img src="${pageContext.request.contextPath}/resources/images/mainImage/main-logo4.png" alt="로고 사진" class="block" id="logo-img" ></a>
 =======
     <a class="logo inline-block" href="#" ><img src="${pageContext.request.contextPath}/resources/image/main-logo4.png" alt="로고 사진" class="block" id="logo-img" ></a>
 >>>>>>> develop
+=======
+    <a class="logo inline-block" href="/spring" ><img src="${pageContext.request.contextPath}/resources/images/mainImage/main-logo4.png" alt="로고 사진" class="block" id="logo-img" ></a>
+>>>>>>> 4576a68d7fb704bf69de1d99e73503c1fc196698
     <form class="search-box absolute-right absolute-middle">
         <ul class="row">
         
@@ -258,7 +262,7 @@ margin-top:20px;
     <nav class="menu-box-1 text-align-center line-height-0-ch-only con">
         <ul class="row inline-block">
             <li class="cell">
-                <a href="#" class="block">영화</a>
+                <a href="/spring/movie" class="block">영화</a>
                 <div>
                     <div class="menu-2 text-align-center line-height-0-ch-only">
                         <div class="inline-block">
@@ -270,14 +274,18 @@ margin-top:20px;
                 </div>
             </li>
             <li class="cell">
-                <a href="#" class="block">예매</a>
+                <a href="/spring/reserve" class="block">예매</a>
                 <div>
                     <div class="menu-2 text-align-center line-height-0-ch-only">
                         <div class="inline-block">
                             <ul class="row">
 <<<<<<< HEAD
+<<<<<<< HEAD
                                 <li class="cell"><a href="#">빠른예매</a></li>
 =======
+=======
+                                <li class="cell"><a href="/spring/reserve">빠른예매</a></li>
+>>>>>>> 4576a68d7fb704bf69de1d99e73503c1fc196698
                                 <li class="cell"><a href="#">상영시간표</a></li>
 >>>>>>> develop
                             </ul>
@@ -287,13 +295,13 @@ margin-top:20px;
             </li>
           
             <li class="cell">
-                <a href="#" class="block">공지사항& 이벤트 </a>
+                <a href="#" class="block">공지사항 & 이벤트 </a>
                 <div>
                     <div class="menu-2 text-align-center line-height-0-ch-only">
                         <div class="inline-block">
                             <ul class="row">
                                 <li class="cell"><a href="#">이벤트</a></li>
-                                <li class="cell"><a href="#">공지사항</a></li>
+                                <li class="cell"><a href="${pageContext.request.contextPath}/notice/noticeList">공지사항</a></li>
                             </ul>
                         </div>
                     </div>

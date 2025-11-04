@@ -9,9 +9,6 @@ import com.kh.moving.exception.AuthenticationException;
 import com.kh.moving.exception.InvalidArgumentsException;
 import com.kh.moving.exception.TooLargeValueException;
 import com.kh.moving.exception.UserIdNotFoundException;
-
-
-
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
@@ -32,7 +29,7 @@ public class ExceptionHandlerController {
 		ModelAndView mv = new ModelAndView();
 		mv.addObject("msg",e.getMessage()).setViewName("include/error_page");
 		log.info("발생에외 :{}", e);
-		return mv;	
+		return mv;	 
 	}
 	@ExceptionHandler(AuthenticationException.class)
 	protected ModelAndView authenticationError(AuthenticationException e) {

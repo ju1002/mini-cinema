@@ -3,13 +3,11 @@
 
 <!-- Header CSSddddd -->
 
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!-- Bootstrap JS -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"></script>
 <!-- Bootstrap CSS -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css">
 <!-- Header CSS -->
-
 <style>
 /* 폰트 적용 */
 @import url(//fonts.googleapis.com/earlyaccess/notosanskr.css);
@@ -248,7 +246,7 @@ margin-top:20px;
             <li class="cell cell-left" ><img src="https://i.namu.wiki/i/EYm29AFq9eP2QqG9c7ns7UMD85CFFJeagte2DGY7rZlEsedVGGAt3b_WmEcs7GXEpf8E7yNGDvfq8Ou9-8cN8w.webp" alt="" width="50%" height="50%" ></li>
         </ul>
     </nav>
-    <a class="logo inline-block" href="#" ><img src="${pageContext.request.contextPath}/resources/images/mainImage/main-logo4.png" alt="로고 사진" class="block" id="logo-img" ></a>
+    <a class="logo inline-block" href="/spring" ><img src="${pageContext.request.contextPath}/resources/images/mainImage/main-logo4.png" alt="로고 사진" class="block" id="logo-img" ></a>
     <div class="search-box absolute-right absolute-middle">
     <ul class="row">
 
@@ -256,7 +254,7 @@ margin-top:20px;
             <c:when test="${ empty sessionScope.loginMember }">
                 <!-- 로그인 전 -->
                 <li class="cell">
-                    <a href="join">회원가입</a>
+                    <a href="${pageContext.request.contextPath}/join">회원가입</a>
                     <a data-toggle="modal" data-target="#loginModal">로그인</a>
                 </li>
                 
@@ -310,13 +308,13 @@ margin-top:20px;
             </li>
           
             <li class="cell">
-                <a href="#" class="block">공지사항& 이벤트 </a>
+                <a href="#" class="block">공지사항 & 이벤트 </a>
                 <div>
                     <div class="menu-2 text-align-center line-height-0-ch-only">
                         <div class="inline-block">
                             <ul class="row">
                                 <li class="cell"><a href="#">이벤트</a></li>
-                                <li class="cell"><a href="#">공지사항</a></li>
+                                <li class="cell"><a href="${pageContext.request.contextPath}/notice/noticeList">공지사항</a></li>
                             </ul>
                         </div>
                     </div>
