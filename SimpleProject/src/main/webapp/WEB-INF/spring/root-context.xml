@@ -61,7 +61,6 @@
 	<mybatis-spring:scan base-package="com.kh.moving.reservation.model.mapper"/>
 
 
-	 
 	<mybatis-spring:scan base-package="com.kh.moving.member.model.dao"/>
 	 
 
