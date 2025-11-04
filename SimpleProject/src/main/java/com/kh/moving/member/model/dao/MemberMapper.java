@@ -11,6 +11,7 @@ import com.kh.moving.member.model.dto.MemberDTO;
 @Mapper
 public interface MemberMapper {
 	
+
 	@Select("SELECT USER_NO userNo, USER_ID userId, USER_PWD userPwd, USER_NAME userName, BIRTHDAY, PHONE, EMAIL, " +
 	        "ENROLL_DATE enrollDate, SNS_AGREE snsAgree, " +
 	        "MANAGER, STATUS " + // <-- 1. MANAGER 와 STATUS 추가
