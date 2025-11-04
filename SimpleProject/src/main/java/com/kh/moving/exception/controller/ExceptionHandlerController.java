@@ -4,11 +4,18 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.servlet.ModelAndView;
 
+<<<<<<< HEAD
 import com.kh.moving.exception.AuthenticationException;
 import com.kh.moving.exception.InvalidArgumentsException;
 import com.kh.moving.exception.TooLargeValueException;
 import com.moving.exception.UserIdNotFoundException;
+=======
+>>>>>>> 4576a68d7fb704bf69de1d99e73503c1fc196698
 
+import com.kh.moving.exception.AuthenticationException;
+import com.kh.moving.exception.InvalidArgumentsException;
+import com.kh.moving.exception.TooLargeValueException;
+import com.kh.moving.exception.UserIdNotFoundException;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
@@ -27,9 +34,9 @@ public class ExceptionHandlerController {
 	private ModelAndView createErrorResponse(RuntimeException e)
 	{
 		ModelAndView mv = new ModelAndView();
-		mv.addObject("msg",e.getMessage()).setViewName("include/error");
+		mv.addObject("msg",e.getMessage()).setViewName("include/error_page");
 		log.info("발생에외 :{}", e);
-		return mv;	
+		return mv;	 
 	}
 	@ExceptionHandler(AuthenticationException.class)
 	protected ModelAndView authenticationError(AuthenticationException e) {

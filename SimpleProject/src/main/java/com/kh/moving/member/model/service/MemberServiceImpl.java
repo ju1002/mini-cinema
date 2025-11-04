@@ -11,7 +11,7 @@ import com.kh.moving.exception.AuthenticationException;
 import com.kh.moving.member.model.dao.MemberMapper;
 import com.kh.moving.member.model.dto.MemberDTO;
 import com.kh.moving.member.model.dto.MemberGenreDTO;
-import com.moving.exception.UserIdNotFoundException;
+import com.kh.moving.exception.UserIdNotFoundException;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -66,6 +66,7 @@ public class MemberServiceImpl implements MemberService {
 		
 		member.setUserNo(userNo);
 		member.setUserPwd(encPwd);
+
 		int result = mapper.signup(member);
 		
 		if(result != 1) {
@@ -79,12 +80,14 @@ public class MemberServiceImpl implements MemberService {
 		test = pre.split(",");
 		
 		genre.setUserNo(userNo);
+
 		
 		int result2 = 0;
 		for(int i=0; i<test.length; i++) {
 			genre.setGenreId(test[i]);
 			
 			result2 = mapper.signup2(genre);
+
 			if(result2 != 1) {
 				throw new AuthenticationException("문제가 발생했습니다. 관리자에게 문의하세요.");
 			}
@@ -94,10 +97,12 @@ public class MemberServiceImpl implements MemberService {
 	
 	@Override
 	public int update(MemberDTO member, HttpSession session) {
+
 		MemberDTO sessionMember = ((MemberDTO)session.getAttribute("loginMember"));
 		
 		validator.validatedUpdateMember(member, sessionMember);
 		
+
 		int userNo = member.getUserNo();
 		int result = mapper.update(member);
 		
@@ -123,7 +128,7 @@ public class MemberServiceImpl implements MemberService {
 				throw new AuthenticationException("문제가 발생했습니다. 관리자에게 문의하세요.");
 			}
 		}
-		
+
 		sessionMember.setUserName(member.getUserName());
 		sessionMember.setBirthday(member.getBirthday());
 		sessionMember.setPhone(member.getPhone());
@@ -148,11 +153,14 @@ public class MemberServiceImpl implements MemberService {
 		}
 		
 		mapper.delete2(sessionMember.getUserNo());
+
 		int result = mapper.delete(sessionMember.getUserId());
 		
 		if(result != 1) {
 			throw new AuthenticationException("관리자에게 문의하세요.");
 		}
+
 		return result;
+
 	}
 }

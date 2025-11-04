@@ -269,7 +269,16 @@ h3 {
 }
 
 /* 메인그리드 */
+<<<<<<< HEAD
 .main-grid {
+=======
+
+.-grid {
+}
+
+.main-grid {
+
+>>>>>>> 4576a68d7fb704bf69de1d99e73503c1fc196698
     background-color: #fdfcf0;
 }
 
@@ -854,7 +863,11 @@ h3 {
 <!-- CGV 안내 -->
 <div class="box-1-title con" style="text-align:left;">
     <h1>CGV 안내</h1>
+<<<<<<< HEAD
 <div id="map" style="width:700px;height:700px;"></div>
+=======
+<div id="map" style="width:500px;height:500px;"></div>
+>>>>>>> 4576a68d7fb704bf69de1d99e73503c1fc196698
 </div>
 
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=32768b61b72672bff487bc496c4a8901"></script>
@@ -881,9 +894,18 @@ marker.setMap(map);
 
 
 </script>
+<<<<<<< HEAD
 <div>
 <!-- 이미지 넣을거 생각해보자 -->
 
+=======
+
+<div >
+<!-- 이미지 넣을거 생각해보자 -->
+	<!--  
+	<img src="${pageContext.request.contextPath }/resources/images/mainImage/"dd />
+	-->
+>>>>>>> 4576a68d7fb704bf69de1d99e73503c1fc196698
 </div>
 
 
@@ -932,4 +954,8 @@ $('.prod-box-1 > .my-carousel-box-1 > .owl-carousel').owlCarousel({
     onInitialized: ProdBox1__updateMenuBox1LiActive,
     onTranslated: ProdBox1__updateMenuBox1LiActive,
 });
+<<<<<<< HEAD
 </script>
+=======
+</script>
+>>>>>>> 4576a68d7fb704bf69de1d99e73503c1fc196698

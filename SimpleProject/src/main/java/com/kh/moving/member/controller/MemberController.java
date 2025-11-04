@@ -14,6 +14,9 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.moving.member.model.dto.MemberDTO;
 import com.kh.moving.member.model.dto.MemberGenreDTO;
+
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
 import com.kh.moving.member.model.service.MemberService;
 
 import lombok.extern.slf4j.Slf4j;
@@ -35,6 +38,7 @@ public class MemberController {
 							  ModelAndView mv) {
 		
 		MemberDTO loginMember = memberService.login("L", member);
+
 		List<MemberGenreDTO> memberGenre = memberService.loginGenre(loginMember);
 		
 		String genre = "";
@@ -53,6 +57,7 @@ public class MemberController {
 		if(loginMember != null) {
 			session.setAttribute("loginMember", loginMember);
 			session.setAttribute("loginMemberGenre", genre);
+
 			mv.setViewName("redirect:/");
 		} else {
 			mv.addObject("msg", "로그인실패!")
@@ -74,6 +79,7 @@ public class MemberController {
 	}
 	
 	@PostMapping("signup")
+
 	public String signup(MemberDTO member,
             @RequestParam(value = "genreList", required = false) String[] genreList) {
 		
@@ -89,6 +95,7 @@ public class MemberController {
 
 		memberService.signUp(member);
 		
+
 		return "main";
 	}
 	
@@ -100,7 +107,9 @@ public class MemberController {
 	@PostMapping("edit")
 	public String edit(MemberDTO member,
 	                   @RequestParam(value = "genreList", required = false) String[] genreList,
-	                   HttpSession session) {
+	                   HttpSession session,
+	                   RedirectAttributes redirectAttributes) {
+
 
 	    if (genreList != null && genreList.length > 0) {
 	        member.setPreferredGenres(String.join(",", genreList));
@@ -132,6 +141,8 @@ public class MemberController {
 
 		return "redirect:myInfo";
 	}
+
+
 	
 	@PostMapping("delete")
 	public String delete(@RequestParam(value="userPwd") String userPwd,

@@ -4,7 +4,11 @@
 <style>
 /* 하단 정렬 */
 .boo {
+<<<<<<< HEAD
     margin-top: 20%;
+=======
+    margin-top: 5%;
+>>>>>>> 4576a68d7fb704bf69de1d99e73503c1fc196698
     height: 62px;
     border-top: 1px solid #444444;
     border-bottom: 1px solid #444444;
@@ -121,6 +125,12 @@
     margin-top: 30px;
 }
 
+<<<<<<< HEAD
+=======
+.address > 
+c {
+}
+>>>>>>> 4576a68d7fb704bf69de1d99e73503c1fc196698
 .address > .cc {
     margin-top: 30px;
 }
@@ -129,7 +139,10 @@
     margin-top: 10px;
     margin-left: 80px;
 }
+<<<<<<< HEAD
 
+=======
+>>>>>>> 4576a68d7fb704bf69de1d99e73503c1fc196698
 .address > .cc > a {
     overflow: hidden;
     float: right;
@@ -209,4 +222,8 @@
     </div>
 </div>
 
+<<<<<<< HEAD
 <div class="qqq"></div>
+=======
+<div class="qqq"></div>
+>>>>>>> 4576a68d7fb704bf69de1d99e73503c1fc196698
