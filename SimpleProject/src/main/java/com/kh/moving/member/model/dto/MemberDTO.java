@@ -24,7 +24,7 @@ public class MemberDTO {
     private String email;
     private String phone;
     private String snsAgree;
-    private Date erollDate;
+    private Date enrollDate;
     private String manager;
     private String status;
     

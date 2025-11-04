@@ -7,8 +7,10 @@
 	 		<setting name="jdbcTypeForNull" value="NULL"/>
 	  	</settings>
 		<typeAliases>
-		
-		</typeAliases>
+        <typeAlias alias="NoticeDTO" type="com.kh.moving.notice.model.dto.NoticeDTO" />
+
+        <typeAlias alias="MemberDTO" type="com.kh.moving.member.model.dto.MemberDTO" />
+    </typeAliases>
 		
 		<!-- environments,dataSource =>DB연결정보를 원래 적어야 함 -->
 		<!-- Bean등록  1 -->
@@ -18,5 +20,7 @@
 	  	<!-- 
 	    <mapper resource ="/mapper/board-mapper.xml"/>
 	  	 -->
+	  	 <mapper resource="/mapper/notice-mapper.xml"/>
 	  </mappers>
+	  
 </configuration>
