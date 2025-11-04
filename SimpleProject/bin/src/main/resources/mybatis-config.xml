@@ -18,14 +18,8 @@
 	  	 <mapper resource ="/mapper/member-mapper.xml"/>
 	    <mapper resource ="/mapper/board-mapper.xml"/>
 	  	 -->
-<<<<<<< HEAD
 	  </mappers>
 </configuration>
-=======
-
 	  	 <mapper resource="/mapper/notice-mapper.xml"/>
-
-
 	  </mappers>
 </configuration>
->>>>>>> 4576a68d7fb704bf69de1d99e73503c1fc196698
