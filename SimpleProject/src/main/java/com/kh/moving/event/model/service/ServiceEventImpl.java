@@ -1,10 +1,12 @@
 package com.kh.moving.event.model.service;
-
+import java.security.InvalidParameterException;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
+import org.apache.ibatis.session.RowBounds;
 import org.springframework.stereotype.Service;
+import org.springframework.ui.Model;
 
 import com.kh.moving.event.model.dao.EventDAO;
 import com.kh.moving.event.model.dto.EventDTO;
@@ -43,9 +45,8 @@ public class ServiceEventImpl implements ServiceEvent {
 		}
 	}
 	
-	
 	@Override
-	public int insert (EventDTO event, HttpSession session) {
+	public int insert(EventDTO event, HttpSession session) {
 		try {
 			// 1. 권한 검증
 			validateManager(event, session);
@@ -80,10 +81,32 @@ public class ServiceEventImpl implements ServiceEvent {
 			throw new RuntimeException("이벤트 저장 실패", e);
 		}
 	}
+	
 	@Override
-	public void selectAll(EventDTO event , HttpSession session){
-		if()
-		return ;
+	public int totalCount() {
+		return eventDao.totalCount();
+	}
+	
+	@Override
+	public List<EventDTO> findAll(int pageNo) {
+		if (pageNo < 1) {
+			throw new InvalidParameterException("유효하지 않는 접근입니다.");
+		}
+		
+		RowBounds rb = new RowBounds((pageNo - 1) * 5, 5);
+		//DB에서 데이터를 얼마나 가져올지 이러면 페이지가 1일때 0번째부터 5번째까지 나옴 RowBounds는 0번째부터 시작이니까!
+		
+		List<EventDTO> events = eventDao.findAll(rb);
+		
+		return events;
+	}
+	@Override
+	public int delete(int eventNo) {
+		if( eventNo < 0) {
+			throw new InvalidParameterException("유효하지 않은 이벤트 번호입니다.");
+		}
+		int result  = eventDao.delete(eventNo);
+		
+		return result;
 	}
 }
-
