@@ -21,4 +21,6 @@ List<EventDTO> findAll(int pageNo);
 //이벤트 삭제
 int delete(int eventNo);
 
+int update(int eventNo,int userNo);
+List<EventDTO> detail(int eventNo);
 }

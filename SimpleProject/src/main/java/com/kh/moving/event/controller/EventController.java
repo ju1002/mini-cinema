@@ -114,8 +114,25 @@ public class EventController {
 	}
 	
 	
-	
-	
+	@PostMapping("/updateEvent")
+	public String updateEvent(@RequestParam(value="eventNo"),@RequestParam(value="userNo")int eventNo , int userNo) {
+		int result = servieEvent.update(eventNo,userNo);
+		if(result>0) {
+			log.info("이벤트 수정에 성공하셨습니다.");
+		}
+		
+		
+		return"redirect:/event/inventory?page=1";
+	}
+	@GetMapping("/detailEvent")
+	public String detalEvent(@RequestParam(value="eventNo")int eventNo) {
+		List<EventDTO> events = serviceEvent.detail(eventNo);
+		
+		if(events.isEmpty()||events==null) {
+			log.info("이벤트 상세보기에 실패하셨습니다.");
+		}
+		return "
+	}
 	
 	
 	

@@ -358,7 +358,7 @@ body {
                         <div>📅 ${event.startDate} ~ ${event.endDate}</div>
                     </div>
                     <div class="event-footer">
-                        <button class="btn btn-edit">수정</button>
+                        <a class="btn btn-edit" href="jacascript:confirmUpdate(${event.evetNo,event.userNo })">수정</a>
                         <a class="btn btn-danger" href="javascript:confirmDelete(${event.eventNo})">삭제</a>
                     </div>
                 </div>
@@ -414,6 +414,24 @@ function confirmDelete(eventNo) {
         input.type = 'hidden';
         input.name = 'eventNo';
         input.value = eventNo;
+        
+        form.appendChild(input);
+        document.body.appendChild(form);
+        form.submit();
+    }
+}
+</script>
+<script>
+function confirmUpdate(eventNo,userNo) {
+    if (confirm('정말 이 이벤트를 수정하시겠습니까?')) {
+        const form = document.createElement('form');
+        form.method = 'POST';
+        form.action = '/spring/event/updateEvent';
+        
+        const input = document.createElement('input');
+        input.type = 'hidden';
+        input.name = 'eventNo','userNo'";
+        input.value = eventNo,userNo;
         
         form.appendChild(input);
         document.body.appendChild(form);
