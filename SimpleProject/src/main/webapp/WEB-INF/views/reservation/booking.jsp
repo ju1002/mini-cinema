@@ -258,13 +258,19 @@
 				<div class="seat" data-seat="B09">B09</div>
 				<div class="seat" data-seat="B10">B10</div>
 			</div>
-			<button id="reserve-btn">예매하기</button>
+			<button id="reserve-btn" disabled>예매하기</button>
 		</div>
 
 
 	</div>
 	<script type="text/javascript">
     	
+	
+	let selectedMovieId = null;
+	let selectedDate = null;
+	let selectedScreeningId = null;
+	
+	
     function SelectedTime() {
         const movieTime = document.querySelectorAll('#movie-time');
 
@@ -333,6 +339,13 @@
 
 				    // 2️ 클릭한 요소(this)에 selected 추가
 				    this.classList.add('selected');
+				    
+				    
+		            // 3️ res3, res4 초기화 및 숨기기
+		            document.querySelector('#res3').innerHTML = '';
+		            document.getElementById('seat-container').style.display = 'none';
+		            document.getElementById('reserve-btn').style.display = 'none';
+				    
 				  });
 				});
 			
@@ -411,15 +424,14 @@
 		        success: function(response) {
 		            console.log(response);
 		            // res3에 상영시간 표시
-		            const showTime = response.map(e => {
-		            	
-		            	return `<div id="movie-time" onclick="SelectedTime();">
-		            	<div>\${e.startTime}</div>
-		            	<div>잔여 : \${e.seatsCount} 석</div>
-		            	</div>`;
-		            	
-		            }).join('');
-		            document.querySelector('#res3').innerHTML = showTime;
+		const showTime = response.map(e => {
+    return `<div id="movie-time" data-screening-id="\${e.screeningId}" class="movie-time">
+        <div>\${e.startTime}</div>
+        <div>잔여 : \${e.seatsCount} 석</div>
+    </div>`;
+}).join('');
+		            
+document.querySelector('#res3').innerHTML = showTime;
 		            
 		            
 		         // 상영시간 클릭 이벤트 등록
@@ -433,7 +445,7 @@ const selectedSeats = [];
 const maxSelection = 3;
 
 function SelectedTime(movieId, selectedDate) {
-    const movieTime = document.querySelectorAll('#movie-time');
+    const movieTime = document.querySelectorAll('.movie-time');
 
     movieTime.forEach(e => {
         e.addEventListener('click', function() {
@@ -443,6 +455,10 @@ function SelectedTime(movieId, selectedDate) {
             // 클릭한 요소만 selected 추가
             this.classList.add('selected');
 
+            // 선택한 상영시간의 id 가져오기
+            const screeningId = parseInt(this.dataset.screeningId);
+            console.log(screeningId);
+            
             // res4 자식 요소 보이기
             document.getElementById('seat-container').style.display = 'flex';
             document.getElementById('reserve-btn').style.display = 'inline-block';
@@ -493,11 +509,64 @@ function SelectedTime(movieId, selectedDate) {
                         selectedSeats.push(seatId);
                         seat.classList.add('selected');
                     }
+                    // 버튼 활성화/비활성화 처리
+                    const reserveBtn = document.querySelector('#reserve-btn');
+                    reserveBtn.disabled = selectedSeats.length === 0;
                 };
             });
         });
     });
 }
+
+const reservation = () => {
+    document.querySelector('#reserve-btn').addEventListener('click', () => {
+        const selectedMovieElement = document.querySelector('#res1 .selected div');
+        const movieId = selectedMovieElement ? selectedMovieElement.id : null;
+
+        const selectedDateElement = document.querySelector('.date-item.selected');
+        const selectedDate = selectedDateElement ? selectedDateElement.dataset.date : null;
+		console.log(selectedDate);
+        const selectedTimeElement = document.querySelector('#movie-time.selected');
+        const startTime = selectedTimeElement
+        ? selectedTimeElement.querySelector('div:first-child').textContent
+        : null;
+        const screeningId = selectedTimeElement 
+        ? parseInt(selectedTimeElement.dataset.screeningId) 
+        : null;
+
+        if (!movieId || !selectedDate || !startTime || !screeningId || selectedSeats.length === 0) {
+            alert('영화, 날짜, 시간, 좌석을 모두 선택해주세요.');
+            console.log(movieId,selectedDate,startTime,screeningId,selectedSeats.length)
+            return;
+        }
+
+        $.ajax({
+            url: '${pageContext.request.contextPath}/ajax/reservation',
+            method: 'POST',
+            contentType: 'application/json',
+            data: JSON.stringify({
+                movieId: movieId,
+                date: selectedDate,
+                startTime: startTime,
+                screeningId: screeningId, 
+                seats: selectedSeats
+            }),
+            success: function(response) {
+                alert('예매가 완료되었습니다!');
+                console.log(response);
+                location.reload();
+            },
+            error: function(err) {
+                console.error(err);
+                alert('예매 처리 중 오류가 발생했습니다.');
+            }
+        });
+    });
+};
+
+reservation();
+
+
 
 		</script>
 

@@ -30,7 +30,5 @@ public class MemberDTO {
     
     private List<String> genreList;   //  선택된 장르들 (체크박스용)
     private String preferredGenres;   //  DB 저장용 (콤마로 구분)
-
-
 	
 }

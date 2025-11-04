@@ -26,7 +26,7 @@ public class ReserveForwordController {
 		
 		
 
-		log.info("movie Id  : {}" ,movieId );
+		//log.info("movie Id  : {}" ,movieId );
 		model.addAttribute("selectedMovieId" , movieId);
 		
 		

@@ -5,7 +5,7 @@
 <mapper namespace="memberMapper">
 
  <select id="login" resultType="com.kh.moving.member.model.dto.MemberDTO">
-    SELECT
+  SELECT
     	   USER_NO userNo
     	 , USER_ID userId
     	 , USER_PWD userPwd

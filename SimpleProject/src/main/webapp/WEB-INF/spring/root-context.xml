@@ -51,12 +51,19 @@
 	 -->
 	 <mybatis-spring:scan base-package="com.kh.moving.notice.model.mapper"/>
 
+	
+	<!-- 
+	<mybatis-spring:scan base-package="com.kh.spring.member.model.dao , com.kh.spring.board.model.mapper"/>
+	 -->
+	<mybatis-spring:scan base-package="com.kh.moving.movie.model.dao"/>
+
+
 	<!-- 
 	<mybatis-spring:scan base-package="com.kh.spring.member.model.dao , com.kh.spring.board.model.mapper"/>
 	 -->
 	<mybatis-spring:scan base-package="com.kh.moving.reservation.model.mapper"/>
 
-	 
+
 	<mybatis-spring:scan base-package="com.kh.moving.member.model.dao"/>
 
 	
