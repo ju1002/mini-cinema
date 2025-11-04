@@ -132,14 +132,7 @@ c {
     margin-top: 10px;
     margin-left: 80px;
 }
-<<<<<<< HEAD
-<<<<<<< HEAD
-.
-=======
 
->>>>>>> develop
-=======
->>>>>>> 4576a68d7fb704bf69de1d99e73503c1fc196698
 .address > .cc > a {
     overflow: hidden;
     float: right;
