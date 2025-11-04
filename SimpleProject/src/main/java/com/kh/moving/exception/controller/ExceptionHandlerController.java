@@ -4,14 +4,6 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.servlet.ModelAndView;
 
-<<<<<<< HEAD
-import com.kh.moving.exception.AuthenticationException;
-import com.kh.moving.exception.InvalidArgumentsException;
-import com.kh.moving.exception.TooLargeValueException;
-import com.moving.exception.UserIdNotFoundException;
-=======
->>>>>>> 4576a68d7fb704bf69de1d99e73503c1fc196698
-
 import com.kh.moving.exception.AuthenticationException;
 import com.kh.moving.exception.InvalidArgumentsException;
 import com.kh.moving.exception.TooLargeValueException;
