@@ -269,16 +269,10 @@ h3 {
 }
 
 /* 메인그리드 */
-<<<<<<< HEAD
-.main-grid {
-=======
 
-.-grid {
-}
+
 
 .main-grid {
-
->>>>>>> 4576a68d7fb704bf69de1d99e73503c1fc196698
     background-color: #fdfcf0;
 }
 
