@@ -1,15 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-
-
-<!-- Header CSSddddd -->
-
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!-- Bootstrap JS -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"></script>
 <!-- Bootstrap CSS -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css">
 <!-- Header CSS -->
-
 <style>
 /* 폰트 적용 */
 @import url(//fonts.googleapis.com/earlyaccess/notosanskr.css);
@@ -256,7 +251,7 @@ margin-top:20px;
             <c:when test="${ empty sessionScope.loginMember }">
                 <!-- 로그인 전 -->
                 <li class="cell">
-                    <a href="join">회원가입</a>
+                    <a href="${pageContext.request.contextPath}/join">회원가입</a>
                     <a data-toggle="modal" data-target="#loginModal">로그인</a>
                 </li>
                 
@@ -310,13 +305,13 @@ margin-top:20px;
             </li>
           
             <li class="cell">
-                <a href="#" class="block">공지사항& 이벤트 </a>
+                <a href="#" class="block">공지사항 & 이벤트 </a>
                 <div>
                     <div class="menu-2 text-align-center line-height-0-ch-only">
                         <div class="inline-block">
                             <ul class="row">
                                 <li class="cell"><a href="#">이벤트</a></li>
-                                <li class="cell"><a href="#">공지사항</a></li>
+                                <li class="cell"><a href="${pageContext.request.contextPath}/notice/noticeList">공지사항</a></li>
                             </ul>
                         </div>
                     </div>

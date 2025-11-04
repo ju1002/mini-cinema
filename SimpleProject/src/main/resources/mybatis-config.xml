@@ -6,14 +6,15 @@
 	  	<settings>
 	 		<setting name="jdbcTypeForNull" value="NULL"/>
 	  	</settings>
-	
-		
-		<!-- environments,dataSource =>DB연결정보를 원래 적어야 함 -->
-		<!-- Bean등록  1 -->
-		   <typeAliases>
-        <!-- 기존에 있던 alias들... -->
+
+		<typeAliases>
+        <typeAlias alias="NoticeDTO" type="com.kh.moving.notice.model.dto.NoticeDTO" />
         <typeAlias type="com.kh.moving.reservation.model.dto.ReservationDTO" alias="ReservationDTO"/>
+        <typeAlias alias="MemberDTO" type="com.kh.moving.member.model.dto.MemberDTO" />
     </typeAliases>
+
+		
+
     
 	  <mappers>
 	  	 <mapper resource ="/mapper/member-mapper.xml"/>
@@ -21,5 +22,7 @@
 	  	<!-- 
 	    <mapper resource ="/mapper/board-mapper.xml"/>
 	  	 -->
+	  	 <mapper resource="/mapper/notice-mapper.xml"/>
 	  </mappers>
+	  
 </configuration>

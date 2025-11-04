@@ -3,18 +3,20 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="memberMapper">
-  <select id="login" resultType="com.kh.moving.member.model.dto.MemberDTO">
-    SELECT
-    	   USER_ID userId
+ <select id="login" resultType="com.kh.moving.member.model.dto.MemberDTO">
+  SELECT
+    	   USER_NO userNo
+    	 , USER_ID userId
     	 , USER_PWD userPwd
     	 , USER_NAME userName
     	 , EMAIL
-    	 , ENROLL_DATE enrollDate
-      FROM 
-      	   MEMBER
-     WHERE 
+    	 , ENROLL_DATE enrollDate 
+    	 , MANAGER              
+       , STATUS               
+    FROM 
+      	 TB_MEMBER
+   WHERE 
      	   USER_ID = #{userId}
-     	 
   </select>
   
  <!-- 아이디 중복 체크 -->
@@ -25,8 +27,6 @@
   <!-- 회원가입 -->
   <insert id="signup"
   		  parameterType="com.kh.moving.member.model.dto.MemberDTO">
-
-
   	INSERT 
   	  INTO 
   	  	   TB_MEMBER 
@@ -57,9 +57,8 @@
 	      , #{preferredGenres}
 	      , SYSDATE
 	      , DEFAULT
-	      , DEFAULT)
+        , DEFAULT
+)
   </insert>
-  
-  
   
 </mapper>
