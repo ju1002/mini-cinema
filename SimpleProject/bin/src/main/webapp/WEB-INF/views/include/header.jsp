@@ -252,7 +252,6 @@ margin-top:20px;
     <nav class="menu-box-1 text-align-center line-height-0-ch-only con">
         <ul class="row inline-block">
             <li class="cell">
-                <a href="#" class="block">영화</a>
                 <a href="/spring/movie" class="block">영화</a>
                 <div>
                     <div class="menu-2 text-align-center line-height-0-ch-only">
@@ -265,13 +264,11 @@ margin-top:20px;
                 </div>
             </li>
             <li class="cell">
-                <a href="#" class="block">예매</a>
                 <a href="/spring/reserve" class="block">예매</a>
                 <div>
                     <div class="menu-2 text-align-center line-height-0-ch-only">
                         <div class="inline-block">
                             <ul class="row">
-                                <li class="cell"><a href="/spring/reserve">빠른예매</a></li>
                                 <li class="cell"><a href="${pageContext.request.contextPath}/reserve">빠른예매</a></li>
                                 <li class="cell"><a href="#">상영시간표</a></li>
 
@@ -282,14 +279,12 @@ margin-top:20px;
             </li>
           
             <li class="cell">
-                <a href="#" class="block">공지사항& 이벤트 </a>
                 <a href="#" class="block">공지사항 & 이벤트 </a>
                 <div>
                     <div class="menu-2 text-align-center line-height-0-ch-only">
                         <div class="inline-block">
                             <ul class="row">
                                 <li class="cell"><a href="#">이벤트</a></li>
-                                <li class="cell"><a href="#">공지사항</a></li>
                                 <li class="cell"><a href="${pageContext.request.contextPath}/notice/noticeList">공지사항</a></li>
                             </ul>
                         </div>
