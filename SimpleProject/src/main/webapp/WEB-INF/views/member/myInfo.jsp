@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+    pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -39,48 +39,40 @@
 		<br>
 		<div class="innerOuter">
 			<h2>마이페이지</h2>
-			<br>
+            <br>
 
-			<form action="edit" method="post">
-				<div class="form-group">
-					<label for="userId">* ID : </label> <input type="text"
-						class="form-control" id="userId"
-						value="${ sessionScope.loginMember.userId }" name="userId"
-						readonly> <br> <label for="userName">* Name :
-					</label> <input type="text" class="form-control" id="userName"
-						value="${ sessionScope.loginMember.userName }" name="userName"
-						required> <br> <label for="brithday">*
-						birthday : </label> <input type="text" class="form-control" id="brithday"
-						value="${ sessionScope.loginMember.birthday }" name="birthday">
-					<br> <label for="phone"> &nbsp; Hpone : </label> <input
-						type="text" class="form-control" id=phone
-						value="${ sessionScope.loginMember.phone }" name="phone">
-					<br> <label for="email"> &nbsp; Email : </label> <input
-						type="text" class="form-control" id="email"
-						value="${ sessionScope.loginMember.email }" name="email">
-					<br> <label for="snsAgree"> &nbsp; SNS수신여부 : </label> <input
-						type="radio" name="snsAgree" value="Y"
-						<c:if test="${sessionScope.loginMember.snsAgree == 'Y'}">checked</c:if>>
-					동의 <input type="radio" name="snsAgree" value="N"
-						<c:if test="${sessionScope.loginMember.snsAgree == 'N'}">checked</c:if>>
-					비동의 <br>
-					<br> <label>선호 장르</label><br> <input type="checkbox"
-						name="genreList" value="G001"
-						${fn:contains(sessionScope.loginMember.preferredGenres, 'G001') ? 'checked' : ''}>드라마
-					<input type="checkbox" name="genreList" value="G002"
-						${fn:contains(sessionScope.loginMember.preferredGenres, 'G002') ? 'checked' : ''}>액션
-					<input type="checkbox" name="genreList" value="G003"
-						${fn:contains(sessionScope.loginMember.preferredGenres, 'G003') ? 'checked' : ''}>코미디
-					<input type="checkbox" name="genreList" value="G004"
-						${fn:contains(sessionScope.loginMember.preferredGenres, 'G004') ? 'checked' : ''}>스릴러
-					<input type="checkbox" name="genreList" value="G005"
-						${fn:contains(sessionScope.loginMember.preferredGenres, 'G005') ? 'checked' : ''}>로맨스
-					<input type="checkbox" name="genreList" value="G006"
-						${fn:contains(sessionScope.loginMember.preferredGenres, 'G006') ? 'checked' : ''}>SF
-					<input type="checkbox" name="genreList" value="G007"
-						${fn:contains(sessionScope.loginMember.preferredGenres, 'G007') ? 'checked' : ''}>공포
-					<input type="checkbox" name="genreList" value="G008"
-						${fn:contains(sessionScope.loginMember.preferredGenres, 'G008') ? 'checked' : ''}>애니메이션
+            <form action="edit" method="post">
+                <div class="form-group">
+                	<input type="hidden" id="userNo" value="${ sessionScope.loginMember.userNo }" name="userNo">
+                    <label for="userId">* ID : </label>
+                    <input type="text" class="form-control" id="userId" value="${ sessionScope.loginMember.userId }" name="userId" readonly> <br>
+
+                    <label for="userName">* Name : </label>
+                    <input type="text" class="form-control" id="userName" value="${ sessionScope.loginMember.userName }" name="userName" required> <br>
+
+					<label for="brithday">* birthday : </label>
+                    <input type="text" class="form-control" id="brithday" value="${ sessionScope.loginMember.birthday }" name="birthday"> <br>
+					
+                    <label for="phone"> &nbsp; Phone : </label>
+                    <input type="text" class="form-control" id=phone value="${ sessionScope.loginMember.phone }" name="phone"> <br>
+                    
+                    <label for="email"> &nbsp; Email : </label>
+                    <input type="text" class="form-control" id="email" value="${ sessionScope.loginMember.email }" name="email"> <br>
+                    
+                    <label for="snsAgree"> &nbsp; SNS수신여부 : </label>
+                    <input type="radio" name="snsAgree" value="Y" 
+					       <c:if test="${sessionScope.loginMember.snsAgree == 'Y'}">checked</c:if>> 동의
+					<input type="radio" name="snsAgree" value="N" 
+					       <c:if test="${sessionScope.loginMember.snsAgree == 'N'}">checked</c:if>> 비동의
+				    <br><br> 
+				    <input type="checkbox" name="genreList" value="G001" ${fn:contains(sessionScope.loginMemberGenre, 'G001') ? 'checked' : ''}>드라마
+				    <input type="checkbox" name="genreList" value="G002" ${fn:contains(sessionScope.loginMemberGenre, 'G002') ? 'checked' : ''}>액션
+				    <input type="checkbox" name="genreList" value="G003" ${fn:contains(sessionScope.loginMemberGenre, 'G003') ? 'checked' : ''}>코미디
+				    <input type="checkbox" name="genreList" value="G004" ${fn:contains(sessionScope.loginMemberGenre, 'G004') ? 'checked' : ''}>스릴러
+				    <input type="checkbox" name="genreList" value="G005" ${fn:contains(sessionScope.loginMemberGenre, 'G005') ? 'checked' : ''}>로맨스
+				    <input type="checkbox" name="genreList" value="G006" ${fn:contains(sessionScope.loginMemberGenre, 'G006') ? 'checked' : ''}>SF
+				    <input type="checkbox" name="genreList" value="G007" ${fn:contains(sessionScope.loginMemberGenre, 'G007') ? 'checked' : ''}>공포
+				    <input type="checkbox" name="genreList" value="G008" ${fn:contains(sessionScope.loginMemberGenre, 'G008') ? 'checked' : ''}>애니메이션  
 
 
 				</div>
@@ -137,6 +129,7 @@
 	</c:if>
 
 	<jsp:include page="../include/footer.jsp" />
+
 
 </body>
 </html>

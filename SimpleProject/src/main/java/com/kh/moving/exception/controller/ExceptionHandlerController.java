@@ -4,7 +4,6 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.servlet.ModelAndView;
 
-
 import com.kh.moving.exception.AuthenticationException;
 import com.kh.moving.exception.InvalidArgumentsException;
 import com.kh.moving.exception.TooLargeValueException;

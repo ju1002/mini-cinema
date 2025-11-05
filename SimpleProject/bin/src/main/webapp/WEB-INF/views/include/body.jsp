@@ -270,11 +270,9 @@ h3 {
 
 /* 메인그리드 */
 
-.-grid {
-}
+
 
 .main-grid {
-
     background-color: #fdfcf0;
 }
 
@@ -859,7 +857,10 @@ h3 {
 <!-- CGV 안내 -->
 <div class="box-1-title con" style="text-align:left;">
     <h1>CGV 안내</h1>
-<div id="map" style="width:500px;height:500px;"></div>
+
+<div id="map" style="width:700px;height:700px;"></div>
+
+
 </div>
 
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=32768b61b72672bff487bc496c4a8901"></script>
@@ -886,6 +887,9 @@ marker.setMap(map);
 
 
 </script>
+
+
+
 
 <div >
 <!-- 이미지 넣을거 생각해보자 -->
@@ -940,4 +944,7 @@ $('.prod-box-1 > .my-carousel-box-1 > .owl-carousel').owlCarousel({
     onInitialized: ProdBox1__updateMenuBox1LiActive,
     onTranslated: ProdBox1__updateMenuBox1LiActive,
 });
+
+
 </script>
+

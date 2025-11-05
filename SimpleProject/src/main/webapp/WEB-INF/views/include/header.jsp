@@ -2,7 +2,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <!-- Header CSSddddd -->
-
 <!-- Bootstrap JS -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"></script>
 <!-- Bootstrap CSS -->
@@ -247,6 +246,7 @@ margin-top:20px;
         </ul>
     </nav>
     <a class="logo inline-block" href="/spring" ><img src="${pageContext.request.contextPath}/resources/images/mainImage/main-logo4.png" alt="로고 사진" class="block" id="logo-img" ></a>
+
     <div class="search-box absolute-right absolute-middle">
     <ul class="row">
 

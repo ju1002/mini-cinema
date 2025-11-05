@@ -1,18 +1,17 @@
 package com.kh.moving.member.model.service;
 
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.kh.moving.exception.AuthenticationException;
-import com.kh.moving.exception.UserIdNotFoundException;
 import com.kh.moving.member.model.dao.MemberMapper;
 import com.kh.moving.member.model.dto.MemberDTO;
-
 import com.kh.moving.member.model.dto.MemberGenreDTO;
 import com.kh.moving.exception.UserIdNotFoundException;
-
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -27,11 +26,18 @@ public class MemberServiceImpl implements MemberService {
 	private final MemberMapper mapper;
 	
 	@Override
-
 	public MemberDTO login(String loginGb, MemberDTO member) {
 		
 		MemberDTO loginMember = mapper.login(member);
+		
 		return validateLoginMember(loginGb, loginMember, member.getUserPwd());
+	}
+	
+	@Override
+	public List<MemberGenreDTO> loginGenre(MemberDTO member) {
+		
+		List<MemberGenreDTO> loginGenre = mapper.loginGenre(member);
+		return loginGenre;
 	}
 	
 	private MemberDTO validateLoginMember(String loginGb, MemberDTO loginMember, String userPwd) {
@@ -54,7 +60,11 @@ public class MemberServiceImpl implements MemberService {
 	public int signUp(MemberDTO member) {
 		
 		validator.validatedMember(member);
+		
+		int userNo = mapper.getseqUserNo(member);
 		String encPwd = passwordEncoder.encode(member.getUserPwd());
+		
+		member.setUserNo(userNo);
 		member.setUserPwd(encPwd);
 
 		int result = mapper.signup(member);
@@ -69,13 +79,15 @@ public class MemberServiceImpl implements MemberService {
 		String pre = member.getPreferredGenres();
 		test = pre.split(",");
 		
-		genre.setUserNo(member.getUserNo());
+		genre.setUserNo(userNo);
+
 		
 		int result2 = 0;
 		for(int i=0; i<test.length; i++) {
 			genre.setGenreId(test[i]);
 			
-			//result2 = mapper.signup2(genre);
+			result2 = mapper.signup2(genre);
+
 			if(result2 != 1) {
 				throw new AuthenticationException("문제가 발생했습니다. 관리자에게 문의하세요.");
 			}
@@ -90,12 +102,33 @@ public class MemberServiceImpl implements MemberService {
 		
 		validator.validatedUpdateMember(member, sessionMember);
 		
+
+		int userNo = member.getUserNo();
 		int result = mapper.update(member);
 		
 		if(result != 1) {
 			throw new AuthenticationException("문제가 발생했습니다. 관리자에게 문의하세요.");
 		}
 		
+		String[] test = null;
+		String pre = member.getPreferredGenres();
+		MemberGenreDTO genre = new MemberGenreDTO();
+		
+		test = pre.split(",");
+		
+		int result2 = 0;
+		mapper.delete2(userNo);
+		
+		genre.setUserNo(userNo);
+		for(int i=0; i<test.length; i++) {
+			genre.setGenreId(test[i]);
+			
+			result2 = mapper.signup2(genre);
+			if(result2 != 1) {
+				throw new AuthenticationException("문제가 발생했습니다. 관리자에게 문의하세요.");
+			}
+		}
+
 		sessionMember.setUserName(member.getUserName());
 		sessionMember.setBirthday(member.getBirthday());
 		sessionMember.setPhone(member.getPhone());
@@ -108,7 +141,6 @@ public class MemberServiceImpl implements MemberService {
 	
 	@Override
 	public int delete(String userPwd, HttpSession session) {
-
 		
 		MemberDTO sessionMember = ((MemberDTO)session.getAttribute("loginMember"));
 		
@@ -120,6 +152,8 @@ public class MemberServiceImpl implements MemberService {
 			throw new AuthenticationException("비밀번호가 일치하지 않습니다.");
 		}
 		
+		mapper.delete2(sessionMember.getUserNo());
+
 		int result = mapper.delete(sessionMember.getUserId());
 		
 		if(result != 1) {

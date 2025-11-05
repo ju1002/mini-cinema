@@ -4,6 +4,7 @@
 <style>
 /* 하단 정렬 */
 .boo {
+    margin-top: 20%;
     margin-top: 5%;
     height: 62px;
     border-top: 1px solid #444444;
@@ -121,9 +122,11 @@
     margin-top: 30px;
 }
 
+
 .address > 
 c {
 }
+
 .address > .cc {
     margin-top: 30px;
 }
@@ -212,4 +215,6 @@ c {
     </div>
 </div>
 
+
 <div class="qqq"></div>
+

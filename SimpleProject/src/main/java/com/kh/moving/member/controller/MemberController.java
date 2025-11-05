@@ -1,5 +1,7 @@
 package com.kh.moving.member.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,9 +11,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.kh.moving.member.model.dto.MemberDTO;
+import com.kh.moving.member.model.dto.MemberGenreDTO;
+
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
 import com.kh.moving.member.model.service.MemberService;
 
 import lombok.extern.slf4j.Slf4j;
@@ -33,8 +38,26 @@ public class MemberController {
 							  ModelAndView mv) {
 		
 		MemberDTO loginMember = memberService.login("L", member);
+
+		List<MemberGenreDTO> memberGenre = memberService.loginGenre(loginMember);
+		
+		String genre = "";
+		
+		for(int i=0; i<memberGenre.size(); i++) {
+			genre += memberGenre.get(i).getGenreId() + ",";
+		}
+		if(null != genre && genre.length() > 0) {
+			genre = genre.substring(0, genre.length()-1);
+		}
+		
+		log.info("회원정보: {}", loginMember);
+		log.info("장르정보: {}", memberGenre);
+		log.info("장르정보2: {}", genre);
+		
 		if(loginMember != null) {
 			session.setAttribute("loginMember", loginMember);
+			session.setAttribute("loginMemberGenre", genre);
+
 			mv.setViewName("redirect:/");
 		} else {
 			mv.addObject("msg", "로그인실패!")
@@ -86,8 +109,6 @@ public class MemberController {
 	                   @RequestParam(value = "genreList", required = false) String[] genreList,
 	                   HttpSession session,
 	                   RedirectAttributes redirectAttributes) {
-		
-		
 	    if (genreList != null && genreList.length > 0) {
 	        member.setPreferredGenres(String.join(",", genreList));
 	    } else {
@@ -95,20 +116,30 @@ public class MemberController {
 	    }
 
 	    log.info("수정된 정보: {}", member);
-
+	    log.info("세션 정보: {}", session);
 	    int result = memberService.update(member, session);
 	    
 	    if (result > 0) {
-	        // DB 최신 정보로 세션 갱신
+	        // DB에 반영된 최신 정보 다시 조회
 	        MemberDTO updatedMember = memberService.login("U", member);
-	        session.setAttribute("loginMember", updatedMember);
-	        redirectAttributes.addFlashAttribute("msg", "회원 정보가 수정되었습니다.");
-	    } else {
-	        redirectAttributes.addFlashAttribute("msg", "회원 정보 수정에 실패했습니다.");
+	        session.setAttribute("loginMember", updatedMember); // 세션 갱신
+	        
+			List<MemberGenreDTO> memberGenre = memberService.loginGenre(updatedMember);
+			
+			String genre = "";
+			
+			for(int i=0; i<memberGenre.size(); i++) {
+				genre += memberGenre.get(i).getGenreId() + ",";
+			}
+			if(null != genre && genre.length() > 0) {
+				genre = genre.substring(0, genre.length()-1);
+			}
+	        session.setAttribute("loginMemberGenre", genre); // 세션 갱신
 	    }
 
-	    return "redirect:myInfo";
+		return "redirect:myInfo";
 	}
+
 
 	
 	@PostMapping("delete")
@@ -120,7 +151,6 @@ public class MemberController {
 		return "redirect:/";
 	}
 	
-
     @RequestMapping("/")
     public String main() {
         return "main";

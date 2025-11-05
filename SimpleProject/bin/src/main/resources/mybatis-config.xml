@@ -18,9 +18,8 @@
 	  	 <mapper resource ="/mapper/member-mapper.xml"/>
 	    <mapper resource ="/mapper/board-mapper.xml"/>
 	  	 -->
-
+	  </mappers>
+</configuration>
 	  	 <mapper resource="/mapper/notice-mapper.xml"/>
-
-
 	  </mappers>
 </configuration>
