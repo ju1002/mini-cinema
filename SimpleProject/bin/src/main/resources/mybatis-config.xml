@@ -20,3 +20,6 @@
 	  	 -->
 	  </mappers>
 </configuration>
+	  	 <mapper resource="/mapper/notice-mapper.xml"/>
+	  </mappers>
+</configuration>

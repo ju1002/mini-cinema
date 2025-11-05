@@ -19,8 +19,10 @@
 		  
 		  <property name="driverClassName" value="oracle.jdbc.driver.OracleDriver" />
 		 <property name="url" value="jdbc:oracle:thin:@115.90.212.20:10000:xe"/> 
+
 		 <property name="username" value="BJY11"/>
 		 <property name="password" value="BJY111234"/>
+
 		  <!--드라이버 등록  
 		  property name="필드명" value="넣을 풀클래스명"-->
 	</bean>
@@ -43,27 +45,38 @@
 	<!-- SqlSession sqlSession = new SqlSessionTemplate(sqlSessionFactory); -->
 	
 	</bean>
+	
+	<!-- 
+	<mybatis-spring:scan base-package="com.kh.spring.member.model.dao , com.kh.spring.board.model.mapper"/>
+	 -->
+	 <mybatis-spring:scan base-package="com.kh.moving.notice.model.mapper"/>
+
+	
+	<!-- 
+	<mybatis-spring:scan base-package="com.kh.spring.member.model.dao , com.kh.spring.board.model.mapper"/>
+	 -->
+	<mybatis-spring:scan base-package="com.kh.moving.movie.model.dao"/>
+
 
 	<!-- 
 	<mybatis-spring:scan base-package="com.kh.spring.member.model.dao , com.kh.spring.board.model.mapper"/>
 	 -->
 	<mybatis-spring:scan base-package="com.kh.moving.reservation.model.mapper"/>
 
-	
-	 
+
 	<mybatis-spring:scan base-package="com.kh.moving.member.model.dao"/>
 
 	 <mybatis-spring:scan base-package="com.kh.moving.event.model.dao"/>
 
 	<!-- 파일 업로드 관련 빈 등록 -->
 	<bean class="org.springframework.web.multipart.commons.CommonsMultipartResolver"
-			id="multipartResolver">
-			<property name="maxUploadSize" value="100000000"/>
-			<property name="maxInMemorySize" value="100000000"/>
-			
-			
-			</bean>
+	id="multipartResolver">
+	<property name="maxUploadSize" value="100000000"/>
+	<property name="maxInMemorySize" value="100000000"/>
 	
+	
+	</bean>
+
 	
 	
 	

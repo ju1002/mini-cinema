@@ -8,7 +8,6 @@ import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 import com.kh.moving.exception.UserIdNotFoundException;
 
-
 public class LoginInterceptor extends HandlerInterceptorAdapter {
 	
 	@Override
@@ -22,7 +21,7 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
 			return true;
 		} else {
 			throw new UserIdNotFoundException("로그인부터해주세요");
-			
+
 		}
 	}
 }

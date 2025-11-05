@@ -3,8 +3,11 @@ package com.kh.moving.reservation.model.service;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.kh.moving.reservation.model.dto.MovieListDTO;
+import com.kh.moving.reservation.model.dto.ReservationDTO;
+import com.kh.moving.reservation.model.dto.ReservationSeatDTO;
 import com.kh.moving.reservation.model.dto.ReserveSeatsDTO;
 import com.kh.moving.reservation.model.dto.ScreeningDTO;
 import com.kh.moving.reservation.model.mapper.ReservationMapper;
@@ -31,7 +34,7 @@ public class ReserveServiceImpl implements ReserveService {
 	@Override
 	public List<ScreeningDTO> findScreeningList(String movieId , String selectDate) {
 		
-		List<ScreeningDTO> screening = mapper.findScreeningList(movieId);
+		List<ScreeningDTO> screening = mapper.findScreeningList(movieId,selectDate);
 		
 		
 		for(ScreeningDTO s : screening) {
@@ -46,15 +49,16 @@ public class ReserveServiceImpl implements ReserveService {
 		
 		
 		
-		log.info("돌아온 dto : {}  "+screening );
+		//log.info("돌아온 dto : {}  "+screening );
 		
 		return screening;
 	}
 	
 
-
 	@Override
 	public List<String> findReserveSeats(ReserveSeatsDTO reserveSeats) {
+		
+		log.info("ReserveSeatsDTO : {} " , reserveSeats);
 		
 		List<String> seats = mapper.findReserveSeats(reserveSeats);
 		
@@ -64,7 +68,35 @@ public class ReserveServiceImpl implements ReserveService {
 	}
 	
 	
+	@Transactional
+	public void saveReservation(ReservationDTO reserveDTO) {
+		
+		int saveReserve = mapper.saveReservation(reserveDTO);
+		
+		int userNo = reserveDTO.getUserNo();
+		
+		List<String> seats = reserveDTO.getSeats();
+		
+		if(saveReserve > 0) {
+			
+			for(String seat : seats) {
+				
+				
+				mapper.saveReserveSeat(seat);
+				
+				
+			}
+			
+			
+		}
+		
+		
+		
 	
+}
 	
 	
 }
+	
+	
+

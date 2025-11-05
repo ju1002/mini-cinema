@@ -8,7 +8,11 @@
     margin-top: 5%;
 =======
     margin-top: 20%;
+<<<<<<< HEAD
 >>>>>>> f4c0a98dcb9a05e793d74ca89dad2d4148118a3f
+=======
+    margin-top: 5%;
+>>>>>>> develop
     height: 62px;
     border-top: 1px solid #444444;
     border-bottom: 1px solid #444444;
@@ -126,9 +130,17 @@
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 .address > 
 c {
 =======
+=======
+
+.address > 
+c {
+}
+
+>>>>>>> develop
 .address > .cc {
 >>>>>>> f4c0a98dcb9a05e793d74ca89dad2d4148118a3f
     margin-top: 30px;
@@ -222,4 +234,6 @@ c {
     </div>
 </div>
 
+
 <div class="qqq"></div>
+
