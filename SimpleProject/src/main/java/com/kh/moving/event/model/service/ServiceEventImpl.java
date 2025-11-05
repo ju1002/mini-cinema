@@ -1,12 +1,11 @@
 package com.kh.moving.event.model.service;
-import java.security.InvalidParameterException;
+
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
 import org.apache.ibatis.session.RowBounds;
 import org.springframework.stereotype.Service;
-import org.springframework.ui.Model;
 
 import com.kh.moving.event.model.dao.EventDAO;
 import com.kh.moving.event.model.dto.EventDTO;
@@ -21,92 +20,102 @@ import lombok.extern.slf4j.Slf4j;
 @RequiredArgsConstructor
 @Service
 public class ServiceEventImpl implements ServiceEvent {
-	
+
 	private final EventDAO eventDao;
-	
+	private final EventDTO eventDto;
+	private final HttpSession session;
+
 	/**
-	 * 매니저 권한 검증
+	 *  권한 검증
 	 */
 	private void validateManager(EventDTO event, HttpSession session) {
 		MemberDTO loginMember = (MemberDTO) session.getAttribute("loginMember");
-		
+
 		if (loginMember == null || !"Y".equals(loginMember.getManager())) {
 			throw new AuthenticationException("권한 없는 접근입니다.");
 		}
 	}
-	
+
 	/**
 	 * 이벤트 내용 검증
 	 */
 	private void validateContent(EventDTO event) {
-		if (event.getEventTitle() == null || event.getEventTitle().trim().isEmpty() ||
-		    event.getDescription() == null || event.getDescription().trim().isEmpty()) {
+		if (event.getEventTitle() == null || event.getEventTitle().trim().isEmpty() || event.getDescription() == null
+				|| event.getDescription().trim().isEmpty()) {
 			throw new InvalidArgumentsException("유효하지 않는 요청입니다.");
 		}
 	}
-	
+
 	@Override
 	public int insert(EventDTO event, HttpSession session) {
-		try {
-			// 1. 권한 검증
-			validateManager(event, session);
-			log.info("권한 검증 완료");
-			
-			// 2. 유효성 검증
-			validateContent(event);
-			log.info("유효성 검증 완료");
-			
-			MemberDTO loginMember = (MemberDTO) session.getAttribute("loginMember");
-			if (loginMember == null) {
-			    log.error("로그인 정보가 없습니다.");
-			} else {
-			    log.info("현재 로그인 회원: {}", loginMember);
-			    log.info("현재 로그인 회원번호: {}", loginMember.getUserNo());
-			}
-			
-			event.setUserNo(loginMember.getUserNo());
-	        log.info("이벤트 작성자 번호: {}", event.getUserNo());
-			
-			// 3. DB에 저장
-			int result = eventDao.insert(event);
-			log.info("이벤트 저장 결과: {}", result);
-			
-			return result;
-			
-		} catch (AuthenticationException | InvalidArgumentsException e) {
-			log.warn("검증 실패: {}", e.getMessage());
-			throw e;
-		} catch (Exception e) {
-			log.error("이벤트 저장 중 예상치 못한 에러 발생", e);
-			throw new RuntimeException("이벤트 저장 실패", e);
+		validateManager(event, session);
+		log.info("권한 검증 완료");
+
+		validateContent(event);
+		log.info("유효성 검증 완료");
+
+		MemberDTO loginMember = (MemberDTO) session.getAttribute("loginMember");
+		if (loginMember == null) {
+			throw new AuthenticationException("로그인 정보가 없습니다.");
 		}
+
+		log.info("현재 로그인 회원: {}", loginMember);
+		log.info("현재 로그인 회원번호: {}", loginMember.getUserNo());
+
+		event.setUserNo(loginMember.getUserNo());
+		log.info("이벤트 작성자 번호: {}", event.getUserNo());
+
+		int result = eventDao.insert(event);
+		log.info("이벤트 저장 결과: {}", result);
+
+		return result;
 	}
-	
+
 	@Override
 	public int totalCount() {
 		return eventDao.totalCount();
 	}
-	
+
 	@Override
 	public List<EventDTO> findAll(int pageNo) {
 		if (pageNo < 1) {
-			throw new InvalidParameterException("유효하지 않는 접근입니다.");
+			throw new InvalidArgumentsException("유효하지 않는 페이지 번호입니다.");
 		}
-		
+
 		RowBounds rb = new RowBounds((pageNo - 1) * 5, 5);
-		//DB에서 데이터를 얼마나 가져올지 이러면 페이지가 1일때 0번째부터 5번째까지 나옴 RowBounds는 0번째부터 시작이니까!
-		
 		List<EventDTO> events = eventDao.findAll(rb);
-		
+
 		return events;
 	}
+
 	@Override
 	public int delete(int eventNo) {
-		if( eventNo < 0) {
-			throw new InvalidParameterException("유효하지 않은 이벤트 번호입니다.");
+		if (eventNo < 0) {
+			throw new InvalidArgumentsException("유효하지 않은 이벤트 번호입니다.");
 		}
-		int result  = eventDao.delete(eventNo);
-		
+
+		int result = eventDao.delete(eventNo);
+
 		return result;
+	}
+	@Override
+	public int update(int eventNo,int userNo) {
+		
+		
+		validateManager(eventDto, session);
+		validateContent(eventDto);
+		InvalidArgumentsException("업데이트를 할 수 없습니다.");
+		int result=eventDao.update(eventNo, userNo);
+		return result;
+		
+	}
+	@Override
+	public List<EventDTO> detail(int eventNo){
+		if(eventNo == null || eventNo !=eventDto.getEventNo()) {
+			throw new InvalidArgumentsException("유효하지 않은 이벤트 입니다.");
+			
+		}
+		List<EventDTO> event = eventDao.detail(eventNo);
+		return event;
 	}
 }

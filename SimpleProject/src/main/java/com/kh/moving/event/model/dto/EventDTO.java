@@ -16,12 +16,11 @@ import lombok.ToString;
 @AllArgsConstructor
 @ToString
 public class EventDTO {
-	private int eventNo;
+	private int eventNo;	
 	private String eventTitle;
 	private String Description;
 	private Date startDate;
 	private Date endDate;
-
 	private int userNo;
-
+	private String eventWriter;
 }
