@@ -43,6 +43,10 @@
 	<!-- SqlSession sqlSession = new SqlSessionTemplate(sqlSessionFactory); -->
 	
 	</bean>
+	<!-- 
+	<mybatis-spring:scan base-package="com.kh.spring.member.model.dao , com.kh.spring.board.model.mapper"/>
+	 -->
+	 <mybatis-spring:scan base-package="com.kh.moving.notice.model.mapper"/>
 
 	
 	<!-- 
@@ -59,10 +63,11 @@
 
 
 
+
 	
 
 	 
-	<mybatis-spring:scan base-package="com.kh.moving.member.model.dao"/>
+
 	 
 
 	

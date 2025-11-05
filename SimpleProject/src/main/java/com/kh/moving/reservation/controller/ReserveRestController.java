@@ -4,14 +4,18 @@ import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.kh.moving.member.model.dto.MemberDTO;
 import com.kh.moving.reservation.model.dto.MovieListDTO;
+import com.kh.moving.reservation.model.dto.ReservationDTO;
 import com.kh.moving.reservation.model.dto.ReserveSeatsDTO;
 import com.kh.moving.reservation.model.dto.ScreeningDTO;
 import com.kh.moving.reservation.model.service.ReserveService;
@@ -29,11 +33,11 @@ public class ReserveRestController {
 	@GetMapping
 	public List<MovieListDTO> findMovieList(HttpSession session){
 		
-		log.info("들어온값 : {}" ,reserveService.findMovieList());
+		//log.info("들어온값 : {}" ,reserveService.findMovieList());
 		
 		String userInfo = (String) session.getAttribute("userInfo");
 		
-		log.info("들어온 값 : {}"+userInfo);
+		//log.info("들어온 값 : {}"+userInfo);
 		
 		return reserveService.findMovieList();
 		
@@ -56,8 +60,8 @@ public class ReserveRestController {
 	public ResponseEntity<?> findReserveSeats(@RequestParam String movieId , @RequestParam String date ,@RequestParam String startTime){
 		
 		
-		log.info("seats들어온값은 : {} , {} " , movieId , date);
-		log.info("startTime  = {} " , startTime);
+		//log.info("seats들어온값은 : {} , {} " , movieId , date);
+		//log.info("startTime  = {} " , startTime);
 		
 		ReserveSeatsDTO reserveSeats = new ReserveSeatsDTO(movieId,date,startTime);
 		
@@ -65,25 +69,27 @@ public class ReserveRestController {
 		List<String> seats = reserveService.findReserveSeats(reserveSeats);
 		
 		
-		log.info("seats : {}"+seats);
+		//log.info("seats : {}"+seats);
 		
 		return ResponseEntity.ok(seats);
 		
 	}
 	
 	@PostMapping
-	public ResponseEntity<?> reservation(){
-		
-		log.info("이거 맞아요?");
+	public ResponseEntity<?> createReservation(@RequestBody ReservationDTO dto, HttpSession session){
 		
 		
-		
-
-		
-		return null;
-		
-		
+	            // 세션에서 USER_NO 가져오기 (로그인한 사용자)
+	            MemberDTO userInfo  = (MemberDTO) session.getAttribute("loginMember");
+	          
+	            dto.setUserNo(userInfo.getUserNo());
+	            log.info("dto 들어오는값 : {}  " + dto);
+	            
+	            // 예약 처리
+	            reserveService.saveReservation(dto);
+	            
+	          return null;
+	            
+	        
+	    }
 	}
-	
-	
-}
