@@ -1,14 +1,7 @@
 package com.kh.moving.event.model.dto;
 
 import java.sql.Date;
-
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
-
-
+import lombok.*;
 
 @Getter
 @Setter
@@ -16,10 +9,10 @@ import lombok.ToString;
 @AllArgsConstructor
 @ToString
 public class EventDTO {
-	private int eventNo;	
-	private String eventTitle;
-	private String Description;
-	private Date startDate;
-	private Date endDate;
-	private int userNo;
+	private int eventNo;        // 이벤트 번호 (PK)
+	private String eventTitle;  // 이벤트 제목
+	private String description; // 이벤트 내용
+	private Date startDate;     // 시작일
+	private Date endDate;       // 종료일
+	private int userNo;         // 작성자(회원 번호)
 }

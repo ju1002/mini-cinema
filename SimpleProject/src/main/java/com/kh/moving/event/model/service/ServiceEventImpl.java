@@ -1,4 +1,5 @@
 package com.kh.moving.event.model.service;
+
 import java.security.InvalidParameterException;
 import java.util.List;
 import javax.servlet.http.HttpSession;
@@ -6,8 +7,7 @@ import org.apache.ibatis.session.RowBounds;
 import org.springframework.stereotype.Service;
 import com.kh.moving.event.model.dao.EventDAO;
 import com.kh.moving.event.model.dto.EventDTO;
-import com.kh.moving.exception.AuthenticationException;
-import com.kh.moving.exception.InvalidArgumentsException;
+import com.kh.moving.exception.*;
 import com.kh.moving.member.model.dto.MemberDTO;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -18,10 +18,9 @@ import lombok.extern.slf4j.Slf4j;
 public class ServiceEventImpl implements ServiceEvent {
 	
 	private final EventDAO eventDao;
-	// ❌ private final EventDTO eventDto; 제거
-	
-	/**
-	 * 매니저 권한 검증
+
+	/** 
+	 * 매니저 권한 확인
 	 */
 	private void validateManager(EventDTO event, HttpSession session) {
 		MemberDTO loginMember = (MemberDTO) session.getAttribute("loginMember");
@@ -30,98 +29,69 @@ public class ServiceEventImpl implements ServiceEvent {
 			throw new AuthenticationException("권한 없는 접근입니다.");
 		}
 	}
-	
-	/**
-	 * 이벤트 내용 검증
+
+	/** 
+	 * 이벤트 제목/내용 유효성 검사
 	 */
 	private void validateContent(EventDTO event) {
 		if (event.getEventTitle() == null || event.getEventTitle().trim().isEmpty() ||
 		    event.getDescription() == null || event.getDescription().trim().isEmpty()) {
-			throw new InvalidArgumentsException("유효하지 않는 요청입니다.");
+			throw new InvalidArgumentsException("이벤트 제목 또는 내용이 비어있습니다.");
 		}
 	}
-	
+
+	/**
+	 * 이벤트 등록
+	 */
 	@Override
 	public int insert(EventDTO event, HttpSession session) {
 		try {
-			// 1. 권한 검증
-			validateManager(event, session);
-			log.info("권한 검증 완료");
-			
-			// 2. 유효성 검증
-			validateContent(event);
-			log.info("유효성 검증 완료");
+			validateManager(event, session);  // 권한 체크
+			validateContent(event);           // 내용 체크
 			
 			MemberDTO loginMember = (MemberDTO) session.getAttribute("loginMember");
-			if (loginMember == null) {
-			    log.error("로그인 정보가 없습니다.");
-			} else {
-			    log.info("현재 로그인 회원: {}", loginMember);
-			    log.info("현재 로그인 회원번호: {}", loginMember.getUserNo());
-			}
+			event.setUserNo(loginMember.getUserNo()); // 작성자 정보 입력
 			
-			event.setUserNo(loginMember.getUserNo());
-	        log.info("이벤트 작성자 번호: {}", event.getUserNo());
-			
-			// 3. DB에 저장
 			int result = eventDao.insert(event);
 			log.info("이벤트 저장 결과: {}", result);
 			
 			return result;
 			
-		} catch (AuthenticationException | InvalidArgumentsException e) {
-			log.warn("검증 실패: {}", e.getMessage());
-			throw e;
 		} catch (Exception e) {
-			log.error("이벤트 저장 중 예상치 못한 에러 발생", e);
+			log.error("이벤트 저장 중 오류 발생", e);
 			throw new RuntimeException("이벤트 저장 실패", e);
 		}
 	}
-	
+
+	/** 전체 이벤트 개수 조회 */
 	@Override
 	public int totalCount() {
 		return eventDao.totalCount();
 	}
-	
+
+	/** 페이징된 이벤트 목록 조회 */
 	@Override
 	public List<EventDTO> findAll(int pageNo) {
-		if (pageNo < 1) {
-			throw new InvalidParameterException("유효하지 않는 접근입니다.");
-		}
-		
+		if (pageNo < 1) throw new InvalidParameterException("잘못된 페이지 번호입니다.");
 		RowBounds rb = new RowBounds((pageNo - 1) * 5, 5);
-		//DB에서 데이터를 얼마나 가져올지 이러면 페이지가 1일때 0번째부터 5번째까지 나옴 RowBounds는 0번째부터 시작이니까!
-		
-		List<EventDTO> events = eventDao.findAll(rb);
-		
-		return events;
+		return eventDao.findAll(rb);
 	}
-	
+
+	/** 이벤트 삭제 */
 	@Override
 	public int delete(int eventNo) {
-		if( eventNo < 0) {
-			throw new InvalidParameterException("유효하지 않은 이벤트 번호입니다.");
-		}
-		int result  = eventDao.delete(eventNo);
-		
-		return result;
+		if (eventNo < 0) throw new InvalidParameterException("잘못된 이벤트 번호입니다.");
+		return eventDao.delete(eventNo);
 	}
-	
+
+	/** 이벤트 상세 조회 */
 	@Override
 	public List<EventDTO> detail(int eventNo) {
 		List<EventDTO> events = eventDao.detail(eventNo);
 		
-		// ✅ eventDto 참조 제거 - detail 메서드 수정
-		if(events == null || events.isEmpty()) {
-			throw new InvalidArgumentsException("상세 조회할 이벤트가 없습니다.");
+		if (events == null || events.isEmpty()) {
+			throw new InvalidArgumentsException("존재하지 않는 이벤트입니다.");
 		}
-		
-		// 이벤트 번호가 일치하는지 확인
-		EventDTO foundEvent = events.get(0);
-		if(eventNo != foundEvent.getEventNo()) {
-			throw new InvalidParameterException("이벤트를 찾을 수 없습니다.");
-		}
-		
 		return events;
 	}
 }
