@@ -30,7 +30,7 @@ public class EventController {
 	
 
 	/**
-	 * 이벤트 목록 페이지 GET /event
+	 * 이벤트 목록 페이지 GET /eventd
 	 */
 	@GetMapping
 	public String eventPage(Model model) {
