@@ -53,7 +53,7 @@
 					<label for="brithday">* birthday : </label>
                     <input type="text" class="form-control" id="brithday" value="${ sessionScope.loginMember.birthday }" name="birthday"> <br>
 					
-                    <label for="phone"> &nbsp; Hpone : </label>
+                    <label for="phone"> &nbsp; Phone : </label>
                     <input type="text" class="form-control" id=phone value="${ sessionScope.loginMember.phone }" name="phone"> <br>
                     
                     <label for="email"> &nbsp; Email : </label>
