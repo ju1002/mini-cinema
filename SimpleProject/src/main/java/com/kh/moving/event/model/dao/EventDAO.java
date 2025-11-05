@@ -19,14 +19,12 @@ public interface EventDAO {
     
     @Select("SELECT COUNT(*) FROM TB_EVENT WHERE STATUS='Y'")
     int totalCount();
-    
-    
     @Select("SELECT EVENT_NO eventNo ,EVENT_TITLE eventTitle ,DESCRIPTION description ,START_DATE startDate,END_DATE endDate, STATUS, USER_NO userNo FROM TB_EVENT WHERE STATUS='Y'")
     	List<EventDTO> findAll(RowBounds rb); 
     @Delete("DELETE FROM TB_EVENT WHERE EVENT_NO = #{eventNo}")
     	int delete(int eventNo);
-    @Update("UPDATE TB_EVENT SET EVENT_TITLE=#{eventTitle},DESCRIPTION=#{description},START_DATE=#{starDate},END_DATE=#{endDate} WHERE EVENT_NO=#{eventNo}AND USER_NO=#{userNo}")
-    int update(int eventNo,int userNo);
+//    @Update("UPDATE TB_EVENT SET EVENT_TITLE=#{eventTitle},DESCRIPTION=#{description},START_DATE=#{starDate},END_DATE=#{endDate} WHERE EVENT_NO=#{eventNo}AND USER_NO=#{userNo}")
+//    int update(int eventNo,int userNo);
     @Select("SELECT EVENT_NO eventNo ,EVENT_TITLE eventTitle ,DESCRIPTION description ,START_DATE startDate,END_DATE endDate, STATUS, USER_NO userNo,EVENT_WRITER eventWriter FROM TB_EVENT WHERE EVENT_NO =#{eventNo}")
     List<EventDTO> detail(int eventNo);
 

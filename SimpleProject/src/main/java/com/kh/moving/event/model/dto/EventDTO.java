@@ -22,5 +22,4 @@ public class EventDTO {
 	private Date startDate;
 	private Date endDate;
 	private int userNo;
-	private String eventWriter;
 }

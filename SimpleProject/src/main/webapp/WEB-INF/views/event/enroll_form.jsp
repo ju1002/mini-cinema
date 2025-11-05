@@ -148,6 +148,16 @@ body {
     min-height: 150px;
 }
 
+.writer-info {
+    padding: 14px 16px;
+    background: #f9f9f9;
+    border: 1.5px solid var(--gray-300);
+    border-radius: 8px;
+    font-size: 0.95em;
+    color: var(--gray-700);
+    font-weight: 500;
+}
+
 .form-help {
     font-size: 0.85em;
     color: var(--gray-600);
@@ -160,7 +170,10 @@ body {
     gap: 20px;
 }
 
-
+.form-actions {
+    display: flex;
+    gap: 12px;
+}
 
 .btn {
     padding: 14px 32px;
@@ -284,62 +297,64 @@ body {
     <div class="form-card">
         <div id="alertBox"></div>
 
-       <form id="eventForm" action="${pageContext.request.contextPath}/event/insert" method="post" enctype="multipart/form-data">
-    <div class="form-group">
-        <label for="title">이벤트 제목 <span class="required">*</span></label>
-        <input type="text" id="title" name="eventTitle" placeholder="예: 여름 시즌 특가 이벤트" required>
-    </div>
+        <form id="eventForm" action="${pageContext.request.contextPath}/event/insert" method="post" enctype="multipart/form-data">
+            <div class="form-group">
+                <label for="title">이벤트 제목 <span class="required">*</span></label>
+                <input type="text" id="title" name="eventTitle" placeholder="예: 여름 시즌 특가 이벤트" required>
+            </div>
 
-    <div class="form-group">
-        <label for="description">이벤트 설명 <span class="required">*</span></label>
-        <textarea id="description" name="description" placeholder="이벤트에 대한 자세한 설명을 입력하세요" required></textarea>
-    </div>
+            <div class="form-group">
+                <label for="description">이벤트 설명 <span class="required">*</span></label>
+                <textarea id="description" name="Description" placeholder="이벤트에 대한 자세한 설명을 입력하세요" required></textarea>
+            </div>
 
-    <div class="form-row">
-        <div class="form-group">
-            <label for="startDate" >시작일 <span class="required">*</span></label>
-            <input type="date" id="startDate" name="startDate" required>
-        </div>
-        <div class="form-group">
-            <label for="endDate" >종료일 <span class="required">*</span></label>
-            
-            <input type="date" id="endDate" name="endDate" required>
-        </div>
-    </div>
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="startDate">시작일 <span class="required">*</span></label>
+                    <input type="date" id="startDate" name="startDate" required>
+                </div>
+                <div class="form-group">
+                    <label for="endDate">종료일 <span class="required">*</span></label>
+                    <input type="date" id="endDate" name="endDate" required>
+                </div>
+            </div>
 
-    <div class="form-group">
-        <label for="category">카테고리</label>
-        <select id="category" name="category">
-            <option value="">카테고리 선택</option>
-            <option value="movie">영화</option>
-            <option value="snack">스낵/음료</option>
-            <option value="membership">멤버십</option>
-            <option value="promotion">프로모션</option>
-            <option value="other">기타</option>
-        </select>
-    </div>
+            <div class="form-group">
+                <label>작성자</label>
+                <div class="writer-info">
+                    👤
+                </div>
+                <input type="text" name="eventWriter" value="${sessionScope.loginMember.userName}" />
+            </div>
 
-    <div class="form-actions">
-        <button type="submit" class="btn btn-primary">이벤트 등록</button>
-    </div>
-</form>
+            <div class="form-group">
+                <label for="category">카테고리</label>
+                <select id="category" name="category">
+                    <option value="">카테고리 선택</option>
+                    <option value="movie">영화</option>
+                    <option value="snack">스낵/음료</option>
+                    <option value="membership">멤버십</option>
+                    <option value="promotion">프로모션</option>
+                    <option value="other">기타</option>
+                </select>
+            </div>
+
+            <div class="form-actions">
+                <button type="submit" class="btn btn-primary">이벤트 등록</button>
+                <button type="button" class="btn btn-secondary" onclick="cancelForm()">취소</button>
+            </div>
+        </form>
     </div>
 </div>
 
 <script>
-
 const eventForm = document.getElementById('eventForm');
 
-
-
-
-
-/*
 eventForm.addEventListener('submit', (e) => {
     e.preventDefault();
     submitForm();
 });
-*/
+
 async function submitForm() {
     const title = document.getElementById('title').value.trim();
     const description = document.getElementById('description').value.trim();
@@ -366,14 +381,13 @@ async function submitForm() {
         return;
     }
 
-  
     const formData = new FormData();
     formData.append('eventTitle', title);
-    formData.append('description', description);
+    formData.append('Description', description);
     formData.append('startDate', startDate);
     formData.append('endDate', endDate);
+    formData.append('eventWriter', '관리자');
     formData.append('category', document.getElementById('category').value);
-   
 
     try {
         const response = await fetch('${pageContext.request.contextPath}/event/insert', {
@@ -384,7 +398,7 @@ async function submitForm() {
         if (response.ok) {
             showAlert('이벤트가 성공적으로 등록되었습니다!', 'success');
             setTimeout(() => {
-                window.location.href = '${pageContext.request.contextPath}/event/insert';
+                window.location.href = '${pageContext.request.contextPath}/event/inventory?page=1';
             }, 1500);
         } else {
             showAlert('이벤트 등록에 실패했습니다.', 'error');
@@ -397,7 +411,7 @@ async function submitForm() {
 
 function cancelForm() {
     if (confirm('작성 중인 내용이 사라집니다. 계속하시겠습니까?')) {
-        window.history.back();
+        window.location.href = '${pageContext.request.contextPath}/event/inventory?page=1';
     }
 }
 

@@ -4,8 +4,6 @@ import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
-import org.springframework.ui.Model;
-
 import com.kh.moving.event.model.dto.EventDTO;
 
 
@@ -21,6 +19,7 @@ List<EventDTO> findAll(int pageNo);
 //이벤트 삭제
 int delete(int eventNo);
 
-int update(int eventNo,int userNo);
+//int update(int eventNo,int userNo);
+//상세보기
 List<EventDTO> detail(int eventNo);
 }

@@ -329,7 +329,7 @@ body {
     <div class="list-controls">
         <div class="search-box">
             <input type="text" id="searchInput" placeholder="이벤트 제목으로 검색...">
-            <button class="search-btn">🔍</button>
+            <button class="search-btn" onclick="/event/detailEvent">🔍</button>
         </div>
         <a class="btn-primary" href="/spring/event/form">➕ 이벤트 등록</a>
     </div>
@@ -358,7 +358,7 @@ body {
                         <div>📅 ${event.startDate} ~ ${event.endDate}</div>
                     </div>
                     <div class="event-footer">
-                        <a class="btn btn-edit" href="jacascript:confirmUpdate(${event.evetNo,event.userNo })">수정</a>
+                        <a class="btn btn-edit" href="jacascript:confirmUpdate">수정</a>
                         <a class="btn btn-danger" href="javascript:confirmDelete(${event.eventNo})">삭제</a>
                     </div>
                 </div>
