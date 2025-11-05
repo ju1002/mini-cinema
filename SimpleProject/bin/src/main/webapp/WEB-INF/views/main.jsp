@@ -19,11 +19,6 @@
     
     <!-- Footer 영역 -->
     <%@ include file="include/footer.jsp" %>
-<<<<<<< HEAD
-    
-    
-=======
->>>>>>> f4c0a98dcb9a05e793d74ca89dad2d4148118a3f
 
 </body>
 </html>
