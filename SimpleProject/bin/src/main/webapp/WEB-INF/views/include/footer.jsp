@@ -4,15 +4,7 @@
 <style>
 /* 하단 정렬 */
 .boo {
-<<<<<<< HEAD
     margin-top: 5%;
-=======
-    margin-top: 20%;
-<<<<<<< HEAD
->>>>>>> f4c0a98dcb9a05e793d74ca89dad2d4148118a3f
-=======
-    margin-top: 5%;
->>>>>>> develop
     height: 62px;
     border-top: 1px solid #444444;
     border-bottom: 1px solid #444444;
@@ -128,21 +120,9 @@
     margin-left: 40px;
     margin-top: 30px;
 }
-
-<<<<<<< HEAD
-<<<<<<< HEAD
 .address > 
 c {
-=======
-=======
-
-.address > 
-c {
-}
-
->>>>>>> develop
 .address > .cc {
->>>>>>> f4c0a98dcb9a05e793d74ca89dad2d4148118a3f
     margin-top: 30px;
 }
 
@@ -150,11 +130,6 @@ c {
     margin-top: 10px;
     margin-left: 80px;
 }
-<<<<<<< HEAD
-.
-=======
-
->>>>>>> f4c0a98dcb9a05e793d74ca89dad2d4148118a3f
 .address > .cc > a {
     overflow: hidden;
     float: right;
