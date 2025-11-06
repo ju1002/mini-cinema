@@ -1,7 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <!-- Header CSSddddd -->
+
 <!-- Bootstrap JS -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"></script>
 <!-- Bootstrap CSS -->
@@ -234,7 +236,8 @@ height: 100px;
 margin-top:20px;
 }
 .menu-box-1 text-align-center line-height-0-ch-only con{
-}</style>
+}
+</style>
 
 
 <!-- Header HTML -->
@@ -245,6 +248,7 @@ margin-top:20px;
             <li class="cell cell-left" ><img src="https://i.namu.wiki/i/EYm29AFq9eP2QqG9c7ns7UMD85CFFJeagte2DGY7rZlEsedVGGAt3b_WmEcs7GXEpf8E7yNGDvfq8Ou9-8cN8w.webp" alt="" width="50%" height="50%" ></li>
         </ul>
     </nav>
+
     <a class="logo inline-block" href="/spring" ><img src="${pageContext.request.contextPath}/resources/images/mainImage/main-logo4.png" alt="로고 사진" class="block" id="logo-img" ></a>
 
     <div class="search-box absolute-right absolute-middle">
@@ -312,8 +316,9 @@ margin-top:20px;
                 <div>
                     <div class="menu-2 text-align-center line-height-0-ch-only">
                         <div class="inline-block">
-                            <ul class="row">
-                                <li class="cell"><a href="#">이벤트</a></li>
+
+                            <ul class="row"> 
+                                <li class="cell"><a href="/spring/event">이벤트</a></li>
                                 <li class="cell"><a href="${pageContext.request.contextPath}/notice/noticeList">공지사항</a></li>
                             </ul>
                         </div>

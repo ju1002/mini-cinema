@@ -1,4 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+
+<!-- Header CSSddddd -->
+
+<!-- Header CSS -->
+
 <style>
 /* 폰트 적용 */
 @import url(//fonts.googleapis.com/earlyaccess/notosanskr.css);
@@ -36,6 +41,7 @@ html {
 }
 .block {
     display: block;
+    &:hover{color:black;}
 }
 .inline-block {
     display: inline-block;
@@ -222,7 +228,8 @@ width:}
 margin-top:20px;
 }
 .menu-box-1 text-align-center line-height-0-ch-only con{
-}</style>
+}
+</style>
 
 
 <!-- Header HTML -->
@@ -271,7 +278,6 @@ margin-top:20px;
                             <ul class="row">
                                 <li class="cell"><a href="${pageContext.request.contextPath}/reserve">빠른예매</a></li>
                                 <li class="cell"><a href="#">상영시간표</a></li>
-
                             </ul>
                         </div>
                     </div>
@@ -283,8 +289,9 @@ margin-top:20px;
                 <div>
                     <div class="menu-2 text-align-center line-height-0-ch-only">
                         <div class="inline-block">
+                            <ul class="row"> 
+                                <li class="cell"><a href="/spring/event">이벤트</a></li>
                             <ul class="row">
-                                <li class="cell"><a href="#">이벤트</a></li>
                                 <li class="cell"><a href="${pageContext.request.contextPath}/notice/noticeList">공지사항</a></li>
                             </ul>
                         </div>

@@ -135,9 +135,10 @@ public class MemberController {
 				genre = genre.substring(0, genre.length()-1);
 			}
 	        session.setAttribute("loginMemberGenre", genre); // 세션 갱신
+	        redirectAttributes.addFlashAttribute("msg", "회원정보가 수정되었습니다.");
 	    }
 
-		return "redirect:myInfo";
+		return "redirect:/myInfo";
 	}
 
 
